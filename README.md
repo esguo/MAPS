@@ -1,2 +1,2 @@
 # MAPS
-## MAPS. By Triton Trails.
+## By Triton Trails.
