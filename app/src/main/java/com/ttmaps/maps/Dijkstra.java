@@ -10,16 +10,18 @@ import java.util.Stack;
 
 public class Dijkstra {
 
-    static ArrayList<POI> allPOI = new ArrayList<POI>();
+    public static ArrayList<POI> allPOI = new ArrayList<POI>();
 
     //Comparator class that compares the distance of the POI
     Comparator<POI> comparator = new POIComparator();
     PriorityQueue<POI> toExplore = new PriorityQueue<POI> (50 ,comparator);
-    Stack<POI> stack = new Stack<POI>();
+    Stack<String> stack = new Stack<String>();
     POI curr;
     String output = "";
 
     public String dijkstra(String start, String end) {
+        addPOI();
+
 		int inf = Integer.MAX_VALUE;
 
         //Initialize each POI's fields for Dijkstra
@@ -41,6 +43,7 @@ public class Dijkstra {
 
 
         //traverse the graph using BFS
+        curr = toExplore.peek();
         while(toExplore.size() != 0){
             //top
             curr = toExplore.poll();
@@ -61,21 +64,70 @@ public class Dijkstra {
                 if(dist < otherPOI.getDistance()) {
                     otherPOI.setDistance(dist);
                     otherPOI.setPrev(curr);
+                    //otherPOI.setPrevEdge(currEdge);
                 }
 
 
 
             }
         }
-        while (curr.getPrev() != null){
-            stack.add(curr);
+        while (curr != null && curr.getPrev() != null){
+            //stack.add(curr.getPrevEdge().getName());
+            stack.add(curr.getName());
             curr = curr.getPrev();
         }
+        output += start + "\n";
         while (!stack.isEmpty()){
-            output += stack.pop().getName();
+            output += stack.pop()/*  + "\n\t" + stack.pop() + */ + "\n";
         }
         return output;
 	}
+
+	public void addPOI(){
+        POI center = new POI("Center");
+        POI pc = new POI("PC");
+        POI pepper_Canyon = new POI("Pepper Canyon");
+        //POI rady = new POI("Rady");
+        POI sixth = new POI("Sixth");
+        POI warren = new POI("Warren");
+        /*POI revelle = new POI("Revelle");
+        POI marshall = new POI("Marshall");
+        POI muir = new POI("Muir");
+        POI erc = new POI("ERC");*/
+
+
+        Edge a = new Edge("Warren Mall", 4, warren, pc);
+        Edge b = new Edge("Through WLH", 3, warren, pepper_Canyon);
+        Edge c = new Edge("Through Croutons", 2, pepper_Canyon, center);
+        Edge d = new Edge("Visual Arts", 1, pepper_Canyon, pc);
+        Edge e = new Edge("Library Walk", 2, pc, center);
+        Edge f = new Edge("Sixth/Pepper Canyon", 1, pepper_Canyon, sixth);
+
+        center.setEdges(c);
+        center.setEdges(e);
+
+        pc.setEdges(a);
+        pc.setEdges(d);
+        pc.setEdges(e);
+
+        sixth.setEdges(f);
+
+        pepper_Canyon.setEdges(c);
+        pepper_Canyon.setEdges(f);
+        pepper_Canyon.setEdges(d);
+        pepper_Canyon.setEdges(b);
+
+        warren.setEdges(a);
+        warren.setEdges(b);
+
+
+        allPOI.add(center);
+        allPOI.add(pc);
+        allPOI.add(pepper_Canyon);
+        allPOI.add(sixth);
+        allPOI.add(warren);
+
+    }
 
 }
 

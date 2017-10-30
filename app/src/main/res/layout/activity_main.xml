@@ -8,8 +8,6 @@
     tools:context="com.ttmaps.maps.MainActivity">
 
     <include
-        layout="@layout/content_main"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        layout="@layout/content_main"/>
 
 </android.support.constraint.ConstraintLayout>

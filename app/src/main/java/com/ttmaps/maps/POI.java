@@ -1,5 +1,7 @@
 package com.ttmaps.maps;
+import java.util.Collections;
 import java.util.List;
+import java.util.ArrayList;
 
 public class POI {
 
@@ -9,6 +11,7 @@ public class POI {
   	private boolean done;  //has it been explored?
   	private int distance;
   	private POI prev;
+  	private Edge prevEdge;
 	private List<Edge> edges; // a list of all the edges names this POI is connected to
 
 
@@ -18,6 +21,8 @@ public class POI {
         this.done = false;
         this.distance = 0;
         this.prev = null;
+        this.prevEdge = null;
+        edges = new ArrayList<Edge>();
 	}
 
 	public String getId() {
@@ -51,6 +56,14 @@ public class POI {
 
     public void setPrev (POI prev){
         this.prev = prev;
+    }
+
+    public Edge getPrevEdge(){
+        return prevEdge;
+    }
+
+    public void setPrevEdge(Edge e){
+        prevEdge = e;
     }
 
 	public List<Edge> getEdges(){

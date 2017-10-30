@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,11 +18,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         loc_input1 = (EditText) findViewById(R.id.input);
         loc_input2 = (EditText) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
+
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
