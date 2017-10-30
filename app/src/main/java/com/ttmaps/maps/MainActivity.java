@@ -1,41 +1,19 @@
 package com.ttmaps.maps;
 
-
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
+import android.content.Context;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView mTextMessage;
     private EditText loc_input1;
     private EditText loc_input2;
     private Button btn_submit;
-
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +23,31 @@ public class MainActivity extends AppCompatActivity {
         loc_input2 = (EditText) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
 
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        final Context context = this;
+        btn_submit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if ((loc_input1.getText().length() > 0) && (loc_input2.getText().length() > 0 )){
+                    String loc1 = loc_input1.getText().toString();
+                    String loc2 = loc_input2.getText().toString();
+
+
+                    Intent intent;
+                    intent = new Intent(context, Result.class);
+                    Dijkstra d = new Dijkstra();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("result", d.dijkstra(loc1, loc2));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Please enter locations in both operand fields", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
     }
+
 
 }
