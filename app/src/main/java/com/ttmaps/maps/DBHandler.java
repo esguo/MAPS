@@ -14,13 +14,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
     public class DBHandler extends SQLiteOpenHelper {
 
-        // Database Version
         private static final int DATABASE_VERSION = 1;
-        // Database Name
         private static final String DATABASE_NAME = "poiInfo";
-        // Contacts table name
         private static final String TABLE_POIS = "POIS";
-        // Shops Table Columns names
         private static final String KEY_ID = "id";
         private static final String KEY_NAME = "name";
         private static final int KEY_SH_DIST = 0;
@@ -35,9 +31,7 @@ import android.database.sqlite.SQLiteOpenHelper;
         }
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-// Drop older table if existed
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_POIS);
-// Creating tables again
             onCreate(db);
         }
 
@@ -45,9 +39,8 @@ import android.database.sqlite.SQLiteOpenHelper;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, poi.getName()); // POI Name
-// Inserting Row
         db.insert(TABLE_POIS, null, values);
-        db.close(); // Closing database connection
+        db.close();
     }
 
     public POI getPOI(String id) {
@@ -60,34 +53,27 @@ import android.database.sqlite.SQLiteOpenHelper;
             cursor.moveToFirst();
 
         POI contact = new POI(cursor.getString(0));
-// return shop
         return contact;
     }
 
     public List<POI> getAllPOIs() {
         List<POI> poiList = new ArrayList<POI>();
-// Select All Query
         String selectQuery = "SELECT * FROM" + TABLE_POIS;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
-// looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
                 POI poi = new POI(cursor.getString(1));
                 poi.setId(cursor.getString(0));
                 poi.setDistance(Integer.parseInt(cursor.getString(2)));
-// Adding contact to list
                 poiList.add(poi);
             } while (cursor.moveToNext());
         }
-
-// return contact list
-        return poiList;
+                return poiList;
     }
 
-    // Getting pois Count
     public int getPOIsCount() {
         String countQuery = "SELECT * FROM" + TABLE_POIS;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -96,20 +82,16 @@ import android.database.sqlite.SQLiteOpenHelper;
         return cursor.getCount();
     }
 
-    // Updating a poi
     public int updatePOI(POI poi) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, poi.getName());
         values.put(KEY_ID, poi.getId());
-
-// updating row
         return db.update(TABLE_POIS, values, KEY_ID + "=?",
         new String[]{String.valueOf(poi.getId())});
     }
 
-    // Deleting a poi
     public void deletePOI(POI poi) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_POIS, KEY_ID + "=?",
