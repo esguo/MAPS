@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class POI {
 
 
-	final private String id;
+	private String id;
 	final private String name;
   	private boolean done;  //has it been explored?
   	private int distance;
@@ -27,6 +27,9 @@ public class POI {
 
 	public String getId() {
 		return id;
+	}
+	public void setId(String newId) {
+		this.id = newId;
 	}
 
 	public String getName() {

@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+import java.util.List;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -25,7 +27,22 @@ public class MainActivity extends AppCompatActivity {
         loc_input1 = (EditText) findViewById(R.id.input);
         loc_input2 = (EditText) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
-
+        DBHandler db = new DBHandler(this);
+//        Log.d("Insert: ","Inserting..");
+//        db.addPOI(new POI("Warren"));
+//
+//        Log.d("Reading: ", "Reading all shops...");
+//        POI poi = db.getPOI("UCSD");
+//        String log = "Id: " + poi.getId() + ", Name: " + poi.getName() + ", Distance: " + poi.getDistance();
+//// Writing shops to log
+//            Log.d("POI: ", log);
+//        List<POI> pois = db.getAllPOIs();
+//
+//        for (POI poi : pois) {
+//            String log = "Id: " + poi.getId() + ", Name: " + poi.getName() + ", Distance: " + poi.getDistance();
+//// Writing shops to log
+//            Log.d("POI: ", log);
+//        }
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
