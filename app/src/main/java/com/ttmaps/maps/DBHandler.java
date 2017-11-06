@@ -26,7 +26,7 @@ import android.database.sqlite.SQLiteOpenHelper;
         }
         @Override
         public void onCreate(SQLiteDatabase db) {
-            String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_POIS + "(" + KEY_ID + "INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
+            String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
             db.execSQL(CREATE_CONTACTS_TABLE);
         }
         @Override
