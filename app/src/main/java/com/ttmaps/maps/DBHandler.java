@@ -43,35 +43,45 @@ import android.database.sqlite.SQLiteOpenHelper;
         db.close();
     }
 
-    public POI getPOI(String id) {
+    public POI getPOI(int id) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.query(TABLE_POIS, new String[]{KEY_ID,
+//                KEY_NAME}, KEY_ID + "=?",
+//        new String[]{String.valueOf(id)}, null, null, null, null);
+//        if (cursor != null)
+//            cursor.moveToFirst();
+//
+//        POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
+//        return contact;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_POIS, new String[]{KEY_ID,
-                KEY_NAME}, KEY_ID + "=?",
-        new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
-
+        Cursor cursor =  db.rawQuery( "select * from " + TABLE_POIS +  " where id=" + id + "", null );
         POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
         return contact;
     }
 
-   /* public List<POI> getAllPOIs() {
+    public List<POI> getAllPOIs() {
         List<POI> poiList = new ArrayList<POI>();
-        String selectQuery = "SELECT * FROM" + TABLE_POIS;
+        String selectQuery = "SELECT * FROM " + TABLE_POIS;
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.moveToFirst();
 
-        if (cursor.moveToFirst()) {
-            do {
-                POI poi = new POI();
-                poi.setId(Integer.parseInt(cursor.getString(0)));
-                //poi.setDistance(Integer.parseInt(cursor.getString(2)));
-                poiList.add(poi);
-            } while (cursor.moveToNext());
+//        if (cursor.moveToFirst()) {
+//            do {
+//                POI poi = new POI();
+//                poi.setId(Integer.parseInt(cursor.getString(0)));
+//                //poi.setDistance(Integer.parseInt(cursor.getString(2)));
+//                poiList.add(poi);
+//            } while (cursor.moveToNext());
+//        }
+        while(cursor.isAfterLast() == false){
+            POI poi = new POI(Integer.parseInt(cursor.getString(0)), (cursor.getString(1)));
+            poiList.add(poi);
+            cursor.moveToNext();
         }
-                return poiList;
-    }*/
+        return poiList;
+    }
 
     public int getPOIsCount() {
         String countQuery = "SELECT * FROM" + TABLE_POIS;

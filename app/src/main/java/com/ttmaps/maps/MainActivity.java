@@ -27,23 +27,22 @@ public class MainActivity extends AppCompatActivity {
         loc_input1 = (EditText) findViewById(R.id.input);
         loc_input2 = (EditText) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
-        Log.d("Insert: ","Inserting..");
+
         DBHandler db = new DBHandler(this);
 //        Log.d("Insert: ","Inserting..");
         db.addPOI(new POI(1, "Warren"));
 //
 //        Log.d("Reading: ", "Reading all shops...");
-//        POI poi = db.getPOI("UCSD");
+        //POI poi = db.getPOI(1);
 //        String log = "Id: " + poi.getId() + ", Name: " + poi.getName() + ", Distance: " + poi.getDistance();
 //// Writing shops to log
 //            Log.d("POI: ", log);
-//        List<POI> pois = db.getAllPOIs();
+        List<POI> pois = db.getAllPOIs();
 //
-//        for (POI poi : pois) {
-//            String log = "Id: " + poi.getId() + ", Name: " + poi.getName() + ", Distance: " + poi.getDistance();
-//// Writing shops to log
-//            Log.d("POI: ", log);
-//        }
+        for (POI poi : pois) {
+            String log = "Id: " + poi.getId() + ", Name: " + poi.getName();
+            Log.d("POI: ", log);
+        }
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
