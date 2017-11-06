@@ -7,6 +7,7 @@ import java.util.List;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by emilychou on 10/30/17.
@@ -14,7 +15,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
     public class DBHandler extends SQLiteOpenHelper {
 
-        private static final int DATABASE_VERSION = 1;
+        private static int DATABASE_VERSION = 1;
         private static final String DATABASE_NAME = "poiInfo";
         private static final String TABLE_POIS = "POIS";
         private static final String KEY_ID = "id";
@@ -26,7 +27,9 @@ import android.database.sqlite.SQLiteOpenHelper;
         }
         @Override
         public void onCreate(SQLiteDatabase db) {
-            String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_POIS + "(" + KEY_ID + "INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
+            //Log.d("Hello:", "goodbye?");
+
+            String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
             db.execSQL(CREATE_CONTACTS_TABLE);
         }
         @Override
@@ -36,6 +39,8 @@ import android.database.sqlite.SQLiteOpenHelper;
         }
 
     public void addPOI(POI poi) {
+        //Log.d("Hello:", "I'm here?");
+        //DATABASE_VERSION++;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, poi.getName()); // POI Name

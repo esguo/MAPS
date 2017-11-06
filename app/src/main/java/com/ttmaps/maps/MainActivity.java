@@ -28,9 +28,15 @@ public class MainActivity extends AppCompatActivity {
         loc_input2 = (EditText) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
 
+        Log.d("Hello:", "hello?");
         DBHandler db = new DBHandler(this);
-//        Log.d("Insert: ","Inserting..");
+        Log.d("Insert: ","Inserting..");
         db.addPOI(new POI(1, "Warren"));
+        db.addPOI(new POI(2, "Muir"));
+        db.addPOI(new POI(3, "Revelle"));
+        db.addPOI(new POI(4, "Marshall"));
+
+
 //
 //        Log.d("Reading: ", "Reading all shops...");
         //POI poi = db.getPOI(1);
