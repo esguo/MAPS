@@ -84,12 +84,12 @@ public class Dijkstra {
 	}
 
 	public void addPOI(){
-        POI center = new POI("Center");
-        POI pc = new POI("PC");
-        POI pepper_Canyon = new POI("Pepper Canyon");
+        POI center = new POI(2, "Center");
+        POI pc = new POI(3, "PC");
+        POI pepper_Canyon = new POI(4, "Pepper Canyon");
         //POI rady = new POI("Rady");
-        POI sixth = new POI("Sixth");
-        POI warren = new POI("Warren");
+        POI sixth = new POI(5, "Sixth");
+        POI warren = new POI(6, "Warren");
         /*POI revelle = new POI("Revelle");
         POI marshall = new POI("Marshall");
         POI muir = new POI("Muir");

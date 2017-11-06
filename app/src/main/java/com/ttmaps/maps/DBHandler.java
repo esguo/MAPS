@@ -26,7 +26,7 @@ import android.database.sqlite.SQLiteOpenHelper;
         }
         @Override
         public void onCreate(SQLiteDatabase db) {
-            String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_POIS + "(" + KEY_NAME + "TEXT" + ")";
+            String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_POIS + "(" + KEY_ID + "INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
             db.execSQL(CREATE_CONTACTS_TABLE);
         }
         @Override
@@ -45,18 +45,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
     public POI getPOI(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-
         Cursor cursor = db.query(TABLE_POIS, new String[]{KEY_ID,
                 KEY_NAME}, KEY_ID + "=?",
         new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        POI contact = new POI(cursor.getString(0));
+        POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
         return contact;
     }
 
-    public List<POI> getAllPOIs() {
+   /* public List<POI> getAllPOIs() {
         List<POI> poiList = new ArrayList<POI>();
         String selectQuery = "SELECT * FROM" + TABLE_POIS;
 
@@ -65,14 +64,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 
         if (cursor.moveToFirst()) {
             do {
-                POI poi = new POI(cursor.getString(1));
-                poi.setId(cursor.getString(0));
-                poi.setDistance(Integer.parseInt(cursor.getString(2)));
+                POI poi = new POI();
+                poi.setId(Integer.parseInt(cursor.getString(0)));
+                //poi.setDistance(Integer.parseInt(cursor.getString(2)));
                 poiList.add(poi);
             } while (cursor.moveToNext());
         }
                 return poiList;
-    }
+    }*/
 
     public int getPOIsCount() {
         String countQuery = "SELECT * FROM" + TABLE_POIS;
@@ -88,7 +87,7 @@ import android.database.sqlite.SQLiteOpenHelper;
         ContentValues values = new ContentValues();
         values.put(KEY_NAME, poi.getName());
         values.put(KEY_ID, poi.getId());
-        return db.update(TABLE_POIS, values, KEY_ID + "=?",
+        return db.update(TABLE_POIS, values, KEY_ID + " =?",
         new String[]{String.valueOf(poi.getId())});
     }
 

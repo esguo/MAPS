@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class POI {
 
 
-	private String id;
+	private int id;
 	final private String name;
   	private boolean done;  //has it been explored?
   	private int distance;
@@ -14,9 +14,8 @@ public class POI {
   	private Edge prevEdge;
 	private List<Edge> edges; // a list of all the edges names this POI is connected to
 
-
-	public POI (String name) {
-	    this.id = "UCSD";
+	public POI (int id, String name) {
+	    this.id = id;
 		this.name = name;
         this.done = false;
         this.distance = 0;
@@ -25,10 +24,10 @@ public class POI {
         edges = new ArrayList<Edge>();
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String newId) {
+	public void setId(int newId) {
 		this.id = newId;
 	}
 
@@ -87,10 +86,10 @@ public class POI {
 		if (getClass() != obj.getClass())
 			return false;
 		POI other = (POI) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (id == 0) {
+			if (other.id != 0)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (id != (other.id))
 			return false;
 		return true;
 	}
