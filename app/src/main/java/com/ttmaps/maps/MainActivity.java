@@ -29,16 +29,16 @@ public class MainActivity extends AppCompatActivity {
         btn_submit = (Button) findViewById(R.id.button);
 
         DBHandler db = new DBHandler(this);
-//        Log.d("Insert: ","Inserting..");
+        Log.d("Insert: ","Inserting..");
         db.addPOI(new POI(1, "Warren"));
 //
-//        Log.d("Reading: ", "Reading all shops...");
-        //POI poi = db.getPOI(1);
+        Log.d("Reading: ", "Reading all POIs...");
+        //POI poi1 = db.getPOI(1);
 //        String log = "Id: " + poi.getId() + ", Name: " + poi.getName() + ", Distance: " + poi.getDistance();
 //// Writing shops to log
 //            Log.d("POI: ", log);
         List<POI> pois = db.getAllPOIs();
-//
+
         for (POI poi : pois) {
             String log = "Id: " + poi.getId() + ", Name: " + poi.getName();
             Log.d("POI: ", log);
