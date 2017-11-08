@@ -15,7 +15,7 @@ import android.util.Log;
 
     public class DBHandler extends SQLiteOpenHelper {
 
-        private static final int DATABASE_VERSION = 1;
+        private static final int DATABASE_VERSION = 3;
         private static final String DATABASE_NAME = "poiInfo";
         private static final String TABLE_POIS = "POIS";
         private static final String KEY_ID = "id";
@@ -28,7 +28,7 @@ import android.util.Log;
         @Override
         public void onCreate(SQLiteDatabase db) {
             Log.d("Creating: ","Creating..");
-            String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS" + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL UNIQUE" + ")";
+            String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL UNIQUE" + ")";
             db.execSQL(CREATE_CONTACTS_TABLE);
         }
         @Override
@@ -42,7 +42,8 @@ import android.util.Log;
         ContentValues values = new ContentValues();
         values.put(KEY_ID, poi.getId());
         values.put(KEY_NAME, poi.getName()); // POI Name
-        db.insert(TABLE_POIS, null, values);
+        db.insertWithOnConflict(TABLE_POIS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+
         db.close();
     }
 

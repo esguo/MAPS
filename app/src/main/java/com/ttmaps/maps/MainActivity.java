@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("Hello:", "hello?");
         DBHandler db = new DBHandler(this);
+
         Log.d("Insert: ","Inserting..");
         db.addPOI(new POI(1, "Warren"));
         db.addPOI(new POI(2, "Muir"));
@@ -39,16 +40,16 @@ public class MainActivity extends AppCompatActivity {
 
 //
         Log.d("Reading: ", "Reading all POIs...");
-        //POI poi1 = db.getPOI(1);
-//        String log = "Id: " + poi.getId() + ", Name: " + poi.getName() + ", Distance: " + poi.getDistance();
+        POI poi1 = db.getPOI(1);
+        String log = "Id: " + poi1.getId() + ", Name: " + poi1.getName();
 //// Writing shops to log
-//            Log.d("POI: ", log);
-        List<POI> pois = db.getAllPOIs();
+            Log.d("POI: ", log);
+        /*List<POI> pois = db.getAllPOIs();
 
         for (POI poi : pois) {
             String log = "Id: " + poi.getId() + ", Name: " + poi.getName();
             Log.d("POI: ", log);
-        }
+        }*/
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
