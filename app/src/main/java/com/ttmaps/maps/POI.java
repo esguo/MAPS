@@ -13,6 +13,7 @@ public class POI {
   	private POI prev;
   	private Edge prevEdge;
 	private List<Edge> edges; // a list of all the edges names this POI is connected to
+  private List<POI> poiList;
 
 	public POI(){
 
@@ -26,6 +27,9 @@ public class POI {
         this.prev = null;
         this.prevEdge = null;
         edges = new ArrayList<Edge>();
+        poiList = new ArrayList<POI>();
+        //poiList.add(new POI("PC")); 		// Need to figure out how to update list from database
+        //poiList.add(new POI("Sixth"));
 	}
 
 	public int getId() {
