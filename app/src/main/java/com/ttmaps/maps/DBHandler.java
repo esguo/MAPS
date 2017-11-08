@@ -15,7 +15,7 @@ import android.util.Log;
 
     public class DBHandler extends SQLiteOpenHelper {
 
-        private static int DATABASE_VERSION = 1;
+        private static final int DATABASE_VERSION = 1;
         private static final String DATABASE_NAME = "poiInfo";
         private static final String TABLE_POIS = "POIS";
         private static final String KEY_ID = "id";
@@ -27,9 +27,8 @@ import android.util.Log;
         }
         @Override
         public void onCreate(SQLiteDatabase db) {
-            //Log.d("Hello:", "goodbye?");
-
-            String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" + ")";
+            Log.d("Creating: ","Creating..");
+            String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS" + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL UNIQUE" + ")";
             db.execSQL(CREATE_CONTACTS_TABLE);
         }
         @Override
@@ -39,29 +38,29 @@ import android.util.Log;
         }
 
     public void addPOI(POI poi) {
-        //Log.d("Hello:", "I'm here?");
-        //DATABASE_VERSION++;
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put(KEY_ID, poi.getId());
         values.put(KEY_NAME, poi.getName()); // POI Name
         db.insert(TABLE_POIS, null, values);
         db.close();
     }
 
     public POI getPOI(int id) {
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.query(TABLE_POIS, new String[]{KEY_ID,
-//                KEY_NAME}, KEY_ID + "=?",
-//        new String[]{String.valueOf(id)}, null, null, null, null);
-//        if (cursor != null)
-//            cursor.moveToFirst();
-//
-//        POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
-//        return contact;
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor =  db.rawQuery( "select * from " + TABLE_POIS +  " where id=" + id + "", null );
+        Cursor cursor = db.query(TABLE_POIS, new String[]{KEY_ID,
+                KEY_NAME}, KEY_ID + "=?",
+        new String[]{String.valueOf(id)}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
         POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
         return contact;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String selectQuery = "SELECT * FROM " + TABLE_POIS + " WHERE id = " + id;
+//        Cursor cursor =  db.rawQuery(selectQuery, null);
+//        POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
+//        return contact;
     }
 
     public List<POI> getAllPOIs() {

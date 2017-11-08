@@ -7,12 +7,16 @@ public class POI {
 
 
 	private int id;
-	final private String name;
+	private String name;
   	private boolean done;  //has it been explored?
   	private int distance;
   	private POI prev;
   	private Edge prevEdge;
 	private List<Edge> edges; // a list of all the edges names this POI is connected to
+
+	public POI(){
+
+	}
 
 	public POI (int id, String name) {
 	    this.id = id;
