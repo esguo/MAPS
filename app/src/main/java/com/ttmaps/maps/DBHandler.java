@@ -50,18 +50,25 @@ import android.util.Log;
     public POI getPOI(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_POIS, new String[]{KEY_ID,
-                KEY_NAME}, KEY_ID + "=?",
-        new String[]{String.valueOf(id)}, null, null, null, null);
+                        KEY_NAME}, KEY_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
         POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
         return contact;
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        String selectQuery = "SELECT * FROM " + TABLE_POIS + " WHERE id = " + id;
-//        Cursor cursor =  db.rawQuery(selectQuery, null);
-//        POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
-//        return contact;
+    }
+
+    public POI getPOIByName(String name) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_POIS, new String[]{KEY_ID,
+                        KEY_NAME}, KEY_NAME + "=?",
+                new String[]{name}, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
+        return contact;
     }
 
     public List<POI> getAllPOIs() {
@@ -72,14 +79,6 @@ import android.util.Log;
         Cursor cursor = db.rawQuery(selectQuery, null);
         cursor.moveToFirst();
 
-//        if (cursor.moveToFirst()) {
-//            do {
-//                POI poi = new POI();
-//                poi.setId(Integer.parseInt(cursor.getString(0)));
-//                //poi.setDistance(Integer.parseInt(cursor.getString(2)));
-//                poiList.add(poi);
-//            } while (cursor.moveToNext());
-//        }
         while(cursor.isAfterLast() == false){
             POI poi = new POI(Integer.parseInt(cursor.getString(0)), (cursor.getString(1)));
             poiList.add(poi);
@@ -89,14 +88,15 @@ import android.util.Log;
     }
 
     public int getPOIsCount() {
-        String countQuery = "SELECT * FROM" + TABLE_POIS;
+        String countQuery = "SELECT * FROM " + TABLE_POIS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+        int c = cursor.getCount();
         cursor.close();
-        return cursor.getCount();
+        return c;
     }
 
-    public int updatePOI(POI poi) {
+    /*public int updatePOI(POI poi) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -104,7 +104,7 @@ import android.util.Log;
         values.put(KEY_ID, poi.getId());
         return db.update(TABLE_POIS, values, KEY_ID + " =?",
         new String[]{String.valueOf(poi.getId())});
-    }
+    }*/
 
     public void deletePOI(POI poi) {
         SQLiteDatabase db = this.getWritableDatabase();

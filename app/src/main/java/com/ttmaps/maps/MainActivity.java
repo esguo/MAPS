@@ -40,16 +40,20 @@ public class MainActivity extends AppCompatActivity {
 
 //
         Log.d("Reading: ", "Reading all POIs...");
-        POI poi1 = db.getPOI(1);
+        //POI poi1 = db.getPOI(1);
+        POI poi1 = db.getPOIByName("Muir");
+        db.deletePOI(poi1);
         String log = "Id: " + poi1.getId() + ", Name: " + poi1.getName();
 //// Writing shops to log
             Log.d("POI: ", log);
-        /*List<POI> pois = db.getAllPOIs();
+        String log1 = "Count of POIs: " + db.getPOIsCount();
+        Log.d("POI Count: ", log1);
+        List<POI> pois = db.getAllPOIs();
 
         for (POI poi : pois) {
-            String log = "Id: " + poi.getId() + ", Name: " + poi.getName();
-            Log.d("POI: ", log);
-        }*/
+            String log2 = "Id: " + poi.getId() + ", Name: " + poi.getName();
+            Log.d("POI: ", log2);
+        }
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
