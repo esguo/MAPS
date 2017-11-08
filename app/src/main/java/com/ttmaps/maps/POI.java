@@ -6,17 +6,21 @@ import java.util.ArrayList;
 public class POI {
 
 
-	final private String id;
-	final private String name;
+	private int id;
+	private String name;
   	private boolean done;  //has it been explored?
   	private int distance;
   	private POI prev;
   	private Edge prevEdge;
 	private List<Edge> edges; // a list of all the edges names this POI is connected to
-	private List<POI> poiList;
+  private List<POI> poiList;
 
-	public POI (String name) {
-	    this.id = "UCSD";
+	public POI(){
+
+	}
+
+	public POI (int id, String name) {
+	    this.id = id;
 		this.name = name;
         this.done = false;
         this.distance = 0;
@@ -28,8 +32,11 @@ public class POI {
         //poiList.add(new POI("Sixth"));
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
+	}
+	public void setId(int newId) {
+		this.id = newId;
 	}
 
 	public String getName() {
@@ -87,10 +94,10 @@ public class POI {
 		if (getClass() != obj.getClass())
 			return false;
 		POI other = (POI) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (id == 0) {
+			if (other.id != 0)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (id != (other.id))
 			return false;
 		return true;
 	}

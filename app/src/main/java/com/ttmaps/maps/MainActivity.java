@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
+import java.util.List;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +28,31 @@ public class MainActivity extends AppCompatActivity {
         loc_input2 = (EditText) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
 
+        DBHandler db = new DBHandler(this);
+
+        //Log.d("Insert: ","Inserting..");
+        db.addPOI(new POI(1, "Warren"));
+        db.addPOI(new POI(2, "Muir"));
+        db.addPOI(new POI(3, "Revelle"));
+        db.addPOI(new POI(4, "Marshall"));
+
+        /* testing database stuff*/
+        /*Log.d("Reading: ", "Reading all POIs...");
+        POI poi1 = db.getPOI(1);
+        POI poi2 = db.getPOIByName("Muir");
+        String log = "Id: " + poi1.getId() + ", Name: " + poi1.getName();
+        Log.d("POI: ", log);
+        String log1 = "Count of POIs: " + db.getPOIsCount();
+        Log.d("POI Count: ", log1);
+        db.deletePOI(poi1);
+        String log2 = "Count of POIs after deleting: " + db.getPOIsCount();
+        Log.d("POI Count: ", log2);
+        
+        List<POI> pois = db.getAllPOIs();
+        for (POI poi : pois) {
+            String log3 = "Id: " + poi.getId() + ", Name: " + poi.getName();
+            Log.d("POI: ", log3);
+        }*/
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
