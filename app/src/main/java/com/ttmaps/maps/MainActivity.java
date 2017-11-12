@@ -57,7 +57,11 @@ public class MainActivity extends AppCompatActivity {
         db.addPOI(new POI(3, "Revelle"));
         db.addPOI(new POI(4, "Marshall"));
 
-        mNavItems.add(new NavItem("Home", "Find routes",R.drawable.ic_action_home));
+        mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
+        mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
+        mNavItems.add(new NavItem("Ratings", "View path ratings", R.drawable.ic_action_ratings));
+        mNavItems.add(new NavItem("Favorites", "View saved paths", R.drawable.ic_action_favorites));
+        mNavItems.add(new NavItem("Find a Room", "View available rooms", R.drawable.ic_action_rooms));
         mNavItems.add(new NavItem("Preferences", "Change your settings",R.drawable.ic_action_settings));
         mNavItems.add(new NavItem("About", "Our team", R.drawable.ic_action_about));
 
