@@ -12,8 +12,7 @@ public class POI {
   	private int distance;
   	private POI prev;
   	private Edge prevEdge;
-	private List<Edge> edges; // a list of all the edges names this POI is connected to
-  	private List<POI> poiList;
+  	private List<Pair> pairList;
 
 	public POI(){
 
@@ -26,8 +25,7 @@ public class POI {
         this.distance = 0;
         this.prev = null;
         this.prevEdge = null;
-        edges = new ArrayList<Edge>();
-        poiList = new ArrayList<POI>();
+        pairList = new ArrayList<Pair>();
         //poiList.add(new POI("PC")); 		// Need to figure out how to update list from database
         //poiList.add(new POI("Sixth"));
 	}
@@ -76,14 +74,9 @@ public class POI {
         prevEdge = e;
     }
 
-	public List<Edge> getEdges(){
-		return edges;
-	}
+    public void addNeighbor(POI p, Edge e) { pairList.add(new Pair(p, e)); }
 
-	public void setEdges(Edge e){
-	    edges.add(e);
-    }
-
+    public List<Pair> getNeighbors() { return pairList; }
 
 	@Override
 	public boolean equals(Object obj) {

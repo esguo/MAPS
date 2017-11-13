@@ -1,4 +1,6 @@
 package com.ttmaps.maps;
+import android.util.Log;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.lang.Integer;
@@ -10,7 +12,7 @@ import java.util.Stack;
 
 public class Dijkstra {
 
-    public static ArrayList<POI> allPOI = new ArrayList<POI>();
+    public static List<POI> allPOI = new ArrayList<POI>();
 
     //Comparator class that compares the distance of the POI
     Comparator<POI> comparator = new POIComparator();
@@ -18,11 +20,16 @@ public class Dijkstra {
     Stack<String> stack = new Stack<String>();
     POI curr;
     String output = "";
+    DBHandler database;
+
+    public Dijkstra(DBHandler d) {
+        database = d;
+    }
 
     public String dijkstra(String start, String end) {
-        addPOI();
 
 		int inf = Integer.MAX_VALUE;
+		allPOI = database.getPOIs();
 
         //Initialize each POI's fields for Dijkstra
         for (POI value : allPOI) {
@@ -34,36 +41,32 @@ public class Dijkstra {
                 value.setDistance(0);
             }
             toExplore.add(value);
+            Log.d("Added: ", value.getName());
         }
-
-
-
 
         //Priority Queue with initial capacity of 50 and a customized comparator
 
 
         //traverse the graph using BFS
         curr = toExplore.peek();
+
         while(toExplore.size() != 0){
+            Log.d("POI name: ", curr.getName());
             //top
             curr = toExplore.poll();
             if (curr.getName().equals(end)){
                 break;
             }
-            List<Edge> edges = curr.getEdges(); //iterate through next's getEdges
-            for(int index = 0; index < edges.size(); index++ ){
-                Edge currEdge = edges.get(index);
-                POI otherPOI;
-                if(currEdge.getPOI()[0].equals(curr.getName())) {
-                    otherPOI = currEdge.getPOI()[0];
-                }
-                else otherPOI = currEdge.getPOI()[1];
+            List<Pair> pairs = curr.getNeighbors(); //iterate through next's getEdges
+            for(int index = 0; index < pairs.size(); index++ ){
+                Pair currPair = pairs.get(index);
+                Log.d("int: ", ""+index);
+                int dist = curr.getDistance() + currPair.getEdge().getWeight();
 
-                int dist = curr.getDistance() + currEdge.getWeight();
-
-                if(dist < otherPOI.getDistance()) {
-                    otherPOI.setDistance(dist);
-                    otherPOI.setPrev(curr);
+                if(dist < currPair.getPOI().getDistance()) {
+                    currPair.getPOI().setDistance(dist);
+                    currPair.getPOI().setPrev(curr);
+                    toExplore.add(currPair.getPOI());
                     //otherPOI.setPrevEdge(currEdge);
                 }
 
@@ -83,6 +86,7 @@ public class Dijkstra {
         return output;
 	}
 
+	/**
 	public void addPOI(){
         POI center = new POI(2, "Center");
         POI pc = new POI(3, "PC");
@@ -93,7 +97,7 @@ public class Dijkstra {
         /*POI revelle = new POI("Revelle");
         POI marshall = new POI("Marshall");
         POI muir = new POI("Muir");
-        POI erc = new POI("ERC");*/
+        POI erc = new POI("ERC");
 
 
         Edge a = new Edge("Warren Mall", 4, warren, pc);
@@ -128,6 +132,7 @@ public class Dijkstra {
         allPOI.add(warren);
 
     }
+    */
 
 }
 

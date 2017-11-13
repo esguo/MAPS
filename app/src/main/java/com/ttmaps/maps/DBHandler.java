@@ -3,6 +3,8 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,9 +22,11 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_POIS = "POIS";
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
+    private HashMap<Integer, POI> poilist;
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        poilist = new HashMap<Integer, POI>();
     }
     
     /* create the initial database */
@@ -125,20 +129,36 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void updateDb(){
         String[] POI = {"Warren", "Muir", "Revelle", "Sixth", "Marshall", "Elenor Roosevelt College", "Center", "PC",
-            "Pepper Canyon", "Ledden", "Galbraith", "York", "Cognitive Science Building", "Solis"};
+            "Pepper Canyon", "Ledden", "Galbraith", "York", "Cognitive Science Building", "Solis", "Rady"};
 
         for(int i = 0; i < POI.length; i++){
             POI poi = new POI(i, POI[i]);
             addPOI(poi);
+            poilist.put(poi.getId(), poi);
         }
     }
-    public void createPair(String pointA, String pointB, Edge path){
-        POI a = getPOIByName(pointA);
-        POI b = getPOIByName(pointB);
+    public void createPair(int pointA, int pointB, String name, int weight){
+        POI a = poilist.get(pointA);
+        POI b = poilist.get(pointB);
 
-        a.addNeighbor(b, path);
-        b.addNeighbor(a, path);
+        Edge e = new Edge(name, weight);
+        a.addNeighbor(b, e);
+        b.addNeighbor(a, e);
+
+
+        /*deletePOI(getPOIByName(pointA));
+        deletePOI(getPOIByName(pointB));
+
+        addPOI(a);
+        addPOI(b);*/
     }
 
+    public List<POI> getPOIs() {
+        List<POI> poiList = new ArrayList<POI>();
+        for (POI p: poilist.values()){
+            poiList.add(p);
+        }
+        return poiList;
+    }
 }
 

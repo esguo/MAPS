@@ -49,10 +49,35 @@ public class MainActivity extends AppCompatActivity {
         loc_input2 = (EditText) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
 
-        DBHandler db = new DBHandler(this);
+        final DBHandler db = new DBHandler(this);
+        db.updateDb();
+        db.createPair(7, 6, "libwalk", 2);
+        db.createPair(0, 7, "warrenmall", 3);
+        db.createPair(0, 3, "ppap", 1);
+        db.createPair(6, 3, "ssc", 4);
+        db.createPair(14, 13, "gym", 5);
+        db.createPair(13, 6, "stairs", 5);
+        db.createPair(12, 6, "libwalk", 4);
+        db.createPair(11, 6, "old student", 5);
+        db.createPair(10, 11, "revelle plaza", 1);
+        db.createPair(9, 12, "stairs", 2);
+        db.createPair(9, 6, "skateboard path", 3);
+        db.createPair(8, 3, "literally nothing", 1);
+        db.createPair(8, 7, "crosswalk", 2);
+        db.createPair(7, 12, "stairs", 2);
+        db.createPair(5, 13, "stairs", 3);
+        db.createPair(5, 14, "othersideofcampus", 2);
+        db.createPair(4, 13, "wow", 1);
+        db.createPair(2, 11, "plaza", 1);
+        db.createPair(2, 10, "plaza", 1);
 
         //Log.d("Insert: ","Inserting..");
-        db.updateDb();
+        /**
+        db.addPOI(new POI(1, "Warren"));
+        db.addPOI(new POI(2, "Muir"));
+        db.addPOI(new POI(3, "Revelle"));
+        db.addPOI(new POI(4, "Marshall"));
+         */
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
@@ -108,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent;
                     intent = new Intent(context, Result.class);
-                    Dijkstra d = new Dijkstra();
+                    Dijkstra d = new Dijkstra(db);
                     Bundle bundle = new Bundle();
                     bundle.putString("result", d.dijkstra(loc1, loc2));
                     intent.putExtras(bundle);
