@@ -139,6 +139,9 @@ public class DBHandler extends SQLiteOpenHelper {
         Edge e = new Edge(name, weight);
         a.addNeighbor(b, e);
         b.addNeighbor(a, e);
+        deletePOI(getPOIByName(pointA));
+        deletePOI(getPOIByName(pointB));
+
     }
 
 }
