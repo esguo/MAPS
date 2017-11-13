@@ -123,5 +123,22 @@ public class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updateDb(){
+        String[] POI = {"Warren", "Muir", "Revelle", "Sixth", "Marshall", "Elenor Roosevelt College", "Center", "PC",
+            "Pepper Canyon", "Ledden", "Galbraith", "York", "Cognitive Science Building", "Solis"};
+
+        for(int i = 0; i < POI.length; i++){
+            POI poi = new POI(i, POI[i]);
+            addPOI(poi);
+        }
+    }
+    public void createPair(String pointA, String pointB, Edge path){
+        POI a = getPOIByName(pointA);
+        POI b = getPOIByName(pointB);
+
+        a.addNeighbor(b, path);
+        b.addNeighbor(a, path);
+    }
+
 }
 
