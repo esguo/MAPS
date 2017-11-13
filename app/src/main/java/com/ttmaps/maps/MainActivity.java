@@ -51,25 +51,25 @@ public class MainActivity extends AppCompatActivity {
 
         final DBHandler db = new DBHandler(this);
         db.updateDb();
-        db.createPair(7, 6, "libwalk", 2);
-        db.createPair(0, 7, "warrenmall", 3);
-        db.createPair(0, 3, "ppap", 1);
-        db.createPair(6, 3, "ssc", 4);
-        db.createPair(14, 13, "gym", 5);
-        db.createPair(13, 6, "stairs", 5);
-        db.createPair(12, 6, "libwalk", 4);
-        db.createPair(11, 6, "old student", 5);
-        db.createPair(10, 11, "revelle plaza", 1);
-        db.createPair(9, 12, "stairs", 2);
-        db.createPair(9, 6, "skateboard path", 3);
-        db.createPair(8, 3, "literally nothing", 1);
-        db.createPair(8, 7, "crosswalk", 2);
-        db.createPair(7, 12, "stairs", 2);
-        db.createPair(5, 13, "stairs", 3);
-        db.createPair(5, 14, "othersideofcampus", 2);
-        db.createPair(4, 13, "wow", 1);
-        db.createPair(2, 11, "plaza", 1);
-        db.createPair(2, 10, "plaza", 1);
+        db.createPair(7, 6, "Library Walk", 2);
+        db.createPair(0, 7, "Warren Mall", 3);
+        db.createPair(0, 3, "Engineering Building", 2);
+        db.createPair(6, 3, "Student Services Center", 4);
+        db.createPair(14, 13, "RIMAC Path", 5);
+        db.createPair(13, 6, "Stairs past Geisel", 5);
+        db.createPair(12, 6, "Library Walk", 4);
+        db.createPair(11, 6, "Old Student Center", 5);
+        db.createPair(10, 11, "Revelle Plaza", 1);
+        db.createPair(9, 12, "Through Peterson (POI in the future)", 2);
+        db.createPair(9, 6, "Walkway going through bike path", 3);
+        db.createPair(8, 3, "Literally Nothing", 1);
+        db.createPair(8, 7, "Crosswalk - Myers", 2);
+        db.createPair(7, 12, "Stairs past Geisel", 2);
+        db.createPair(5, 13, "Goody's Path", 3);
+        db.createPair(5, 14, "RIMAC field Path", 2);
+        db.createPair(4, 13, "ECON Dept Path", 1);
+        db.createPair(2, 11, "Revelle Plaza", 1);
+        db.createPair(2, 10, "Revelle Plaza", 1);
 
         //Log.d("Insert: ","Inserting..");
         /**

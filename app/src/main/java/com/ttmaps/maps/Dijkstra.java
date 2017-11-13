@@ -66,8 +66,8 @@ public class Dijkstra {
                 if(dist < currPair.getPOI().getDistance()) {
                     currPair.getPOI().setDistance(dist);
                     currPair.getPOI().setPrev(curr);
+                    currPair.getPOI().setPrevEdge(currPair.getEdge());
                     toExplore.add(currPair.getPOI());
-                    //otherPOI.setPrevEdge(currEdge);
                 }
 
 
@@ -75,13 +75,13 @@ public class Dijkstra {
             }
         }
         while (curr != null && curr.getPrev() != null){
-            //stack.add(curr.getPrevEdge().getName());
             stack.add(curr.getName());
+            stack.add(curr.getPrevEdge().getName());
             curr = curr.getPrev();
         }
         output += start + "\n";
         while (!stack.isEmpty()){
-            output += stack.pop()/*  + "\n\t" + stack.pop() + */ + "\n";
+            output += "--> " + stack.pop()  + " -->\n" + stack.pop()  + "\n";
         }
         return output;
 	}
