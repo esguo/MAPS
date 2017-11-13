@@ -132,12 +132,13 @@ public class DBHandler extends SQLiteOpenHelper {
             addPOI(poi);
         }
     }
-    public void createPair(String pointA, String pointB, Edge path){
+    public void createPair(String pointA, String pointB, String name, int weight){
         POI a = getPOIByName(pointA);
         POI b = getPOIByName(pointB);
 
-        a.addNeighbor(b, path);
-        b.addNeighbor(a, path);
+        Edge e = new Edge(name, weight);
+        a.addNeighbor(b, e);
+        b.addNeighbor(a, e);
     }
 
 }

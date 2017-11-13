@@ -49,13 +49,20 @@ public class MainActivity extends AppCompatActivity {
         loc_input2 = (EditText) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
 
-        DBHandler db = new DBHandler(this);
+        final DBHandler db = new DBHandler(this);
+        db.updateDb();
+        db.createPair("Center", "PC", "centerpc", 2);
+        db.createPair("PC", "Warren", "pcwarren", 5);
+        db.createPair("Center", "Sixth", "centersixth", 1);
+        db.createPair("Sixth", "Warren", "sixthwarren", 1);
 
         //Log.d("Insert: ","Inserting..");
+        /**
         db.addPOI(new POI(1, "Warren"));
         db.addPOI(new POI(2, "Muir"));
         db.addPOI(new POI(3, "Revelle"));
         db.addPOI(new POI(4, "Marshall"));
+         */
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
@@ -111,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Intent intent;
                     intent = new Intent(context, Result.class);
-                    Dijkstra d = new Dijkstra();
+                    Dijkstra d = new Dijkstra(db);
                     Bundle bundle = new Bundle();
                     bundle.putString("result", d.dijkstra(loc1, loc2));
                     intent.putExtras(bundle);
