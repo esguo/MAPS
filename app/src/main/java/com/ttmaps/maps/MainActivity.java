@@ -52,10 +52,7 @@ public class MainActivity extends AppCompatActivity {
         DBHandler db = new DBHandler(this);
 
         //Log.d("Insert: ","Inserting..");
-        db.addPOI(new POI(1, "Warren"));
-        db.addPOI(new POI(2, "Muir"));
-        db.addPOI(new POI(3, "Revelle"));
-        db.addPOI(new POI(4, "Marshall"));
+        db.updateDb();
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));

@@ -13,7 +13,7 @@ public class POI {
   	private POI prev;
   	private Edge prevEdge;
 	private List<Edge> edges; // a list of all the edges names this POI is connected to
-  private List<POI> poiList;
+  	private List<POI> poiList;
 
 	public POI(){
 
