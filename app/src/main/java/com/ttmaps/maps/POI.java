@@ -14,6 +14,17 @@ public class POI {
   	private Edge prevEdge;
   	private List<Pair> pairList;
 
+  	// Filters
+	private boolean isBathroom;
+	private boolean isFood;
+	private boolean isInfoCenter;	// Information Center eg. Student Services
+	private boolean isClassroom;
+	private boolean isAdmin;		// administrative building eg. APM
+	private boolean isResHall;
+	private boolean isRec;			// recreational area eg. RIMAC
+	private boolean isParking;
+	private boolean isStudyArea;
+
 	public POI(){
 
 	}
@@ -26,6 +37,15 @@ public class POI {
         this.prev = null;
         this.prevEdge = null;
         pairList = new ArrayList<Pair>();
+        this.isBathroom = false;
+        this.isFood = false;
+		this.isInfoCenter = false;
+		this.isClassroom = false;
+		this.isAdmin = false;
+		this.isResHall = false;
+		this.isRec = false;
+		this.isParking = false;
+		this.isStudyArea = false;
         //poiList.add(new POI("PC")); 		// Need to figure out how to update list from database
         //poiList.add(new POI("Sixth"));
 	}
@@ -78,6 +98,32 @@ public class POI {
 
     public List<Pair> getNeighbors() { return pairList; }
 
+    public void setIsBathroom() { isBathroom = true; }
+    public boolean getIsBathroom() { return isBathroom; }
+
+	public void setIsFood(){ isFood = true; }
+	public boolean getIsFood(){ return isFood; }
+
+	public void setIsInfoCenter(){ isInfoCenter = true; }
+	public boolean getIsInfoCenter(){ return isInfoCenter; }
+
+	public void setIsClassroom(){ isClassroom = true; }
+	public boolean getIsClassroom(){ return isClassroom; }
+
+	public void setIsAdmin(){ isAdmin = true; }
+	public boolean getIsAdmin(){ return isAdmin; }
+
+	public void setIsResHall(){ isResHall = true; }
+	public boolean getIsResHall(){ return isResHall; }
+
+	public void setIsRec(){ isRec = true; }
+	public boolean getIsRec(){ return isRec; }
+
+	public void setIsParking(){ isParking = true; }
+	public boolean getIsParking(){ return isParking; }
+
+	public void setIsStudyArea(){ isStudyArea= true; }
+	public boolean getIsStudyArea(){ return isStudyArea; }
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
