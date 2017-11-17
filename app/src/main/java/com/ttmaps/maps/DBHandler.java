@@ -17,11 +17,14 @@ import android.util.Log;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 9;
     private static final String DATABASE_NAME = "poiInfo";
     private static final String TABLE_POIS = "POIS";
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
+    private static final String KEY_RATING = "totalRating";
+    private static final String KEY_RATING_COUNT = "ratingCount";
+    private static final String KEY_AVG_RATING = "avgRating";
     private HashMap<Integer, POI> poilist;
 
     public DBHandler(Context context) {
@@ -33,7 +36,7 @@ public class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("Creating: ","Creating..");
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL UNIQUE" + ")";
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL UNIQUE, " + KEY_RATING + " INTEGER, " + KEY_RATING_COUNT + " INTEGER, " + KEY_AVG_RATING + " INTEGER" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
     
@@ -45,26 +48,36 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /* add POI to the POI table */
-    public void addPOI(POI poi) {
+    public void addPOI(POI poi, int rating, int count, int avg_rating) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ID, poi.getId());
         values.put(KEY_NAME, poi.getName());
+        values.put(KEY_RATING, rating);
+        values.put(KEY_RATING_COUNT, count);
+        values.put(KEY_AVG_RATING, avg_rating);
         db.insertWithOnConflict(TABLE_POIS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
         db.close();
     }
 
     /* get a POI by id from the POI table */
-    public POI getPOI(int id) {
+    public String getPOI(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(TABLE_POIS, new String[]{KEY_ID,
-                        KEY_NAME}, KEY_ID + "=?",
-                new String[]{String.valueOf(id)}, null, null, null, null);
-        if (cursor != null)
-            cursor.moveToFirst();
+        String rowString = String.format("Table with row " + id + " is: ");
+        Cursor row = db.rawQuery("SELECT * FROM " + TABLE_POIS + " WHERE " + KEY_ID + " = " + id, null);
+        if (row.moveToFirst() ){
+            String[] columnNames = row.getColumnNames();
+            do {
+                for (String name: columnNames) {
+                    rowString += String.format("%s: %s\n", name,
+                            row.getString(row.getColumnIndex(name)));
+                }
+                rowString += "\n";
 
-        POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
-        return contact;
+            } while (row.moveToNext());
+        }
+
+        return rowString;
     }
 
     /* get a POI by name from the POI table */
@@ -81,20 +94,23 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     /* get a list of all POIs in the POI table */
-    public List<POI> getAllPOIs() {
-        List<POI> poiList = new ArrayList<POI>();
-        String selectQuery = "SELECT * FROM " + TABLE_POIS;
-
+    public String getAllPOIs() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-        cursor.moveToFirst();
+        String rowString = String.format("All rows is: ");
+        Cursor row = db.rawQuery("SELECT * FROM " + TABLE_POIS, null);
+        if (row.moveToFirst() ){
+            String[] columnNames = row.getColumnNames();
+            do {
+                for (String name: columnNames) {
+                    rowString += String.format("%s: %s\n", name,
+                            row.getString(row.getColumnIndex(name)));
+                }
+                rowString += "\n";
 
-        while(cursor.isAfterLast() == false){
-            POI poi = new POI(Integer.parseInt(cursor.getString(0)), (cursor.getString(1)));
-            poiList.add(poi);
-            cursor.moveToNext();
+            } while (row.moveToNext());
         }
-        return poiList;
+
+        return rowString;
     }
 
     /* get the number of POIs currently in the table */
@@ -107,25 +123,58 @@ public class DBHandler extends SQLiteOpenHelper {
         return c;
     }
 
-    /* function to update a POI's fields (will edit in the future depending on
-       which fields we decide are constant and which are not */
-    /*public int updatePOI(POI poi) {
-        SQLiteDatabase db = this.getWritableDatabase();
 
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, poi.getName());
-        values.put(KEY_ID, poi.getId());
-        return db.update(TABLE_POIS, values, KEY_ID + " =?",
-        new String[]{String.valueOf(poi.getId())});
-    }*/
+    public int getRating(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = ("SELECT " + KEY_RATING + " FROM " + TABLE_POIS + " WHERE id = " + id);
+        Cursor cursor = db.rawQuery(query, null);
+        int rating = 0;
+        if(cursor != null & cursor.getCount() > 0){
+            cursor.moveToFirst();
+            rating = cursor.getInt(cursor.getColumnIndex(KEY_RATING));
+            cursor.close();
+        }
+        return rating;
+    }
+
+    public int getRatingCount(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = ("SELECT " + KEY_RATING_COUNT + " FROM " + TABLE_POIS + " WHERE id = " + id);
+        Cursor cursor = db.rawQuery(query, null);
+        int rating = 0;
+        if(cursor != null & cursor.getCount() > 0){
+            cursor.moveToFirst();
+            rating = cursor.getInt(cursor.getColumnIndex(KEY_RATING_COUNT));
+            cursor.close();
+        }
+        return rating;
+    }
+
+    public int getAvgRating(int id){
+        return getRating(id)/getRatingCount(id);
+    }
+
 
     /* delete a POI from the POI table */
-    public void deletePOI(POI poi) {
+    public void deleteRow(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_POIS, KEY_ID + "=?",
-        new String[] { String.valueOf(poi.getId()) });
+        new String[] { String.valueOf(id) });
         db.close();
     }
+
+    public int updatePOI(int id, String name, int newRating) {
+        SQLiteDatabase db = this.getWritableDatabase();
+//        db.rawQuery("UPDATE " + TABLE_POIS + " SET " + KEY_RATING + " = " + (newRating + getRating(id)) + " WHERE id = " + id, null);
+//        return newRating + getRating(id);
+        POI poi = getPOIByName(name);
+        int prevRating = getRating(poi.getId());
+        int prevCount = getRatingCount(poi.getId());
+        deleteRow(poi.getId());
+        addPOI(poi, prevRating + newRating, prevCount + 1, (prevRating + newRating)/(prevCount + 1));
+        return newRating + getRating(poi.getId());
+    }
+
 
     public void updateDb(){
         String[] POI = {"Warren", "Muir", "Revelle", "Sixth", "Marshall", "Elenor Roosevelt College", "Center", "PC",
@@ -133,7 +182,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         for(int i = 0; i < POI.length; i++){
             POI poi = new POI(i, POI[i]);
-            addPOI(poi);
+            addPOI(poi, 0, 0, 0);
             poilist.put(poi.getId(), poi);
         }
     }

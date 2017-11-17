@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText loc_input1;
     private EditText loc_input2;
     private Button btn_submit;
+    private Button rating_btn_submit;
 
 
     @Override
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         loc_input1 = (EditText) findViewById(R.id.input);
         loc_input2 = (EditText) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
+        rating_btn_submit = (Button) findViewById(R.id.ratingButton);
 
         final DBHandler db = new DBHandler(this);
         db.updateDb();
@@ -70,14 +72,6 @@ public class MainActivity extends AppCompatActivity {
         db.createPair(4, 13, "ECON Dept Path", 1);
         db.createPair(2, 11, "Revelle Plaza", 1);
         db.createPair(2, 10, "Revelle Plaza", 1);
-
-        //Log.d("Insert: ","Inserting..");
-        /**
-        db.addPOI(new POI(1, "Warren"));
-        db.addPOI(new POI(2, "Muir"));
-        db.addPOI(new POI(3, "Revelle"));
-        db.addPOI(new POI(4, "Marshall"));
-         */
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
@@ -104,6 +98,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        String poi1 = db.getAllPOIs();
+        Log.d("INFO OF ALL POIS: ", poi1);
+        int poi3 = db.getRating(0);
+        Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
+        int rating = db.updatePOI(0, "Warren", 5);
+        String poi2 = db.getPOI(0);
+        Log.d("NEW RATING IS: ", String.valueOf(rating));
+        Log.d("INFO ON UPDATED POI: ", poi2);
+        int rating1 = db.updatePOI(0, "Warren", 3);
+        String poi5 = db.getAllPOIs();
+        Log.d("NEW RATING IS ENF: ", String.valueOf(rating1));
+        Log.d("INFO OF ALL AGAIN: ", poi5);
         /* testing database stuff*/
         /*Log.d("Reading: ", "Reading all POIs...");
         POI poi1 = db.getPOI(1);
@@ -136,6 +142,28 @@ public class MainActivity extends AppCompatActivity {
                     Dijkstra d = new Dijkstra(db);
                     Bundle bundle = new Bundle();
                     bundle.putString("result", d.dijkstra(loc1, loc2));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Please enter locations in both operand fields", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        //currently displays rating
+        rating_btn_submit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                if ((loc_input1.getText().length() > 0) && (loc_input2.getText().length() > 0 )){
+                    String loc1 = loc_input1.getText().toString();
+                    POI poi = db.getPOIByName(loc1);
+                    int rating = db.getAvgRating(poi.getId());
+
+                    Intent intent;
+                    intent = new Intent(context, Result.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("result", "" + rating);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
