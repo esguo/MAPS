@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             while((csvLine = reader.readLine()) != null){
                 data = csvLine.split(",");
                 try{
-                    db.populateHash(Integer.parseInt(data[0]), data[1].toLowerCase());
+                    db.populateHash(Integer.parseInt(data[0]), data[1]);
                 }
                 catch (Exception e){
                     Log.d("Problem", e.toString());
@@ -85,8 +85,7 @@ public class MainActivity extends AppCompatActivity {
             while((csvLine = reader.readLine()) != null){
                 data = csvLine.split(",");
                 try{
-                    db.createPair(data[0].toLowerCase(), data[1].toLowerCase(),
-                            data[2].toLowerCase(), Integer.parseInt(data[3]));
+                    db.createPair(data[0], data[1], data[2], Integer.parseInt(data[3]));
                 }
                 catch (Exception e){
                     Log.d("Problem", e.toString());
@@ -157,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 if ((loc_input1.getText().length() > 0) && (loc_input2.getText().length() > 0 )){
-                    String loc1 = loc_input1.getText().toString().toLowerCase();
-                    String loc2 = loc_input2.getText().toString().toLowerCase();
+                    String loc1 = loc_input1.getText().toString();
+                    String loc2 = loc_input2.getText().toString();
 
 
                     Intent intent;

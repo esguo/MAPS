@@ -37,7 +37,7 @@ public class Dijkstra {
             value.setDistance(inf); // set distance to infinity
             value.setDone(false);   // shows that the node is not done yet
             value.setPrev(null);
-            if(value.getName().equals(start)){
+            if(value.getName().equalsIgnoreCase(start)){
                 value.setDistance(0);
             }
             toExplore.add(value);
@@ -54,7 +54,7 @@ public class Dijkstra {
             Log.d("POI name: ", curr.getName());
             //top
             curr = toExplore.poll();
-            if (curr.getName().equals(end)){
+            if (curr.getName().equalsIgnoreCase(end)){
                 break;
             }
             List<Pair> pairs = curr.getNeighbors(); //iterate through next's getEdges
