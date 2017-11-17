@@ -1,15 +1,15 @@
 package com.ttmaps.maps;
-import android.content.Context;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 
 /**
  * Created by emilychou on 10/30/17.
@@ -25,11 +25,13 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_RATING = "totalRating";
     private static final String KEY_RATING_COUNT = "ratingCount";
     private static final String KEY_AVG_RATING = "avgRating";
-    private HashMap<Integer, POI> poilist;
+    private HashMap<String, POI> poilist;
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        poilist = new HashMap<Integer, POI>();
+        poilist = new HashMap<String, POI>();
+
+        /* get Excel file for database */
     }
     
     /* create the initial database */
@@ -183,23 +185,24 @@ public class DBHandler extends SQLiteOpenHelper {
         for(int i = 0; i < POI.length; i++){
             POI poi = new POI(i, POI[i]);
             addPOI(poi, 0, 0, 0);
-            poilist.put(poi.getId(), poi);
+            poilist.put(poi.getName(), poi);
         }
     }
-    public void createPair(int pointA, int pointB, String name, int weight){
+
+    /* creates POI based on id, name, populates hash table with the appropriate POI */
+    public void populateHash(int id, String POIName){
+        POI poi = new POI(id, POIName);
+        poilist.put(poi.getName(), poi);
+    }
+
+
+    public void createPair(String pointA, String pointB, String name, int weight){
         POI a = poilist.get(pointA);
         POI b = poilist.get(pointB);
 
         Edge e = new Edge(name, weight);
         a.addNeighbor(b, e);
         b.addNeighbor(a, e);
-
-
-        /*deletePOI(getPOIByName(pointA));
-        deletePOI(getPOIByName(pointB));
-
-        addPOI(a);
-        addPOI(b);*/
     }
 
     public List<POI> getPOIs() {
