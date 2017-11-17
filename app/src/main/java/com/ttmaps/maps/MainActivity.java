@@ -21,6 +21,11 @@ import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText loc_input2;
     private Button btn_submit;
     private Button rating_btn_submit;
+    String[] data;
 
 
     @Override
@@ -52,26 +58,44 @@ public class MainActivity extends AppCompatActivity {
         rating_btn_submit = (Button) findViewById(R.id.ratingButton);
 
         final DBHandler db = new DBHandler(this);
-        db.updateDb();
-        db.createPair(7, 6, "Library Walk", 2);
-        db.createPair(0, 7, "Warren Mall", 3);
-        db.createPair(0, 3, "Engineering Building", 2);
-        db.createPair(6, 3, "Student Services Center", 4);
-        db.createPair(14, 13, "RIMAC Path", 5);
-        db.createPair(13, 6, "Stairs past Geisel", 5);
-        db.createPair(12, 6, "Library Walk", 4);
-        db.createPair(11, 6, "Old Student Center", 5);
-        db.createPair(10, 11, "Revelle Plaza", 1);
-        db.createPair(9, 12, "Through Peterson (POI in the future)", 2);
-        db.createPair(9, 6, "Walkway going through bike path", 3);
-        db.createPair(8, 3, "Literally Nothing", 1);
-        db.createPair(8, 7, "Crosswalk - Myers", 2);
-        db.createPair(7, 12, "Stairs past Geisel", 2);
-        db.createPair(5, 13, "Goody's Path", 3);
-        db.createPair(5, 14, "RIMAC field Path", 2);
-        db.createPair(4, 13, "ECON Dept Path", 1);
-        db.createPair(2, 11, "Revelle Plaza", 1);
-        db.createPair(2, 10, "Revelle Plaza", 1);
+
+        /* read in from excel file (csv) and add to db */
+        InputStream inputStream = getResources().openRawResource(R.raw.poilist);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        try{
+            String csvLine;
+            while((csvLine = reader.readLine()) != null){
+                data = csvLine.split(",");
+                try{
+                    db.populateHash(Integer.parseInt(data[0]), data[1].toLowerCase());
+                }
+                catch (Exception e){
+                    Log.d("Problem", e.toString());
+                }
+            }
+        }
+        catch (IOException ex){
+            throw new RuntimeException("Error in reading CSV file: " + ex);
+        }
+
+        inputStream = getResources().openRawResource(R.raw.pathslist);
+        reader = new BufferedReader(new InputStreamReader(inputStream));
+        try{
+            String csvLine;
+            while((csvLine = reader.readLine()) != null){
+                data = csvLine.split(",");
+                try{
+                    db.createPair(data[0].toLowerCase(), data[1].toLowerCase(),
+                            data[2].toLowerCase(), Integer.parseInt(data[3]));
+                }
+                catch (Exception e){
+                    Log.d("Problem", e.toString());
+                }
+            }
+        }
+        catch (IOException ex){
+            throw new RuntimeException("Error in reading CSV file: " + ex);
+        }
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
