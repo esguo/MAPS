@@ -58,43 +58,8 @@ public class MainActivity extends AppCompatActivity {
         rating_btn_submit = (Button) findViewById(R.id.ratingButton);
 
         final DBHandler db = new DBHandler(this);
+        readFromFile(db);
 
-        /* read in from excel file (csv) and add to db */
-        InputStream inputStream = getResources().openRawResource(R.raw.poilist);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        try{
-            String csvLine;
-            while((csvLine = reader.readLine()) != null){
-                data = csvLine.split(",");
-                try{
-                    db.populateHash(Integer.parseInt(data[0]), data[1]);
-                }
-                catch (Exception e){
-                    Log.d("Problem", e.toString());
-                }
-            }
-        }
-        catch (IOException ex){
-            throw new RuntimeException("Error in reading CSV file: " + ex);
-        }
-
-        inputStream = getResources().openRawResource(R.raw.pathslist);
-        reader = new BufferedReader(new InputStreamReader(inputStream));
-        try{
-            String csvLine;
-            while((csvLine = reader.readLine()) != null){
-                data = csvLine.split(",");
-                try{
-                    db.createPair(data[0], data[1], data[2], Integer.parseInt(data[3]));
-                }
-                catch (Exception e){
-                    Log.d("Problem", e.toString());
-                }
-            }
-        }
-        catch (IOException ex){
-            throw new RuntimeException("Error in reading CSV file: " + ex);
-        }
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
@@ -197,6 +162,45 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    private void readFromFile(DBHandler db) {
+    /* read in from excel file (csv) and add to db */
+        InputStream inputStream = getResources().openRawResource(R.raw.poilist);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        try{
+            String csvLine;
+            while((csvLine = reader.readLine()) != null){
+                data = csvLine.split(",");
+                try{
+                    db.populateHash(Integer.parseInt(data[0]), data[1]);
+                }
+                catch (Exception e){
+                    Log.d("Problem", e.toString());
+                }
+            }
+        }
+        catch (IOException ex){
+            throw new RuntimeException("Error in reading CSV file: " + ex);
+        }
+
+        inputStream = getResources().openRawResource(R.raw.pathslist);
+        reader = new BufferedReader(new InputStreamReader(inputStream));
+        try{
+            String csvLine;
+            while((csvLine = reader.readLine()) != null){
+                data = csvLine.split(",");
+                try{
+                    db.createPair(data[0], data[1], data[2], Integer.parseInt(data[3]));
+                }
+                catch (Exception e){
+                    Log.d("Problem", e.toString());
+                }
+            }
+        }
+        catch (IOException ex){
+            throw new RuntimeException("Error in reading CSV file: " + ex);
+        }
     }
 
     class NavItem {
