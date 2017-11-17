@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,11 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
 
-    private EditText loc_input1;
-    private EditText loc_input2;
+    private AutoCompleteTextView loc_input1;
+    private AutoCompleteTextView loc_input2;
     private Button btn_submit;
     private Button rating_btn_submit;
     String[] data;
+    ArrayList<String> POIs;
 
 
     @Override
@@ -52,13 +55,26 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loc_input1 = (EditText) findViewById(R.id.input);
-        loc_input2 = (EditText) findViewById(R.id.input2);
+        loc_input1 = (AutoCompleteTextView) findViewById(R.id.input);
+        loc_input2 = (AutoCompleteTextView) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
         rating_btn_submit = (Button) findViewById(R.id.ratingButton);
 
         final DBHandler db = new DBHandler(this);
+        POIs = new ArrayList<String>();
         readFromFile(db);
+
+        /*creates list of POIs to choose from */
+        for(POI poi: db.getPOIs()) {
+            POIs.add(poi.getName());
+        }
+        ArrayAdapter<String> list = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, POIs);
+
+        /* sets dropdown autocomplete feature */
+        loc_input1.setThreshold(1);
+        loc_input2.setThreshold(1);
+        loc_input1.setAdapter(list);
+        loc_input2.setAdapter(list);
 
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
