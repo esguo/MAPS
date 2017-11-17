@@ -157,8 +157,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 if ((loc_input1.getText().length() > 0) && (loc_input2.getText().length() > 0 )){
-                    String loc1 = loc_input1.getText().toString();
-                    String loc2 = loc_input2.getText().toString();
+                    String loc1 = loc_input1.getText().toString().toLowerCase();
+                    String loc2 = loc_input2.getText().toString().toLowerCase();
 
 
                     Intent intent;
