@@ -11,9 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -25,6 +26,10 @@ import android.content.Intent;
 import android.util.Log;
 
 import java.io.Serializable;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,12 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
 
-    private EditText loc_input1;
-    private EditText loc_input2;
+    private AutoCompleteTextView loc_input1;
+    private AutoCompleteTextView loc_input2;
     private Button btn_submit;
     private Button rating_btn_submit;
     int rate = 0;
-    DBHandler db = new DBHandler(this);;
+    DBHandler db = new DBHandler(this);
+    String[] data;
+    ArrayList<String> POIs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,32 +58,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //db = new DBHandler(this);
         setContentView(R.layout.activity_main);
-        loc_input1 = (EditText) findViewById(R.id.input);
-        loc_input2 = (EditText) findViewById(R.id.input2);
+        loc_input1 = (AutoCompleteTextView) findViewById(R.id.input);
+        loc_input2 = (AutoCompleteTextView) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
         rating_btn_submit = (Button) findViewById(R.id.ratingButton);
-       // final DBHandler db = new DBHandler(this);
-        //final DBHandler db = ((MyApplication)getApplication()).db;
-        db.updateDb();
-        db.createPair(7, 6, "Library Walk", 2);
-        db.createPair(0, 7, "Warren Mall", 3);
-        db.createPair(0, 3, "Engineering Building", 2);
-        db.createPair(6, 3, "Student Services Center", 4);
-        db.createPair(14, 13, "RIMAC Path", 5);
-        db.createPair(13, 6, "Stairs past Geisel", 5);
-        db.createPair(12, 6, "Library Walk", 4);
-        db.createPair(11, 6, "Old Student Center", 5);
-        db.createPair(10, 11, "Revelle Plaza", 1);
-        db.createPair(9, 12, "Through Peterson (POI in the future)", 2);
-        db.createPair(9, 6, "Walkway going through bike path", 3);
-        db.createPair(8, 3, "Literally Nothing", 1);
-        db.createPair(8, 7, "Crosswalk - Myers", 2);
-        db.createPair(7, 12, "Stairs past Geisel", 2);
-        db.createPair(5, 13, "Goody's Path", 3);
-        db.createPair(5, 14, "RIMAC field Path", 2);
-        db.createPair(4, 13, "ECON Dept Path", 1);
-        db.createPair(2, 11, "Revelle Plaza", 1);
-        db.createPair(2, 10, "Revelle Plaza", 1);
+
+        final DBHandler db = new DBHandler(this);
+        POIs = new ArrayList<>();
+        readFromFile(db);
+
+        /*creates list of POIs to choose from */
+        for(POI poi: db.getPOIs()) {
+            POIs.add(poi.getName());
+        }
+        ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
+
+        /* sets dropdown autocomplete feature */
+        loc_input1.setThreshold(1);
+        loc_input2.setThreshold(1);
+        loc_input1.setAdapter(list);
+        loc_input2.setAdapter(list);
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
@@ -112,9 +113,34 @@ public class MainActivity extends AppCompatActivity {
 //        Log.d("NEW RATING IS: ", String.valueOf(rating));
 //        Log.d("INFO ON UPDATED POI: ", poi2);
 //        int rating1 = db.updatePOI(0, "Warren", 3);
-        String poi5 = db.getAllPOIs();
-//        Log.d("NEW RATING IS ENF: ", String.valueOf(rating1));
-        Log.d("INFO OF ALL AGAIN: ", poi5);
+        /*
+        String poi1 = db.getAllPOIs();
+        Log.d("INFO OF ALL POIS: ", poi1);
+        int poi3 = db.getRating(0);
+        Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
+        int rating = db.updatePOI(0, "Warren", 5);
+        String poi2 = db.getPOI(0);
+        Log.d("NEW RATING IS: ", String.valueOf(rating));
+        Log.d("INFO ON UPDATED POI: ", poi2);
+        int rating1 = db.updatePOI(0, "Warren", 3);
+        */
+        /* testing database stuff*/
+        /*Log.d("Reading: ", "Reading all POIs...");
+        POI poi1 = db.getPOI(1);
+        POI poi2 = db.getPOIByName("Muir");
+        String log = "Id: " + poi1.getId() + ", Name: " + poi1.getName();
+        Log.d("POI: ", log);
+        String log1 = "Count of POIs: " + db.getPOIsCount();
+        Log.d("POI Count: ", log1);
+        db.deletePOI(poi1);
+        String log2 = "Count of POIs after deleting: " + db.getPOIsCount();
+        Log.d("POI Count: ", log2);
+        
+        List<POI> pois = db.getAllPOIs();
+        for (POI poi : pois) {
+            String log3 = "Id: " + poi.getId() + ", Name: " + poi.getName();
+            Log.d("POI: ", log3);
+        }*/
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
@@ -156,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == rate && resultCode == RESULT_OK && data != null) {
@@ -165,12 +192,51 @@ public class MainActivity extends AppCompatActivity {
             Log.d("RATE NUM ", num2);
             POI poi = db.getPOIByName(num1);
             //dont want to update when u just view
-            if(Integer.parseInt(num2) == 0) {
+            if (Integer.parseInt(num2) == 0) {
                 return;
                 //do you pass the number anywhere like rating 3
             }
             db.updatePOI(poi.getId(), poi.getName(), Integer.parseInt(num2));
             Log.d("OMG JUST WORK ", String.valueOf(db.getAvgRating(poi.getId())));
+        }
+    }
+
+    private void readFromFile(DBHandler db) {
+    /* read in from excel file (csv) and add to db */
+        InputStream inputStream = getResources().openRawResource(R.raw.poilist);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        try{
+            String csvLine;
+            while((csvLine = reader.readLine()) != null){
+                data = csvLine.split(",");
+                try{
+                    db.populateHash(Integer.parseInt(data[0]), data[1]);
+                }
+                catch (Exception e){
+                    Log.d("Problem", e.toString());
+                }
+            }
+        }
+        catch (IOException ex){
+            throw new RuntimeException("Error in reading CSV file: " + ex);
+        }
+
+        inputStream = getResources().openRawResource(R.raw.pathslist);
+        reader = new BufferedReader(new InputStreamReader(inputStream));
+        try{
+            String csvLine;
+            while((csvLine = reader.readLine()) != null){
+                data = csvLine.split(",");
+                try{
+                    db.createPair(data[0], data[1], data[2], Integer.parseInt(data[3]));
+                }
+                catch (Exception e){
+                    Log.d("Problem", e.toString());
+                }
+            }
+        }
+        catch (IOException ex){
+            throw new RuntimeException("Error in reading CSV file: " + ex);
         }
     }
 

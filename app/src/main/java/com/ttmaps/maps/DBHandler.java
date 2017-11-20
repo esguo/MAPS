@@ -1,21 +1,18 @@
 package com.ttmaps.maps;
-import android.content.Context;
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-/**
- * Created by emilychou on 10/30/17.
- */
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
-public class DBHandler extends SQLiteOpenHelper {
+/** Database and included datasets to select POI and their respective edges
+ */
+class DBHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "poiInfo";
@@ -25,11 +22,11 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_RATING = "totalRating";
     private static final String KEY_RATING_COUNT = "ratingCount";
     private static final String KEY_AVG_RATING = "avgRating";
-    private HashMap<Integer, POI> poilist;
+    private HashMap<String, POI> poilist;
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        poilist = new HashMap<Integer, POI>();
+        poilist = new HashMap<>();
     }
     
     /* create the initial database */
@@ -63,7 +60,7 @@ public class DBHandler extends SQLiteOpenHelper {
     /* get a POI by id from the POI table */
     public String getPOI(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String rowString = String.format("Table with row " + id + " is: ");
+        String rowString = "Table with row " + id + " is: ";
         Cursor row = db.rawQuery("SELECT * FROM " + TABLE_POIS + " WHERE " + KEY_ID + " = " + id, null);
         if (row.moveToFirst() ){
             String[] columnNames = row.getColumnNames();
@@ -89,14 +86,13 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
-        return contact;
+        return new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
     }
 
     /* get a list of all POIs in the POI table */
     public String getAllPOIs() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String rowString = String.format("All rows is: ");
+        String rowString = "All rows is: ";
         Cursor row = db.rawQuery("SELECT * FROM " + TABLE_POIS, null);
         if (row.moveToFirst() ){
             String[] columnNames = row.getColumnNames();
@@ -185,28 +181,29 @@ public class DBHandler extends SQLiteOpenHelper {
 
         for(int i = 0; i < POI.length; i++){
             POI poi = new POI(i, POI[i]);
-            //addPOI(poi, 0, 0, 0);
-            poilist.put(poi.getId(), poi);
+            addPOI(poi, 0, 0, 0);
+            poilist.put(poi.getName(), poi);
         }
     }
-    public void createPair(int pointA, int pointB, String name, int weight){
+
+    /* creates POI based on id, name, populates hash table with the appropriate POI */
+    public void populateHash(int id, String POIName){
+        POI poi = new POI(id, POIName);
+        poilist.put(poi.getName(), poi);
+    }
+
+
+    public void createPair(String pointA, String pointB, String name, int weight){
         POI a = poilist.get(pointA);
         POI b = poilist.get(pointB);
 
         Edge e = new Edge(name, weight);
         a.addNeighbor(b, e);
         b.addNeighbor(a, e);
-
-
-        /*deletePOI(getPOIByName(pointA));
-        deletePOI(getPOIByName(pointB));
-
-        addPOI(a);
-        addPOI(b);*/
     }
 
     public List<POI> getPOIs() {
-        List<POI> poiList = new ArrayList<POI>();
+        List<POI> poiList = new ArrayList<>();
         for (POI p: poilist.values()){
             poiList.add(p);
         }

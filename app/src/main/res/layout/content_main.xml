@@ -11,7 +11,7 @@
     tools:showIn="@layout/activity_main">
 
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_height="16dp"
@@ -20,7 +20,7 @@
         android:hint="Current Location"
         android:inputType="text" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/input2"
         android:layout_width="match_parent"
         android:layout_height="2dp"
