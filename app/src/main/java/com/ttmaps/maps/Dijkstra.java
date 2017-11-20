@@ -2,9 +2,7 @@ package com.ttmaps.maps;
 import android.util.Log;
 
 import java.util.List;
-import java.util.ArrayList;
 import java.lang.Integer;
-import java.util.HashMap;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Stack;
@@ -12,15 +10,12 @@ import java.util.Stack;
 
 class Dijkstra {
 
-    private static List<POI> allPOI = new ArrayList<>();
-
     //Comparator class that compares the distance of the POI
-    private Comparator<POI> comparator = new POIComparator();
-    private PriorityQueue<POI> toExplore = new PriorityQueue<>(50, comparator);
-    private Stack<String> stack = new Stack<>();
-    private POI curr;
+    private final Comparator<POI> comparator = new POIComparator();
+    private final PriorityQueue<POI> queue = new PriorityQueue<>(50, comparator);
+    private final Stack<String> stack = new Stack<>();
+    private final DBHandler database;
     private String output = "";
-    private DBHandler database;
 
     Dijkstra(DBHandler d) {
         database = d;
@@ -29,17 +24,16 @@ class Dijkstra {
     String dijkstra(String start, String end) {
 
         int inf = Integer.MAX_VALUE;
-        allPOI = database.getPOIs();
+        List<POI> allPOI = database.getPOIs();
 
         //Initialize each POI's fields for Dijkstra
         for (POI value : allPOI) {
             value.setDistance(inf); // set distance to infinity
-            value.setDone(false);   // shows that the node is not done yet
             value.setPrev(null);
             if (value.getName().equalsIgnoreCase(start)) {
                 value.setDistance(0);
             }
-            toExplore.add(value);
+            queue.add(value);
             Log.d("Added: ", value.getName());
         }
 
@@ -47,12 +41,12 @@ class Dijkstra {
 
 
         //traverse the graph using BFS
-        curr = toExplore.peek();
+        POI curr = queue.peek();
 
-        while (toExplore.size() != 0) {
+        while (queue.size() != 0) {
             Log.d("POI name: ", curr.getName());
             //top
-            curr = toExplore.poll();
+            curr = queue.poll();
             if (curr.getName().equalsIgnoreCase(end)) {
                 break;
             }
@@ -66,7 +60,7 @@ class Dijkstra {
                     currPair.getPOI().setDistance(dist);
                     currPair.getPOI().setPrev(curr);
                     currPair.getPOI().setPrevEdge(currPair.getEdge());
-                    toExplore.add(currPair.getPOI());
+                    queue.add(currPair.getPOI());
                 }
 
 
@@ -80,7 +74,6 @@ class Dijkstra {
             }
             output += start + "\n";
             while (!stack.isEmpty()) {
-                //noinspection StringConcatenationInLoop
                 output += "--> " + stack.pop() + " -->\n" + stack.pop() + "\n";
             }
         }

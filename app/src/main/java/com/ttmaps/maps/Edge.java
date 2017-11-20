@@ -1,5 +1,4 @@
 package com.ttmaps.maps;
-import java.util.List;
 
 public class Edge {
     //private final String id;
@@ -7,7 +6,7 @@ public class Edge {
     private final int weight;
 
 
-    public Edge(String name, int weight) {
+    Edge(String name, int weight) {
         //this.id = id;
 		this.name = name;
         this.weight = weight;
@@ -19,7 +18,7 @@ public class Edge {
      return name;
 	 }
 
-    public int getWeight() {
+    int getWeight() {
         return weight;
     }
 

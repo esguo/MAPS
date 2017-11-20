@@ -14,7 +14,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -28,7 +27,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.List;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,14 +59,14 @@ public class MainActivity extends AppCompatActivity {
         rating_btn_submit = (Button) findViewById(R.id.ratingButton);
 
         final DBHandler db = new DBHandler(this);
-        POIs = new ArrayList<String>();
+        POIs = new ArrayList<>();
         readFromFile(db);
 
         /*creates list of POIs to choose from */
         for(POI poi: db.getPOIs()) {
             POIs.add(poi.getName());
         }
-        ArrayAdapter<String> list = new ArrayAdapter<String>(this,android.R.layout.select_dialog_singlechoice, POIs);
+        ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
 
         /* sets dropdown autocomplete feature */
         loc_input1.setThreshold(1);

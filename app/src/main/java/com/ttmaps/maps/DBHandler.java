@@ -10,12 +10,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
-/**
- * Created by emilychou on 10/30/17.
+/** Database and included datasets to select POI and their respective edges
  */
-
-public class DBHandler extends SQLiteOpenHelper {
+class DBHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 9;
     private static final String DATABASE_NAME = "poiInfo";
@@ -29,9 +26,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        poilist = new HashMap<String, POI>();
-
-        /* get Excel file for database */
+        poilist = new HashMap<>();
     }
     
     /* create the initial database */
@@ -65,7 +60,7 @@ public class DBHandler extends SQLiteOpenHelper {
     /* get a POI by id from the POI table */
     public String getPOI(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String rowString = String.format("Table with row " + id + " is: ");
+        String rowString = "Table with row " + id + " is: ";
         Cursor row = db.rawQuery("SELECT * FROM " + TABLE_POIS + " WHERE " + KEY_ID + " = " + id, null);
         if (row.moveToFirst() ){
             String[] columnNames = row.getColumnNames();
@@ -91,14 +86,13 @@ public class DBHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        POI contact = new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
-        return contact;
+        return new POI(Integer.parseInt(cursor.getString(0)), cursor.getString(1));
     }
 
     /* get a list of all POIs in the POI table */
     public String getAllPOIs() {
         SQLiteDatabase db = this.getReadableDatabase();
-        String rowString = String.format("All rows is: ");
+        String rowString = "All rows is: ";
         Cursor row = db.rawQuery("SELECT * FROM " + TABLE_POIS, null);
         if (row.moveToFirst() ){
             String[] columnNames = row.getColumnNames();
@@ -206,7 +200,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public List<POI> getPOIs() {
-        List<POI> poiList = new ArrayList<POI>();
+        List<POI> poiList = new ArrayList<>();
         for (POI p: poilist.values()){
             poiList.add(p);
         }

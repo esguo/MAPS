@@ -1,5 +1,4 @@
 package com.ttmaps.maps;
-import java.util.Collections;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -8,7 +7,6 @@ public class POI {
 
 	private int id;
 	private String name;
-  	private boolean done;  //has it been explored?
   	private int distance;
   	private POI prev;
   	private Edge prevEdge;
@@ -29,14 +27,13 @@ public class POI {
 
 	}
 
-	public POI (int id, String name) {
+	POI(int id, String name) {
 	    this.id = id;
 		this.name = name;
-        this.done = false;
         this.distance = 0;
         this.prev = null;
         this.prevEdge = null;
-        pairList = new ArrayList<Pair>();
+        pairList = new ArrayList<>();
         this.isBathroom = false;
         this.isFood = false;
 		this.isInfoCenter = false;
@@ -61,42 +58,34 @@ public class POI {
 		return name;
 	}
 
-    public boolean getDone(){
-		return done;
-    }
-
-    public void setDone(boolean done){
-        this.done = done;
-    }
-
-    public int getDistance()
+    int getDistance()
     {
     	return distance;
     }
 
-    public void setDistance (int distance){
+    void setDistance(int distance){
         this.distance = distance;
     }
 
-    public POI getPrev(){
+    POI getPrev(){
         return prev;
     }
 
-    public void setPrev (POI prev){
+    void setPrev(POI prev){
         this.prev = prev;
     }
 
-    public Edge getPrevEdge(){
+    Edge getPrevEdge(){
         return prevEdge;
     }
 
-    public void setPrevEdge(Edge e){
+    void setPrevEdge(Edge e){
         prevEdge = e;
     }
 
-    public void addNeighbor(POI p, Edge e) { pairList.add(new Pair(p, e)); }
+    void addNeighbor(POI p, Edge e) { pairList.add(new Pair(p, e)); }
 
-    public List<Pair> getNeighbors() { return pairList; }
+    List<Pair> getNeighbors() { return pairList; }
 
     public void setIsBathroom() { isBathroom = true; }
     public boolean getIsBathroom() { return isBathroom; }
