@@ -100,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*
         String poi1 = db.getAllPOIs();
         Log.d("INFO OF ALL POIS: ", poi1);
         int poi3 = db.getRating(0);
@@ -112,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
         String poi5 = db.getAllPOIs();
         Log.d("NEW RATING IS ENF: ", String.valueOf(rating1));
         Log.d("INFO OF ALL AGAIN: ", poi5);
+        */
         /* testing database stuff*/
         /*Log.d("Reading: ", "Reading all POIs...");
         POI poi1 = db.getPOI(1);
