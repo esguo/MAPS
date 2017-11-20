@@ -10,30 +10,29 @@ import java.util.PriorityQueue;
 import java.util.Stack;
 
 
-public class Dijkstra {
+class Dijkstra {
 
-    public static List<POI> allPOI = new ArrayList<POI>();
+    private static List<POI> allPOI = new ArrayList<>();
 
     //Comparator class that compares the distance of the POI
-    Comparator<POI> comparator = new POIComparator();
-    PriorityQueue<POI> toExplore = new PriorityQueue<POI>(50, comparator);
-    Stack<String> stack = new Stack<String>();
-    POI curr;
-    String output = "";
-    DBHandler database;
+    private Comparator<POI> comparator = new POIComparator();
+    private PriorityQueue<POI> toExplore = new PriorityQueue<>(50, comparator);
+    private Stack<String> stack = new Stack<>();
+    private POI curr;
+    private String output = "";
+    private DBHandler database;
 
-    public Dijkstra(DBHandler d) {
+    Dijkstra(DBHandler d) {
         database = d;
     }
 
-    public String dijkstra(String start, String end) {
+    String dijkstra(String start, String end) {
 
         int inf = Integer.MAX_VALUE;
         allPOI = database.getPOIs();
 
         //Initialize each POI's fields for Dijkstra
         for (POI value : allPOI) {
-            POI temp = value;       //get the POI object
             value.setDistance(inf); // set distance to infinity
             value.setDone(false);   // shows that the node is not done yet
             value.setPrev(null);
@@ -73,14 +72,20 @@ public class Dijkstra {
 
             }
         }
-        while (curr != null && curr.getPrev() != null) {
-            stack.add(curr.getName());
-            stack.add(curr.getPrevEdge().getName());
-            curr = curr.getPrev();
+        try {
+            while (curr != null && curr.getPrev() != null) {
+                stack.add(curr.getName());
+                stack.add(curr.getPrevEdge().getName());
+                curr = curr.getPrev();
+            }
+            output += start + "\n";
+            while (!stack.isEmpty()) {
+                //noinspection StringConcatenationInLoop
+                output += "--> " + stack.pop() + " -->\n" + stack.pop() + "\n";
+            }
         }
-        output += start + "\n";
-        while (!stack.isEmpty()) {
-            output += "--> " + stack.pop() + " -->\n" + stack.pop() + "\n";
+        catch (OutOfMemoryError e){
+            output = "Error while creating path: \n\n" + e.toString();
         }
         return output;
     }
