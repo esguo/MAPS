@@ -17,7 +17,7 @@ import android.util.Log;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "poiInfo";
     private static final String TABLE_POIS = "POIS";
     private static final String KEY_ID = "id";
@@ -151,6 +151,9 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public int getAvgRating(int id){
+        if(getRatingCount(id) == 0){
+            return 0;
+        }
         return getRating(id)/getRatingCount(id);
     }
 
@@ -182,7 +185,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
         for(int i = 0; i < POI.length; i++){
             POI poi = new POI(i, POI[i]);
-            addPOI(poi, 0, 0, 0);
+            //addPOI(poi, 0, 0, 0);
             poilist.put(poi.getId(), poi);
         }
     }

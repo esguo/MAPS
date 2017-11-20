@@ -3,6 +3,7 @@ package com.ttmaps.maps;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,13 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import java.util.List;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,20 +41,22 @@ public class MainActivity extends AppCompatActivity {
     private EditText loc_input2;
     private Button btn_submit;
     private Button rating_btn_submit;
-
+    int rate = 0;
+    DBHandler db = new DBHandler(this);;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
+        //db = new DBHandler(this);
         setContentView(R.layout.activity_main);
         loc_input1 = (EditText) findViewById(R.id.input);
         loc_input2 = (EditText) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.button);
         rating_btn_submit = (Button) findViewById(R.id.ratingButton);
-
-        final DBHandler db = new DBHandler(this);
+       // final DBHandler db = new DBHandler(this);
+        //final DBHandler db = ((MyApplication)getApplication()).db;
         db.updateDb();
         db.createPair(7, 6, "Library Walk", 2);
         db.createPair(0, 7, "Warren Mall", 3);
@@ -98,35 +103,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String poi1 = db.getAllPOIs();
-        Log.d("INFO OF ALL POIS: ", poi1);
-        int poi3 = db.getRating(0);
-        Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
-        int rating = db.updatePOI(0, "Warren", 5);
-        String poi2 = db.getPOI(0);
-        Log.d("NEW RATING IS: ", String.valueOf(rating));
-        Log.d("INFO ON UPDATED POI: ", poi2);
-        int rating1 = db.updatePOI(0, "Warren", 3);
+//        String poi1 = db.getAllPOIs();
+//        Log.d("INFO OF ALL POIS: ", poi1);
+//        int poi3 = db.getRating(0);
+//        Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
+       // int rating = db.updatePOI(0, "Warren", 5);
+//        String poi2 = db.getPOI(0);
+//        Log.d("NEW RATING IS: ", String.valueOf(rating));
+//        Log.d("INFO ON UPDATED POI: ", poi2);
+//        int rating1 = db.updatePOI(0, "Warren", 3);
         String poi5 = db.getAllPOIs();
-        Log.d("NEW RATING IS ENF: ", String.valueOf(rating1));
+//        Log.d("NEW RATING IS ENF: ", String.valueOf(rating1));
         Log.d("INFO OF ALL AGAIN: ", poi5);
-        /* testing database stuff*/
-        /*Log.d("Reading: ", "Reading all POIs...");
-        POI poi1 = db.getPOI(1);
-        POI poi2 = db.getPOIByName("Muir");
-        String log = "Id: " + poi1.getId() + ", Name: " + poi1.getName();
-        Log.d("POI: ", log);
-        String log1 = "Count of POIs: " + db.getPOIsCount();
-        Log.d("POI Count: ", log1);
-        db.deletePOI(poi1);
-        String log2 = "Count of POIs after deleting: " + db.getPOIsCount();
-        Log.d("POI Count: ", log2);
-        
-        List<POI> pois = db.getAllPOIs();
-        for (POI poi : pois) {
-            String log3 = "Id: " + poi.getId() + ", Name: " + poi.getName();
-            Log.d("POI: ", log3);
-        }*/
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
@@ -135,7 +123,6 @@ public class MainActivity extends AppCompatActivity {
                 if ((loc_input1.getText().length() > 0) && (loc_input2.getText().length() > 0 )){
                     String loc1 = loc_input1.getText().toString();
                     String loc2 = loc_input2.getText().toString();
-
 
                     Intent intent;
                     intent = new Intent(context, Result.class);
@@ -151,29 +138,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final Context context1 = this;
         //currently displays rating
         rating_btn_submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if ((loc_input1.getText().length() > 0) && (loc_input2.getText().length() > 0 )){
-                    String loc1 = loc_input1.getText().toString();
-                    POI poi = db.getPOIByName(loc1);
-                    int rating = db.getAvgRating(poi.getId());
+                Intent intent = new Intent(MainActivity.this, add_ratings.class);
 
-                    Intent intent;
-                    intent = new Intent(context, Result.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("result", "" + rating);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(MainActivity.this, "Please enter locations in both operand fields", Toast.LENGTH_LONG).show();
-                }
+                //rate is how i return like int or string values
+                //you can't return like custom objects ive tried TTTTTTTT
+                startActivityForResult(intent, rate);
+
+                Log.d("ID IS ", String.valueOf(rate));
             }
         });
 
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == rate && resultCode == RESULT_OK && data != null) {
+            String num1 = data.getStringExtra("name");
+            String num2 = data.getStringExtra("rateNum");
+            Log.d("POI NAME", num1);
+            Log.d("RATE NUM ", num2);
+            POI poi = db.getPOIByName(num1);
+            //dont want to update when u just view
+            if(Integer.parseInt(num2) == 0) {
+                return;
+                //do you pass the number anywhere like rating 3
+            }
+            db.updatePOI(poi.getId(), poi.getName(), Integer.parseInt(num2));
+            Log.d("OMG JUST WORK ", String.valueOf(db.getAvgRating(poi.getId())));
+        }
     }
 
     class NavItem {

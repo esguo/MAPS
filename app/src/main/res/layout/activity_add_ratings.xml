@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/poiToRate"
+        android:layout_width="match_parent"
+        android:layout_height="94dp"
+        android:ems="10"
+        android:hint="Rate this POI!"
+        android:inputType="text" />
+
+    <RatingBar
+        android:id="@+id/ratePoiBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/rateButton"
+        android:layout_width="403dp"
+        android:layout_height="97dp"
+        android:text="Go!" />
+
+    <Button
+        android:id="@+id/viewRateButton"
+        android:layout_width="match_parent"
+        android:layout_height="111dp"
+        android:text="View!" />
+
+</LinearLayout>
