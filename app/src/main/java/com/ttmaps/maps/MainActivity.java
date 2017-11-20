@@ -170,12 +170,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(MainActivity.this, add_ratings.class);
-
-                //rate is how i return like int or string values
-                //you can't return like custom objects ive tried TTTTTTTT
                 startActivityForResult(intent, rate);
 
-                Log.d("ID IS ", String.valueOf(rate));
+                //Log.d("ID IS ", String.valueOf(rate));
             }
         });
 
@@ -191,13 +188,11 @@ public class MainActivity extends AppCompatActivity {
             Log.d("POI NAME", num1);
             Log.d("RATE NUM ", num2);
             POI poi = db.getPOIByName(num1);
-            //dont want to update when u just view
             if (Integer.parseInt(num2) == 0) {
                 return;
-                //do you pass the number anywhere like rating 3
             }
             db.updatePOI(poi.getId(), poi.getName(), Integer.parseInt(num2));
-            Log.d("OMG JUST WORK ", String.valueOf(db.getAvgRating(poi.getId())));
+            //Log.d("OMG JUST WORK ", String.valueOf(db.getAvgRating(poi.getId())));
         }
     }
 

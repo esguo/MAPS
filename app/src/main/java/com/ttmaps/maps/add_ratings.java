@@ -18,21 +18,6 @@ public class add_ratings extends AppCompatActivity {
     private EditText poiToRate;
     private RatingBar ratingBar;
     @Override
-
-    // well oncreate just defines what happens when u press a button
-    // is there a way to NOT have the enter button (set rating) go back to the other page
-    // just stay on curr page do it
-    //yeahhh
-    //actually you cant do that here because I need values to be returned to mainacitivty in order to update the db becuase
-    //I can't get the db from in here I tried like all night yesterday and nothing worked because it kept just not updating/
-    //i think it made copies etc.
-    //yeah java pass by value and ref, but parameters are copied and not reffed
-    //I just instantiation a new db bc online said that works but actually it gave me the same result so it worked or no?
-    //actually idr but sort of to some extent
-    /*
-    have a parameter as db, then return the db that you create
-    where would i pass in a parameter here tho
-     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //db = ((MyApplication)getApplication()).db;
@@ -71,7 +56,6 @@ public class add_ratings extends AppCompatActivity {
         viewRateButton = (Button) findViewById(R.id.viewRateButton);
         viewRateButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            //seems you're recreating the database in ONCREATE in the mainactibity
             public void onClick (View v){
                 if(poiToRate.getText().length() > 0){
                     final DBHandler db = new DBHandler(add_ratings.this);
