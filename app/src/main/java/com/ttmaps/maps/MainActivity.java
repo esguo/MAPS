@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             POIs.add(poi.getName());
         }
         ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
-
+        //db.updateDb();
         /* sets dropdown autocomplete feature */
         loc_input1.setThreshold(1);
         loc_input2.setThreshold(1);
@@ -185,13 +185,14 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == rate && resultCode == RESULT_OK && data != null) {
             String num1 = data.getStringExtra("name");
             String num2 = data.getStringExtra("rateNum");
+            String num3 = data.getStringExtra("comment");
             Log.d("POI NAME", num1);
             Log.d("RATE NUM ", num2);
             POI poi = db.getPOIByName(num1);
             if (Integer.parseInt(num2) == 0) {
                 return;
             }
-            db.updatePOI(poi.getId(), poi.getName(), Integer.parseInt(num2));
+            db.updatePOI(poi.getId(), poi.getName(), Integer.parseInt(num2), num3);
             //Log.d("OMG JUST WORK ", String.valueOf(db.getAvgRating(poi.getId())));
         }
     }
