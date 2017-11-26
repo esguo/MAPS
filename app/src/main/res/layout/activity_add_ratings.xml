@@ -32,6 +32,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/comment"
+        android:layout_width="match_parent"
+        android:layout_height="155dp"
+        android:ems="10"
+        android:hint="Comment"
+        android:inputType="text" />
+
     <Button
         android:id="@+id/rateButton"
         android:layout_width="330dp"
