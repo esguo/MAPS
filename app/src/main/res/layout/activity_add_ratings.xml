@@ -17,6 +17,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <EditText
+        android:id="@+id/comment"
+        android:layout_width="match_parent"
+        android:layout_height="155dp"
+        android:ems="10"
+        android:hint="Comment"
+        android:inputType="text" />
+
     <Button
         android:id="@+id/rateButton"
         android:layout_width="403dp"

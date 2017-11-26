@@ -17,6 +17,7 @@ public class add_ratings extends AppCompatActivity {
     private Button viewRateButton;
     private EditText poiToRate;
     private RatingBar ratingBar;
+    private EditText comment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +27,7 @@ public class add_ratings extends AppCompatActivity {
         poiToRate = (EditText) findViewById(R.id.poiToRate);
         ratingBar = (RatingBar) findViewById(R.id.ratePoiBar);
         rateButton = (Button) findViewById(R.id.rateButton);
+        comment = (EditText) findViewById(R.id.comment);
 
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,6 +41,13 @@ public class add_ratings extends AppCompatActivity {
                     //int rating = db.updatePOI(rateThisPOI.getId(), poi, (int)stars);
                     Log.d("NOOOOOOOOOOOOOOOW: ", String.valueOf(db.getAvgRating(rateThisPOI.getId())));
                     Intent data = new Intent();
+                    if(comment.getText().length() > 0){
+                        String com = comment.getText().toString();
+                        data.putExtra("comment", com);
+                    }
+                    else{
+                        data.putExtra("comment", "");
+                    }
                     data.putExtra("name", poi);
                     data.putExtra("rateNum", "" + (int)stars);
                     if(getParent() == null){
@@ -67,7 +76,7 @@ public class add_ratings extends AppCompatActivity {
                     intent = new Intent(context, Result.class);
                     Bundle bundle = new Bundle();
                     if(db.getRatingCount(rateThisPOI.getId()) != 0) {
-                        bundle.putString("result", "" + (rating / (db.getRatingCount(rateThisPOI.getId()))));
+                        bundle.putString("result", "Rating\n" + (rating / (db.getRatingCount(rateThisPOI.getId()))) + "\n\nComments" + db.getRatingCom(rateThisPOI.getId()));
                     }
                     else{
                         bundle.putString("result", "No ratings yet!");
@@ -75,7 +84,8 @@ public class add_ratings extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                     intent.putExtra("name", poi);
-                    intent.putExtra("rateNum", "2");
+                    intent.putExtra("rateNum", "0");
+                    intent.putExtra("comment", "");
                     finish();
                 }
 
