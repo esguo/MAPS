@@ -1,45 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#dabdf7"
-    android:orientation="vertical"
+    android:background="@color/colorPrimaryDarkGray"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.ttmaps.maps.MainActivity"
     tools:showIn="@layout/activity_main">
 
 
+    <view
+        android:id="@+id/viewPathSearch1"
+        class="android.support.v4.widget.DrawerLayout"
+        android:layout_width="357dp"
+        android:layout_height="222dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/rounded_corner2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <AutoCompleteTextView
         android:id="@+id/input"
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        android:layout_weight="1"
+        android:layout_width="266dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_corner"
         android:ems="10"
+        android:gravity="center"
         android:hint="Current Location"
-        android:inputType="text" />
+        android:inputType="text"
+        android:text="Enter starting location..."
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/viewPathSearch1" />
 
     <AutoCompleteTextView
         android:id="@+id/input2"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="1"
+        android:layout_width="266dp"
+        android:layout_height="52dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_corner"
+
         android:ems="10"
+        android:gravity="center"
         android:hint="Destination"
-        android:inputType="text" />
+        android:inputType="text"
+        android:text="Enter destination..."
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input"
+        app:layout_constraintVertical_bias="0.111" />
 
     <Button
         android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_width="308dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="228dp"
+        android:layout_marginTop="8dp"
         android:layout_weight="1"
-        android:text="Find Path" />
+        android:text="Find Path"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input"
+        app:layout_constraintVertical_bias="0.75" />
 
     <Button
         android:id="@+id/ratingButton"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_weight="1"
-        android:text="Get Rating" />
-</LinearLayout>
+        android:layout_width="343dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Get Rating"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button" />
+
+    <TextView
+        android:id="@+id/searchPathLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Search"
+        android:textColor="@color/colorPrimaryLightGB"
+        app:layout_constraintBottom_toTopOf="@+id/viewPathSearch1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
