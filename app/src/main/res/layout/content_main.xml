@@ -41,5 +41,5 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_weight="1"
-        android:text="Get Rating" />
+        android:text="Add or View Rating" />
 </LinearLayout>
