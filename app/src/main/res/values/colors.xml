@@ -7,4 +7,5 @@
     <color name="colorMenuBlue">#527faf</color>
     <color name="colorPrimaryLightGB">#aec3ef</color>
     <color name="colorPrimaryYellowButton">#f9ed80</color>
+    <color name="colorinfobackground">#ffffff</color>
 </resources>
