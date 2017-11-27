@@ -3,7 +3,6 @@ package com.ttmaps.maps;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +16,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import java.io.Serializable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         loc_input1 = (AutoCompleteTextView) findViewById(R.id.input);
         loc_input2 = (AutoCompleteTextView) findViewById(R.id.input2);
-        btn_submit = (Button) findViewById(R.id.button);
+        btn_submit = (Button) findViewById(R.id.psearchSubmit);
         rating_btn_submit = (Button) findViewById(R.id.ratingButton);
 
         final DBHandler db = new DBHandler(this);
