@@ -14,7 +14,7 @@ import java.util.List;
  */
 class DBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 17;
+    private static final int DATABASE_VERSION = 19;
     private static final String DATABASE_NAME = "poiInfo";
     private static final String TABLE_POIS = "POIS";
     private static final String KEY_ID = "id";
@@ -55,7 +55,7 @@ class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_RATING_COUNT, count);
         values.put(KEY_AVG_RATING, avg_rating);
         values.put(KEY_RATING_COM, comment);
-        db.insertWithOnConflict(TABLE_POIS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+        db.insertWithOnConflict(TABLE_POIS, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         db.close();
     }
 
