@@ -14,7 +14,7 @@ import java.util.List;
  */
 class DBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 17;
     private static final String DATABASE_NAME = "poiInfo";
     private static final String TABLE_POIS = "POIS";
     private static final String KEY_ID = "id";
@@ -34,7 +34,7 @@ class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("Creating: ","Creating..");
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL UNIQUE, " + KEY_RATING + " INTEGER, " + KEY_RATING_COUNT + " INTEGER, " + KEY_AVG_RATING + " INTEGER, " + KEY_RATING_COM +  " TEXT NOT NULL UNIQUE" + ")";
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL UNIQUE, " + KEY_RATING + " INTEGER, " + KEY_RATING_COUNT + " INTEGER, " + KEY_AVG_RATING + " INTEGER, " + KEY_RATING_COM +  " TEXT NOT NULL" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
     

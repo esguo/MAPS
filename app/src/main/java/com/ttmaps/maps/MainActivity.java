@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_submit;
     private Button rating_btn_submit;
     int rate = 0;
-    DBHandler db = new DBHandler(this);
+    final DBHandler db = new DBHandler(this);
     String[] data;
     ArrayList<String> POIs;
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         btn_submit = (Button) findViewById(R.id.button);
         rating_btn_submit = (Button) findViewById(R.id.ratingButton);
 
-        final DBHandler db = new DBHandler(this);
+        //final DBHandler db = new DBHandler(this);
         POIs = new ArrayList<>();
         readFromFile(db);
 
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             POIs.add(poi.getName());
         }
         ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
-        //db.updateDb();
+        db.updateDb();
         /* sets dropdown autocomplete feature */
         loc_input1.setThreshold(1);
         loc_input2.setThreshold(1);
@@ -104,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        String poi1 = db.getAllPOIs();
-//        Log.d("INFO OF ALL POIS: ", poi1);
+        String poi1 = db.getAllPOIs();
+        Log.d("INFO OF ALL POIS: ", poi1);
 //        int poi3 = db.getRating(0);
 //        Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
        // int rating = db.updatePOI(0, "Warren", 5);
@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
             db.updatePOI(poi.getId(), poi.getName(), Integer.parseInt(num2), num3);
-            //Log.d("OMG JUST WORK ", String.valueOf(db.getAvgRating(poi.getId())));
+            Log.d("OMG JUST WORK ", String.valueOf(db.getAvgRating(poi.getId())));
         }
     }
 
