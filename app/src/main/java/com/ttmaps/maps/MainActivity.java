@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btn_submit;
     private Button rating_btn_submit;
     int rate = 0;
-    DBHandler db = new DBHandler(this);
+    final DBHandler db = new DBHandler(this);
     String[] data;
     ArrayList<String> POIs;
 
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         btn_submit = (Button) findViewById(R.id.psearchSubmit);
         rating_btn_submit = (Button) findViewById(R.id.ratingButton);
 
-        final DBHandler db = new DBHandler(this);
+        //final DBHandler db = new DBHandler(this);
         POIs = new ArrayList<>();
         readFromFile(db);
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             POIs.add(poi.getName());
         }
         ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
-        //db.updateDb();
+        db.updateDb();
         /* sets dropdown autocomplete feature */
         loc_input1.setThreshold(1);
         loc_input2.setThreshold(1);
