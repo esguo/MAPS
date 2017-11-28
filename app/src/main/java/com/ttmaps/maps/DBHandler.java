@@ -14,7 +14,7 @@ import java.util.List;
  */
 class DBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 19;
+    private static final int DATABASE_VERSION = 21;
     private static final String DATABASE_NAME = "poiInfo";
     private static final String TABLE_POIS = "POIS";
     private static final String KEY_ID = "id";
@@ -192,8 +192,8 @@ class DBHandler extends SQLiteOpenHelper {
 
 
     public void updateDb(){
-        String[] POI = {"Warren", "Muir", "Revelle", "Sixth", "Marshall", "Elenor Roosevelt College", "Center", "PC",
-            "Pepper Canyon", "Ledden", "Galbraith", "York", "Cognitive Science Building", "Solis", "Rady"};
+        String[] POI = {"warren", "muir", "revelle", "sixth", "marshall", "elenor roosevelt college", "center", "pc",
+            "pepper canyon", "ledden", "galbraith", "york", "cognitive science building", "solis", "rady"};
 
         for(int i = 0; i < POI.length; i++){
             POI poi = new POI(i, POI[i]);
@@ -205,6 +205,8 @@ class DBHandler extends SQLiteOpenHelper {
     public void populateHash(int id, String POIName){
         POI poi = new POI(id, POIName);
         poilist.put(poi.getName(), poi);
+        POI dbpoi = new POI(id, POIName.toLowerCase());
+        addPOI(dbpoi, 0, 0, 0, "");
     }
 
 

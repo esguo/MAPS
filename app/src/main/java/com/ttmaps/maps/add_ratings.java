@@ -34,7 +34,7 @@ public class add_ratings extends AppCompatActivity {
             public void onClick (View v){
                 if(poiToRate.getText().length() > 0){
                     final DBHandler db = new DBHandler(add_ratings.this);
-                    String poi = poiToRate.getText().toString();
+                    String poi = poiToRate.getText().toString().toLowerCase();
                     POI rateThisPOI = db.getPOIByName(poi);
                     float stars = ratingBar.getRating();
                     Log.d("STAAAAAAAAAAAAAARS: ", String.valueOf(stars));
@@ -68,7 +68,7 @@ public class add_ratings extends AppCompatActivity {
             public void onClick (View v){
                 if(poiToRate.getText().length() > 0){
                     final DBHandler db = new DBHandler(add_ratings.this);
-                    String poi = poiToRate.getText().toString();
+                    String poi = poiToRate.getText().toString().toLowerCase();
                     POI rateThisPOI = db.getPOIByName(poi);
                     int rating = db.getRating(rateThisPOI.getId());
                     Log.d("CURRENT RATING IS: ", String.valueOf(rating));

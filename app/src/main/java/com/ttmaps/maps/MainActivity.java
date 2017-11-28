@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
             POIs.add(poi.getName());
         }
         ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
-        db.updateDb();
+        //db.updateDb();
         /* sets dropdown autocomplete feature */
         loc_input1.setThreshold(1);
         loc_input2.setThreshold(1);
@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        String poi1 = db.getAllPOIs();
-//        Log.d("INFO OF ALL POIS: ", poi1);
+        String poi1 = db.getAllPOIs();
+        Log.d("INFO OF ALL POIS: ", poi1);
 //        int poi3 = db.getRating(0);
 //        Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
        // int rating = db.updatePOI(0, "Warren", 5);
