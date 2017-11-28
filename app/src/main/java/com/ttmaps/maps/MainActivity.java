@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -308,5 +309,57 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout.closeDrawer(mDrawerPane);
     }
 
+    public ArrayList<String> getFilteredPOIs(boolean[] filterList){
+        ArrayList<String> canUse = new ArrayList<>();
+        List<POI> allPOI = db.getPOIs();
+        for(int i = 0; i < allPOI.size(); i++){
+            canUse.add(allPOI.get(i).getName());
+        }
+        for(int i = 0; i < allPOI.size(); i++){
+            if(filterList[0]) {
+                if (!allPOI.get(i).getIsAdmin()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[1]){
+                if (!allPOI.get(i).getIsClassroom()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[2]){
+                if (!allPOI.get(i).getIsFood()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[3]){
+                if (!allPOI.get(i).getIsParking()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[4]){
+                if (!allPOI.get(i).getIsRec()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[5]){
+                if (!allPOI.get(i).getIsResHall()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[6]){
+                if (!allPOI.get(i).getIsStudyArea()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+        }
+        return canUse;
+    }
 
 }
