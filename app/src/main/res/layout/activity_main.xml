@@ -37,7 +37,7 @@
             android:id="@+id/viewPathSearch2"
             class="android.support.v4.widget.DrawerLayout"
             android:layout_width="283dp"
-            android:layout_height="186dp"
+            android:layout_height="132dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_corner2"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +45,7 @@
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchPathLabel2"
-            app:layout_constraintVertical_bias="0.06" />
+            app:layout_constraintVertical_bias="0.793" />
 
         <AutoCompleteTextView
             android:id="@+id/input"
@@ -192,6 +192,16 @@
             app:layout_constraintBottom_toBottomOf="@+id/viewPathSearch2"
             app:layout_constraintEnd_toEndOf="@+id/viewPathSearch2"
             app:layout_constraintStart_toStartOf="@+id/viewPathSearch2" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="292dp"
+            android:layout_height="47dp"
+            android:layout_marginStart="44dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="295dp" />
 
     </android.support.constraint.ConstraintLayout>
 
