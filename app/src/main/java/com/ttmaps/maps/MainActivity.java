@@ -101,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        String poi1 = db.getAllPOIs();
-//        Log.d("INFO OF ALL POIS: ", poi1);
+        String poi1 = db.getAllPOIs();
+        Log.d("INFO OF ALL POIS: ", poi1);
 //        int poi3 = db.getRating(0);
 //        Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
        // int rating = db.updatePOI(0, "Warren", 5);
