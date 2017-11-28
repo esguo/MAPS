@@ -2,6 +2,7 @@ package com.ttmaps.maps;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -28,6 +31,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +47,11 @@ public class MainActivity extends AppCompatActivity {
     private AutoCompleteTextView loc_input2;
     private Button btn_submit;
     private Button rating_btn_submit;
+
+    private CheckBox safeRoute;
+    private CheckBox wellLit;
+    private CheckBox wheelChair;
+
     int rate = 0;
     final DBHandler db = new DBHandler(this);
     String[] data;
@@ -58,7 +67,9 @@ public class MainActivity extends AppCompatActivity {
         loc_input1 = (AutoCompleteTextView) findViewById(R.id.input);
         loc_input2 = (AutoCompleteTextView) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.psearchSubmit);
-        rating_btn_submit = (Button) findViewById(R.id.ratingButton);
+        safeRoute = (CheckBox) findViewById(R.id.checkBox);
+        wellLit = (CheckBox) findViewById(R.id.checkBox2);
+        wheelChair = (CheckBox) findViewById(R.id.checkBox4);
 
         //final DBHandler db = new DBHandler(this);
         POIs = new ArrayList<>();
@@ -69,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             POIs.add(poi.getName());
         }
         ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
-        db.updateDb();
+        //db.updateDb();
         /* sets dropdown autocomplete feature */
         loc_input1.setThreshold(1);
         loc_input2.setThreshold(1);
@@ -87,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         // DrawerLayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
-        // Populate the Navigtion Drawer with options
+        // Populate the Navigation Drawer with options
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
         mDrawerList = (ListView) findViewById(R.id.navList);
         DrawerListAdapter adapter = new DrawerListAdapter(this, mNavItems);
@@ -151,7 +162,12 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(context, Result.class);
                     Dijkstra d = new Dijkstra(db);
                     Bundle bundle = new Bundle();
-                    bundle.putString("result", d.dijkstra(loc1, loc2));
+                    boolean[] filter = new boolean[3];
+                    filter[0] = safeRoute.isChecked();
+                    filter[1] = wellLit.isChecked();
+                    filter[2] = wheelChair.isChecked();
+
+                    bundle.putString("result", d.dijkstra(loc1, loc2, filter));
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -160,20 +176,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        final Context context1 = this;
-        //currently displays rating
-        rating_btn_submit.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, add_ratings.class);
-                startActivityForResult(intent, rate);
-
-                //Log.d("ID IS ", String.valueOf(rate));
-            }
-        });
-
-
     }
 
 
@@ -291,22 +293,91 @@ public class MainActivity extends AppCompatActivity {
 
             return view;
         }
+
     }
 
     private void selectItemFromDrawer(int position) {
-        Fragment fragment = new PreferencesFragment();
 
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.mainContent, fragment)
-                .commit();
+        if (position == 0) {
+
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(intent);
+        }
+
+        if (position == 2) {
+
+            Intent intent = new Intent(MainActivity.this, add_ratings.class);
+            startActivityForResult(intent, rate);
+
+            /**
+            Fragment fragment = new RatingsFragment();
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.activity_main, fragment);
+            transaction.commit();
+             */
+        }
 
         mDrawerList.setItemChecked(position, true);
         setTitle(mNavItems.get(position).mTitle);
+        Log.d("test", "fragment");
 
         // Close the drawer
         mDrawerLayout.closeDrawer(mDrawerPane);
+
     }
 
+    public ArrayList<String> getFilteredPOIs(boolean[] filterList){
+        ArrayList<String> canUse = new ArrayList<>();
+        List<POI> allPOI = db.getPOIs();
+        for(int i = 0; i < allPOI.size(); i++){
+            canUse.add(allPOI.get(i).getName());
+        }
+        for(int i = 0; i < allPOI.size(); i++){
+            if(filterList[0]) {
+                if (!allPOI.get(i).getIsAdmin()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[1]){
+                if (!allPOI.get(i).getIsClassroom()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[2]){
+                if (!allPOI.get(i).getIsFood()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[3]){
+                if (!allPOI.get(i).getIsParking()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[4]){
+                if (!allPOI.get(i).getIsRec()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[5]){
+                if (!allPOI.get(i).getIsResHall()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+            if(filterList[6]){
+                if (!allPOI.get(i).getIsStudyArea()){
+                    canUse.remove(i);
+                    continue;
+                }
+            }
+        }
+        return canUse;
+    }
 
 }

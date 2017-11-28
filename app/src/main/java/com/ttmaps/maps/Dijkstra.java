@@ -21,7 +21,12 @@ class Dijkstra {
         database = d;
     }
 
-    String dijkstra(String start, String end) {
+    String dijkstra(String start, String end, boolean[] opt) {
+        /* opt
+            0 - safe
+            1 - well lit
+            2 - wheelchair
+         */
 
         int inf = Integer.MAX_VALUE;
         List<POI> allPOI = database.getPOIs();
@@ -53,7 +58,16 @@ class Dijkstra {
             List<Pair> pairs = curr.getNeighbors(); //iterate through next's getEdges
             for (int index = 0; index < pairs.size(); index++) {
                 Pair currPair = pairs.get(index);
-                Log.d("int: ", "" + index);
+
+                //skip this edge if does not match options selected
+                if(opt[0] && !(currPair.isWellLit() || currPair.hasSafeBox()))
+                    continue;
+                if(opt[1] && !currPair.isWellLit())
+                    continue;
+                if(opt[2] && !currPair.noStairs())
+                    continue;
+
+                //Log.d("int: ", "" + index);
                 int dist = curr.getDistance() + currPair.getEdge().getWeight();
 
                 if (dist < currPair.getPOI().getDistance()) {

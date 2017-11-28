@@ -24,7 +24,6 @@ public class POI {
 	private boolean isStudyArea;
 
 	public POI(){
-
 	}
 
 	POI(int id, String name) {
