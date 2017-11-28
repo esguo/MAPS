@@ -2,6 +2,7 @@ package com.ttmaps.maps;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         // DrawerLayout
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
 
-        // Populate the Navigtion Drawer with options
+        // Populate the Navigation Drawer with options
         mDrawerPane = (RelativeLayout) findViewById(R.id.drawerPane);
         mDrawerList = (ListView) findViewById(R.id.navList);
         DrawerListAdapter adapter = new DrawerListAdapter(this, mNavItems);
@@ -151,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(context, Result.class);
                     Dijkstra d = new Dijkstra(db);
                     Bundle bundle = new Bundle();
-                    bundle.putString("result", d.dijkstra(loc1, loc2));
+                    boolean[] a = new boolean[3];
+                    bundle.putString("result", d.dijkstra(loc1, loc2, a));
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -291,21 +293,38 @@ public class MainActivity extends AppCompatActivity {
 
             return view;
         }
+
     }
 
     private void selectItemFromDrawer(int position) {
-        Fragment fragment = new PreferencesFragment();
 
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.mainContent, fragment)
-                .commit();
+        if (position == 0) {
+
+            Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(intent);
+        }
+
+        if (position == 2) {
+
+            Intent intent = new Intent(MainActivity.this, add_ratings.class);
+            startActivityForResult(intent, rate);
+
+            /**
+            Fragment fragment = new RatingsFragment();
+
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.activity_main, fragment);
+            transaction.commit();
+             */
+        }
 
         mDrawerList.setItemChecked(position, true);
         setTitle(mNavItems.get(position).mTitle);
+        Log.d("test", "fragment");
 
         // Close the drawer
         mDrawerLayout.closeDrawer(mDrawerPane);
+
     }
 
 

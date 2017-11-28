@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.ttmaps.maps.MainActivity">
-
-    <include
-        layout="@layout/content_main"/>
-
-</android.support.constraint.ConstraintLayout>
--->
 
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,40 +9,215 @@
     android:layout_height="match_parent"
     tools:context="com.ttmaps.maps.MainActivity">
 
-    <!--main screen-->
-    <RelativeLayout
-        android:id="@+id/mainContent"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </RelativeLayout>
-    
-    <!--drawer-->
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDarkGray"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.ttmaps.maps.MainActivity"
+        tools:showIn="@layout/activity_main">
+
+
+        <view
+            android:id="@+id/viewPathSearch1"
+            class="android.support.v4.widget.DrawerLayout"
+            android:layout_width="357dp"
+            android:layout_height="223dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/rounded_corner2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.518"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <view
+            android:id="@+id/viewPathSearch2"
+            class="android.support.v4.widget.DrawerLayout"
+            android:layout_width="283dp"
+            android:layout_height="186dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/rounded_corner2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.504"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchPathLabel2"
+            app:layout_constraintVertical_bias="0.06" />
+
+        <AutoCompleteTextView
+            android:id="@+id/input"
+            android:layout_width="315dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_corner"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Current Location"
+            android:inputType="text"
+            android:text="Enter starting location..."
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/viewPathSearch1" />
+
+        <AutoCompleteTextView
+            android:id="@+id/input2"
+            android:layout_width="315dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_corner"
+
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Destination"
+            android:inputType="text"
+            android:text="Enter destination..."
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintBottom_toTopOf="@+id/psearchSubmit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input"
+            app:layout_constraintVertical_bias="0.111" />
+
+        <Button
+            android:id="@+id/psearchSubmit"
+            android:layout_width="308dp"
+            android:layout_height="55dp"
+            android:layout_marginBottom="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corner3"
+            android:text="Find Path"
+            app:layout_constraintBottom_toBottomOf="@+id/viewPathSearch1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/ratingButton"
+            android:layout_width="153dp"
+            android:layout_height="31dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="208dp"
+            android:text="Add or View Rating"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/psearchSubmit"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/searchPathLabel"
+            android:layout_width="61dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="Search"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/searchPathLabel2"
+            android:layout_width="61dp"
+            android:layout_height="17dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="Filter"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewPathSearch1" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="20dp"
+            android:checked="false"
+            android:text="Safe Routes Only"
+            app:layout_constraintEnd_toEndOf="@+id/checkBox2"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/checkBox2"
+            app:layout_constraintTop_toTopOf="@+id/viewPathSearch2" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Well-lit Routes Only"
+            app:layout_constraintBottom_toBottomOf="@+id/viewPathSearch2"
+            app:layout_constraintEnd_toEndOf="@+id/checkBox3"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/checkBox3"
+            app:layout_constraintTop_toBottomOf="@+id/checkBox"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Blacklist Locations"
+            app:layout_constraintBottom_toTopOf="@+id/checkBox4"
+            app:layout_constraintEnd_toEndOf="@+id/checkBox4"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/checkBox4" />
+
+        <CheckBox
+            android:id="@+id/checkBox4"
+            android:layout_width="190dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Wheelchair Accessibility"
+            app:layout_constraintBottom_toBottomOf="@+id/viewPathSearch2"
+            app:layout_constraintEnd_toEndOf="@+id/viewPathSearch2"
+            app:layout_constraintStart_toStartOf="@+id/viewPathSearch2" />
+
+    </android.support.constraint.ConstraintLayout>
+
     <RelativeLayout
         android:id="@+id/drawerPane"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start">
-        
-        <!--drawerHeader
-        <RelativeLayout
-            android:id="@+id/drawerHeader"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@color/colorPrimary"
-            android:padding="8dp">
-            
-        </RelativeLayout> -->
 
-        <!--menu list-->
+
         <ListView
             android:id="@+id/navList"
             android:layout_width="280dp"
             android:layout_height="match_parent"
             android:choiceMode="singleChoice"
-            android:background="#ffffffff" />
-    
+            android:background="#ffffffff"
+            android:clickable="true"/>
+
     </RelativeLayout>
-    <include
-        layout="@layout/content_main"/>
 
 </android.support.v4.widget.DrawerLayout>
+
+
+
+
+
+
