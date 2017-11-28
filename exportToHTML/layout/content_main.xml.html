@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>content_main.xml</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: #999999; font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,0); font-style: italic; }
+.s1 { color: rgb(0,0,255); font-weight: bold; }
+.s2 { color: rgb(0,0,0); }
+.s3 { color: rgb(0,128,0); font-weight: bold; }
+.s4 { color: rgb(0,0,128); font-weight: bold; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+content_main.xml</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">&lt;?</span><span class="s1">xml version=</span><span class="s3">&quot;1.0&quot; </span><span class="s1">encoding=</span><span class="s3">&quot;utf-8&quot;</span><span class="s0">?&gt;</span><span class="s2"> 
+&lt;</span><span class="s4">android.support.constraint.ConstraintLayout </span><span class="s1">xmlns:android=</span><span class="s3">&quot;http://schemas.android.com/apk/res/android&quot;</span><span class="s2"> 
+    </span><span class="s1">xmlns:app=</span><span class="s3">&quot;http://schemas.android.com/apk/res-auto&quot;</span><span class="s2"> 
+    </span><span class="s1">xmlns:tools=</span><span class="s3">&quot;http://schemas.android.com/tools&quot;</span><span class="s2"> 
+    </span><span class="s1">android:id=</span><span class="s3">&quot;@+id/pathSearchBody&quot;</span><span class="s2"> 
+    </span><span class="s1">android:layout_width=</span><span class="s3">&quot;match_parent&quot;</span><span class="s2"> 
+    </span><span class="s1">android:layout_height=</span><span class="s3">&quot;match_parent&quot;</span><span class="s2"> 
+    </span><span class="s1">android:layout_alignParentBottom=</span><span class="s3">&quot;false&quot;</span><span class="s2"> 
+    </span><span class="s1">android:background=</span><span class="s3">&quot;@color/colorBg&quot;</span><span class="s2"> 
+    </span><span class="s1">app:layout_behavior=</span><span class="s3">&quot;@string/appbar_scrolling_view_behavior&quot;</span><span class="s2"> 
+    </span><span class="s1">tools:context=</span><span class="s3">&quot;com.ttmaps.maps.MainActivity&quot;</span><span class="s2"> 
+    </span><span class="s1">tools:showIn=</span><span class="s3">&quot;@layout/activity_main&quot;</span><span class="s2">&gt; 
+ 
+ 
+    &lt;</span><span class="s4">view</span><span class="s2"> 
+        </span><span class="s1">class=</span><span class="s3">&quot;android.support.v4.widget.DrawerLayout&quot;</span><span class="s2"> 
+        </span><span class="s1">id=</span><span class="s3">&quot;@+id/view&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_width=</span><span class="s3">&quot;331dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_height=</span><span class="s3">&quot;247dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:background=</span><span class="s3">&quot;@color/nice_blue&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintBottom_toTopOf=</span><span class="s3">&quot;@+id/button&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintEnd_toEndOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintHorizontal_bias=</span><span class="s3">&quot;0.509&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintStart_toStartOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintTop_toTopOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintVertical_bias=</span><span class="s3">&quot;0.182&quot; </span><span class="s2">/&gt; 
+ 
+    &lt;</span><span class="s4">EditText</span><span class="s2"> 
+        </span><span class="s1">android:id=</span><span class="s3">&quot;@+id/input&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_width=</span><span class="s3">&quot;270dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_height=</span><span class="s3">&quot;64dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_marginTop=</span><span class="s3">&quot;84dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:background=</span><span class="s3">&quot;@android:color/background_light&quot;</span><span class="s2"> 
+        </span><span class="s1">android:elevation=</span><span class="s3">&quot;11dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:ems=</span><span class="s3">&quot;10&quot;</span><span class="s2"> 
+        </span><span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span><span class="s2"> 
+        </span><span class="s1">android:hint=</span><span class="s3">&quot;@string/current_location&quot;</span><span class="s2"> 
+        </span><span class="s1">android:inputType=</span><span class="s3">&quot;text&quot;</span><span class="s2"> 
+        </span><span class="s1">android:text=</span><span class="s3">&quot;Enter starting location...&quot;</span><span class="s2"> 
+        </span><span class="s1">android:textColor=</span><span class="s3">&quot;@android:color/darker_gray&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintBottom_toTopOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintEnd_toEndOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintStart_toStartOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintTop_toTopOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintVertical_bias=</span><span class="s3">&quot;0.0&quot; </span><span class="s2">/&gt; 
+ 
+    &lt;</span><span class="s4">EditText</span><span class="s2"> 
+        </span><span class="s1">android:id=</span><span class="s3">&quot;@+id/input2&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_width=</span><span class="s3">&quot;270dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_height=</span><span class="s3">&quot;64dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_marginBottom=</span><span class="s3">&quot;276dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:background=</span><span class="s3">&quot;@android:color/background_light&quot;</span><span class="s2"> 
+        </span><span class="s1">android:elevation=</span><span class="s3">&quot;11dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:ems=</span><span class="s3">&quot;10&quot;</span><span class="s2"> 
+        </span><span class="s1">android:gravity=</span><span class="s3">&quot;center&quot;</span><span class="s2"> 
+        </span><span class="s1">android:hint=</span><span class="s3">&quot;@string/destination&quot;</span><span class="s2"> 
+        </span><span class="s1">android:inputType=</span><span class="s3">&quot;text&quot;</span><span class="s2"> 
+        </span><span class="s1">android:text=</span><span class="s3">&quot;Enter destination...&quot;</span><span class="s2"> 
+        </span><span class="s1">android:textColor=</span><span class="s3">&quot;@android:color/darker_gray&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintBottom_toBottomOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintEnd_toEndOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintHorizontal_bias=</span><span class="s3">&quot;0.504&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintStart_toStartOf=</span><span class="s3">&quot;parent&quot; </span><span class="s2">/&gt; 
+ 
+    &lt;</span><span class="s4">Button</span><span class="s2"> 
+        </span><span class="s1">android:id=</span><span class="s3">&quot;@+id/button&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_width=</span><span class="s3">&quot;343dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_height=</span><span class="s3">&quot;56dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_weight=</span><span class="s3">&quot;1&quot;</span><span class="s2"> 
+        </span><span class="s1">android:text=</span><span class="s3">&quot;@string/find_path&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintBottom_toBottomOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintEnd_toEndOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintHorizontal_bias=</span><span class="s3">&quot;0.512&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintStart_toStartOf=</span><span class="s3">&quot;parent&quot; </span><span class="s2">/&gt; 
+ 
+    &lt;</span><span class="s4">ImageView</span><span class="s2"> 
+        </span><span class="s1">android:id=</span><span class="s3">&quot;@+id/imageView&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_width=</span><span class="s3">&quot;368dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:layout_height=</span><span class="s3">&quot;515dp&quot;</span><span class="s2"> 
+        </span><span class="s1">android:elevation=</span><span class="s3">&quot;9dp&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintBottom_toBottomOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintEnd_toEndOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintHorizontal_bias=</span><span class="s3">&quot;0.5&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintStart_toStartOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:layout_constraintTop_toTopOf=</span><span class="s3">&quot;parent&quot;</span><span class="s2"> 
+        </span><span class="s1">app:srcCompat=</span><span class="s3">&quot;@drawable/path_search_ui&quot; </span><span class="s2">/&gt; 
+ 
+&lt;/</span><span class="s4">android.support.constraint.ConstraintLayout</span><span class="s2">&gt; 
+</span></pre>
+</body>
+</html>

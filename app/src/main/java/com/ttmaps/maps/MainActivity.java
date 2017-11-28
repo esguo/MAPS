@@ -43,22 +43,24 @@ public class MainActivity extends AppCompatActivity {
     private AutoCompleteTextView loc_input2;
     private Button btn_submit;
     private Button rating_btn_submit;
+    int rate = 0;
+    final DBHandler db = new DBHandler(this);
     String[] data;
     ArrayList<String> POIs;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
 
         super.onCreate(savedInstanceState);
+        //db = new DBHandler(this);
         setContentView(R.layout.activity_main);
         loc_input1 = (AutoCompleteTextView) findViewById(R.id.input);
         loc_input2 = (AutoCompleteTextView) findViewById(R.id.input2);
-        btn_submit = (Button) findViewById(R.id.button);
+        btn_submit = (Button) findViewById(R.id.psearchSubmit);
         rating_btn_submit = (Button) findViewById(R.id.ratingButton);
 
-        final DBHandler db = new DBHandler(this);
+        //final DBHandler db = new DBHandler(this);
         POIs = new ArrayList<>();
         readFromFile(db);
 
@@ -67,13 +69,12 @@ public class MainActivity extends AppCompatActivity {
             POIs.add(poi.getName());
         }
         ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
-
+        //db.updateDb();
         /* sets dropdown autocomplete feature */
         loc_input1.setThreshold(1);
         loc_input2.setThreshold(1);
         loc_input1.setAdapter(list);
         loc_input2.setAdapter(list);
-
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
@@ -102,6 +103,16 @@ public class MainActivity extends AppCompatActivity {
 
         String poi1 = db.getAllPOIs();
         Log.d("INFO OF ALL POIS: ", poi1);
+//        int poi3 = db.getRating(0);
+//        Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
+       // int rating = db.updatePOI(0, "Warren", 5);
+//        String poi2 = db.getPOI(0);
+//        Log.d("NEW RATING IS: ", String.valueOf(rating));
+//        Log.d("INFO ON UPDATED POI: ", poi2);
+//        int rating1 = db.updatePOI(0, "Warren", 3);
+        /*
+        String poi1 = db.getAllPOIs();
+        Log.d("INFO OF ALL POIS: ", poi1);
         int poi3 = db.getRating(0);
         Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
         int rating = db.updatePOI(0, "Warren", 5);
@@ -109,9 +120,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("NEW RATING IS: ", String.valueOf(rating));
         Log.d("INFO ON UPDATED POI: ", poi2);
         int rating1 = db.updatePOI(0, "Warren", 3);
-        String poi5 = db.getAllPOIs();
-        Log.d("NEW RATING IS ENF: ", String.valueOf(rating1));
-        Log.d("INFO OF ALL AGAIN: ", poi5);
+        */
         /* testing database stuff*/
         /*Log.d("Reading: ", "Reading all POIs...");
         POI poi1 = db.getPOI(1);
@@ -138,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
                     String loc1 = loc_input1.getText().toString();
                     String loc2 = loc_input2.getText().toString();
 
-
                     Intent intent;
                     intent = new Intent(context, Result.class);
                     Dijkstra d = new Dijkstra(db);
@@ -153,29 +161,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        final Context context1 = this;
         //currently displays rating
         rating_btn_submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if ((loc_input1.getText().length() > 0) && (loc_input2.getText().length() > 0 )){
-                    String loc1 = loc_input1.getText().toString();
-                    POI poi = db.getPOIByName(loc1);
-                    int rating = db.getAvgRating(poi.getId());
+                Intent intent = new Intent(MainActivity.this, add_ratings.class);
+                startActivityForResult(intent, rate);
 
-                    Intent intent;
-                    intent = new Intent(context, Result.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("result", "" + rating);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(MainActivity.this, "Please enter locations in both operand fields", Toast.LENGTH_LONG).show();
-                }
+                //Log.d("ID IS ", String.valueOf(rate));
             }
         });
 
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == rate && resultCode == RESULT_OK && data != null) {
+            String num1 = data.getStringExtra("name");
+            String num2 = data.getStringExtra("rateNum");
+            String num3 = data.getStringExtra("comment");
+            Log.d("POI NAME", num1);
+            Log.d("RATE NUM ", num2);
+            POI poi = db.getPOIByName(num1);
+            if (Integer.parseInt(num2) == 0) {
+                return;
+            }
+            db.updatePOI(poi.getId(), poi.getName(), Integer.parseInt(num2), num3);
+            //Log.d("OMG JUST WORK ", String.valueOf(db.getAvgRating(poi.getId())));
+        }
     }
 
     private void readFromFile(DBHandler db) {

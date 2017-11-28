@@ -14,7 +14,7 @@ import java.util.List;
  */
 class DBHandler extends SQLiteOpenHelper {
 
-    private static final int DATABASE_VERSION = 9;
+    private static final int DATABASE_VERSION = 21;
     private static final String DATABASE_NAME = "poiInfo";
     private static final String TABLE_POIS = "POIS";
     private static final String KEY_ID = "id";
@@ -22,6 +22,7 @@ class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_RATING = "totalRating";
     private static final String KEY_RATING_COUNT = "ratingCount";
     private static final String KEY_AVG_RATING = "avgRating";
+    private static final String KEY_RATING_COM = "ratingCom";
     private HashMap<String, POI> poilist;
 
     public DBHandler(Context context) {
@@ -33,7 +34,7 @@ class DBHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d("Creating: ","Creating..");
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL UNIQUE, " + KEY_RATING + " INTEGER, " + KEY_RATING_COUNT + " INTEGER, " + KEY_AVG_RATING + " INTEGER" + ")";
+        String CREATE_CONTACTS_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_POIS + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT NOT NULL UNIQUE, " + KEY_RATING + " INTEGER, " + KEY_RATING_COUNT + " INTEGER, " + KEY_AVG_RATING + " INTEGER, " + KEY_RATING_COM +  " TEXT NOT NULL" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);
     }
     
@@ -45,7 +46,7 @@ class DBHandler extends SQLiteOpenHelper {
     }
 
     /* add POI to the POI table */
-    public void addPOI(POI poi, int rating, int count, int avg_rating) {
+    public void addPOI(POI poi, int rating, int count, int avg_rating, String comment) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_ID, poi.getId());
@@ -53,7 +54,8 @@ class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_RATING, rating);
         values.put(KEY_RATING_COUNT, count);
         values.put(KEY_AVG_RATING, avg_rating);
-        db.insertWithOnConflict(TABLE_POIS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+        values.put(KEY_RATING_COM, comment);
+        db.insertWithOnConflict(TABLE_POIS, null, values, SQLiteDatabase.CONFLICT_IGNORE);
         db.close();
     }
 
@@ -147,7 +149,23 @@ class DBHandler extends SQLiteOpenHelper {
     }
 
     public int getAvgRating(int id){
+        if(getRatingCount(id) == 0){
+            return 0;
+        }
         return getRating(id)/getRatingCount(id);
+    }
+
+    public String getRatingCom(int id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = ("SELECT " + KEY_RATING_COM + " FROM " + TABLE_POIS + " WHERE id = " + id);
+        Cursor cursor = db.rawQuery(query, null);
+        String comment = "";
+        if(cursor != null & cursor.getCount() > 0){
+            cursor.moveToFirst();
+            comment = cursor.getString(cursor.getColumnIndex(KEY_RATING_COM));
+            cursor.close();
+        }
+        return comment;
     }
 
 
@@ -159,27 +177,27 @@ class DBHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public int updatePOI(int id, String name, int newRating) {
+    public int updatePOI(int id, String name, int newRating, String newComment) {
         SQLiteDatabase db = this.getWritableDatabase();
 //        db.rawQuery("UPDATE " + TABLE_POIS + " SET " + KEY_RATING + " = " + (newRating + getRating(id)) + " WHERE id = " + id, null);
 //        return newRating + getRating(id);
         POI poi = getPOIByName(name);
         int prevRating = getRating(poi.getId());
         int prevCount = getRatingCount(poi.getId());
+        String prevComment = getRatingCom(poi.getId());
         deleteRow(poi.getId());
-        addPOI(poi, prevRating + newRating, prevCount + 1, (prevRating + newRating)/(prevCount + 1));
+        addPOI(poi, prevRating + newRating, prevCount + 1, (prevRating + newRating)/(prevCount + 1), ("\n" + newComment + prevComment));
         return newRating + getRating(poi.getId());
     }
 
 
     public void updateDb(){
-        String[] POI = {"Warren", "Muir", "Revelle", "Sixth", "Marshall", "Elenor Roosevelt College", "Center", "PC",
-            "Pepper Canyon", "Ledden", "Galbraith", "York", "Cognitive Science Building", "Solis", "Rady"};
+        String[] POI = {"warren", "muir", "revelle", "sixth", "marshall", "elenor roosevelt college", "center", "pc",
+            "pepper canyon", "ledden", "galbraith", "york", "cognitive science building", "solis", "rady"};
 
         for(int i = 0; i < POI.length; i++){
             POI poi = new POI(i, POI[i]);
-            addPOI(poi, 0, 0, 0);
-            poilist.put(poi.getName(), poi);
+            addPOI(poi, 0, 0, 0, "");
         }
     }
 
@@ -187,6 +205,8 @@ class DBHandler extends SQLiteOpenHelper {
     public void populateHash(int id, String POIName){
         POI poi = new POI(id, POIName);
         poilist.put(poi.getName(), poi);
+        POI dbpoi = new POI(id, POIName.toLowerCase());
+        addPOI(dbpoi, 0, 0, 0, "");
     }
 
 
