@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case 3:
-                        boolean[] flags3 = {true, false, true, false, false, false, false};
+                        boolean[] flags3 = {false, false, true, false, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags3);
                         Log.d("FILTER POI: ", "CASE 3");
                         for (String s : filteredPOIs) {
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case 4:
-                        boolean[] flags4 = {true, false, false, true, false, false, false};
+                        boolean[] flags4 = {false, false, false, true, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags4);
                         Log.d("FILTER POI: ", "CASE 4");
                         for (String s : filteredPOIs) {
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case 5:
-                        boolean[] flags5 = {true, false, false, false, true, false, false};
+                        boolean[] flags5 = {false, false, false, false, true, false, false};
                         filteredPOIs = getFilteredPOIs(flags5);
                         Log.d("FILTER POI: ", "CASE 5");
                         for (String s : filteredPOIs) {
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case 6:
-                        boolean[] flags6 = {true, false, false, false, false, true, false};
+                        boolean[] flags6 = {false, false, false, false, false, true, false};
                         filteredPOIs = getFilteredPOIs(flags6);
                         Log.d("FILTER POI: ", "CASE 6");
                         for (String s : filteredPOIs) {
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case 7:
-                        boolean[] flags7 = {true, false, false, false, false, false, true};
+                        boolean[] flags7 = {false, false, false, false, false, false, true};
                         filteredPOIs = getFilteredPOIs(flags7);
                         Log.d("FILTER POI: ", "CASE 7");
                         for (String s : filteredPOIs) {
