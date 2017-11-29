@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,9 +56,11 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox wheelChair;
 
     int rate = 0;
+    int set_dest = 1;
     final DBHandler db = new DBHandler(this);
     String[] data;
-    ArrayList<String> POIs;
+    static ArrayList<String> POIs;
+    static HashMap<String, POI> POIList;
     ArrayList<String> filteredPOIs;
 
     @Override
@@ -65,22 +68,23 @@ public class MainActivity extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-        //db = new DBHandler(this);
         setContentView(R.layout.activity_main);
         loc_input1 = (AutoCompleteTextView) findViewById(R.id.input);
         loc_input2 = (AutoCompleteTextView) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.psearchSubmit);
         safeRoute = (CheckBox) findViewById(R.id.checkBox);
         wellLit = (CheckBox) findViewById(R.id.checkBox2);
-        wheelChair = (CheckBox) findViewById(R.id.checkBox4);
+        wheelChair = (CheckBox) findViewById(R.id.checkBox3);
 
         //final DBHandler db = new DBHandler(this);
         POIs = new ArrayList<>();
+        POIList = new HashMap<>();
         readFromFile(db);
 
         /*creates list of POIs to choose from */
         for(POI poi: db.getPOIs()) {
             POIs.add(poi.getName());
+            POIList.put(poi.getName(), poi);
         }
 
 
@@ -295,6 +299,9 @@ public class MainActivity extends AppCompatActivity {
             db.updatePOI(poi.getId(), poi.getName(), Integer.parseInt(num2), num3);
             //Log.d("OMG JUST WORK ", String.valueOf(db.getAvgRating(poi.getId())));
         }
+        if (requestCode == set_dest && resultCode == RESULT_OK && data != null) {
+            loc_input2.setText(data.getStringExtra("result"));
+        }
     }
 
     private void readFromFile(DBHandler db) {
@@ -307,13 +314,12 @@ public class MainActivity extends AppCompatActivity {
                 data = csvLine.split(",");
                 try{
                     boolean[] filters = {Boolean.parseBoolean(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), Boolean.parseBoolean(data[5]), Boolean.parseBoolean(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8])};
-                    for(boolean b : filters){
-                        Log.d("NIWOKLR", "" + b);
+                    try{
+                        db.populateHash(Integer.parseInt(data[0]), data[1], data[9], filters);
                     }
-                    //boolean[] bool = {false, false, false, false, false, false, false, false};
-                    db.populateHash(Integer.parseInt(data[0]), data[1], "", filters);
-                    //db.populateHash(Integer.parseInt(data[0]), data[1]);
-
+                    catch(Exception e){
+                        db.populateHash(Integer.parseInt(data[0]), data[1], "", filters);
+                    }
                 }
                 catch (Exception e){
                     Log.d("Problem", e.toString());
@@ -335,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
                 catch (Exception e){
-                    //Log.d("Problem", e.toString());
+                    Log.d("Problem1", e.toString());
                     Log.d("Problem1", data[0] + data[1] + data[2] + Integer.parseInt(data[3]) + "");
                 }
             }
@@ -411,7 +417,7 @@ public class MainActivity extends AppCompatActivity {
         if (position == 0) {
 
             Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-            startActivity(intent);
+            startActivityForResult(intent, set_dest);
         }
 
         if (position == 2) {
