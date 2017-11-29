@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     final DBHandler db = new DBHandler(this);
     String[] data;
     ArrayList<String> POIs;
+    ArrayList<String> filteredPOIs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +73,64 @@ public class MainActivity extends AppCompatActivity {
         for(POI poi: db.getPOIs()) {
             POIs.add(poi.getName());
         }
+
+        Log.d("HERE", "HERE");
         ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
+        ArrayAdapter<String> listWithFilters = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
+        String s3 = "" + listWithFilters.getCount();
+        Log.d("SIZE OF AUTO: ", s3);
         //db.updateDb();
         /* sets dropdown autocomplete feature */
         loc_input1.setThreshold(1);
         loc_input2.setThreshold(1);
         loc_input1.setAdapter(list);
-        loc_input2.setAdapter(list);
+        loc_input2.setAdapter(listWithFilters);
+
+        filteredPOIs = new ArrayList<>();
+        Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
+        String[] items = new String[]{"No filters selected", "Admin", "Classroom", "Food", "Parking", "Recreation", "Residential Hall", "Study Area"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter1);
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected (AdapterView < ? > parent, View v,int position, long id){
+
+                switch (position) {
+                    case 0:
+                        boolean[] flags = {false, false, false, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags);
+                        Log.d("FILTER POI: ", "CASE 0");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 1:
+                        // Whatever you want to happen when the second item gets selected
+                        boolean[] flags1 = {true, false, false, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags1);
+                        Log.d("FILTER POI: ", "CASE 1");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 2:
+                        // Whatever you want to happen when the thrid item gets selected
+                        break;
+
+                }
+                ArrayAdapter<String> listWithFilter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.select_dialog_singlechoice, filteredPOIs);
+                loc_input2.setAdapter(listWithFilter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d("FILTER POI: ", "CASE NONE");
+                boolean[] flags = {false, false, false, false, false, false, false};
+                filteredPOIs = getFilteredPOIs(flags);
+            }
+        });
+
+
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
@@ -103,12 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 selectItemFromDrawer(position);
             }
         });
-
-        Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
-        String[] items = new String[]{"1", "2", "three"};
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        dropdown.setAdapter(adapter1);
-
 
         String poi1 = db.getAllPOIs();
         Log.d("INFO OF ALL POIS: ", poi1);
@@ -337,54 +384,63 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<String> getFilteredPOIs(boolean[] filterList){
         ArrayList<String> canUse = new ArrayList<>();
+        ArrayList<String> remove = new ArrayList<>();
         List<POI> allPOI = db.getPOIs();
         for(int i = 0; i < allPOI.size(); i++){
             canUse.add(allPOI.get(i).getName());
         }
+
         for(int i = 0; i < allPOI.size(); i++){
             if(filterList[0]) {
                 if (!allPOI.get(i).getIsAdmin()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[1]){
                 if (!allPOI.get(i).getIsClassroom()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[2]){
                 if (!allPOI.get(i).getIsFood()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[3]){
                 if (!allPOI.get(i).getIsParking()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[4]){
                 if (!allPOI.get(i).getIsRec()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[5]){
                 if (!allPOI.get(i).getIsResHall()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[6]){
                 if (!allPOI.get(i).getIsStudyArea()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
         }
+        String s1 = "" + canUse.size();
+        Log.d("SIZE: ", s1);
+        for(int i = 0; i < remove.size(); i++){
+            canUse.remove(remove.get(i));
+        }
+        String s = "" + canUse.size();
+        Log.d("SIZE: ", s);
         return canUse;
     }
 
