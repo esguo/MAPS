@@ -51,8 +51,17 @@
             android:label="@string/title_activity_maps"
             android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name=".poi_info_window">
+
+        <activity android:name=".poi_info_window"
+            android:label="Map"
+            android:parentActivityName=".MapsActivity">
         </activity>
+
+        <activity android:name=".FloorPlans"
+            android:label="Map"
+            android:parentActivityName=".MapsActivity">
+        </activity>
+
     </application>
 
 </manifest>
