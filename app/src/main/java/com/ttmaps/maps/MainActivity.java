@@ -455,7 +455,6 @@ public class MainActivity extends AppCompatActivity {
         Log.d("ALL POI SIZe",allPOI.size() + "" );
         for(int i = 0; i < allPOI.size(); i++){
             if(filterList[0]) {
-                Log.d("IN 0", "");
                 if (!allPOI.get(i).getIsAdmin()){
 
                     remove.add(allPOI.get(i).getName());
@@ -463,46 +462,36 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             if(filterList[1]){
-                Log.d("IN 1", "");
                 if (!allPOI.get(i).getIsClassroom()){
                     remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[2]){
-                if (allPOI.get(i).getIsFood()){
-                    Log.d("FOOD ", allPOI.get(i).getName());
-                }
                 if (!allPOI.get(i).getIsFood()){
-                    Log.d("NOT FOOD ", allPOI.get(i).getName());
-                    Log.d("REMOVE SIZE ", "" + remove.size());
                     remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[3]){
-                Log.d("IN 3", "");
                 if (!allPOI.get(i).getIsParking()){
                     remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[4]){
-                Log.d("IN 4", "");
                 if (!allPOI.get(i).getIsRec()){
                     remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[5]){
-                Log.d("IN 5", "");
                 if (!allPOI.get(i).getIsResHall()){
                     remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[6]){
-                Log.d("IN 6", "");
                 if (!allPOI.get(i).getIsStudyArea()){
                     remove.add(allPOI.get(i).getName());
                     continue;
@@ -512,7 +501,6 @@ public class MainActivity extends AppCompatActivity {
         String s1 = "" + canUse.size();
         Log.d("SIZE: ", s1);
         for(int i = 0; i < remove.size(); i++){
-            Log.d("REMOVING ", remove.get(i));
             canUse.remove(remove.get(i));
         }
         String s = "" + canUse.size();
