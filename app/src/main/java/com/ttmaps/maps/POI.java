@@ -22,6 +22,7 @@ public class POI {
 	private boolean isRec;			// recreational area eg. RIMAC
 	private boolean isParking;
 	private boolean isStudyArea;
+	private String file_name;
 
 	public POI(){
 	}
@@ -42,8 +43,18 @@ public class POI {
 		this.isRec = false;
 		this.isParking = false;
 		this.isStudyArea = false;
+		this.file_name = "";
         //poiList.add(new POI("PC")); 		// Need to figure out how to update list from database
         //poiList.add(new POI("Sixth"));
+	}
+
+
+	POI(int id, String name, String file_name) {
+		this(id, name);
+		this.file_name = file_name;
+
+		//poiList.add(new POI("PC")); 		// Need to figure out how to update list from database
+		//poiList.add(new POI("Sixth"));
 	}
 
 	public int getId() {

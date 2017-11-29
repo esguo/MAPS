@@ -205,7 +205,9 @@ public class MainActivity extends AppCompatActivity {
             while((csvLine = reader.readLine()) != null){
                 data = csvLine.split(",");
                 try{
-                    db.populateHash(Integer.parseInt(data[0]), data[1]);
+                    boolean[] filters = {Boolean.valueOf(data[2]), Boolean.valueOf(data[3]), Boolean.valueOf(data[4]), Boolean.valueOf(data[5]), Boolean.valueOf(data[6]), Boolean.valueOf(data[7])};
+                    db.populateHash(Integer.parseInt(data[0]), data[1], data[9], filters);
+
                 }
                 catch (Exception e){
                     Log.d("Problem", e.toString());
