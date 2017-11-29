@@ -19,9 +19,11 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     final DBHandler db = new DBHandler(this);
     String[] data;
     ArrayList<String> POIs;
+    ArrayList<String> filteredPOIs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +82,111 @@ public class MainActivity extends AppCompatActivity {
         for(POI poi: db.getPOIs()) {
             POIs.add(poi.getName());
         }
+
+
+
+        Log.d("HERE", "HERE");
         ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
+        ArrayAdapter<String> listWithFilters = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
+        String s3 = "" + listWithFilters.getCount();
+        Log.d("SIZE OF AUTO: ", s3);
         //db.updateDb();
         /* sets dropdown autocomplete feature */
         loc_input1.setThreshold(1);
         loc_input2.setThreshold(1);
         loc_input1.setAdapter(list);
-        loc_input2.setAdapter(list);
+        loc_input2.setAdapter(listWithFilters);
+
+        filteredPOIs = new ArrayList<>();
+        Spinner dropdown = (Spinner)findViewById(R.id.spinner1);
+        String[] items = new String[]{"No filters selected", "Admin", "Classroom", "Food", "Parking", "Recreation", "Residential Hall", "Study Area"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter1);
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected (AdapterView < ? > parent, View v,int position, long id){
+
+                switch (position) {
+                    case 0:
+                        boolean[] flags = {false, false, false, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags);
+                        Log.d("FILTER POI: ", "CASE 0");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 1:
+                        // Whatever you want to happen when the second item gets selected
+                        boolean[] flags1 = {true, false, false, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags1);
+                        Log.d("FILTER POI: ", "CASE 1");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 2:
+                        boolean[] flags2 = {false, true, false, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags2);
+                        Log.d("FILTER POI: ", "CASE 2");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 3:
+                        boolean[] flags3 = {true, false, true, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags3);
+                        Log.d("FILTER POI: ", "CASE 3");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 4:
+                        boolean[] flags4 = {true, false, false, true, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags4);
+                        Log.d("FILTER POI: ", "CASE 4");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 5:
+                        boolean[] flags5 = {true, false, false, false, true, false, false};
+                        filteredPOIs = getFilteredPOIs(flags5);
+                        Log.d("FILTER POI: ", "CASE 5");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 6:
+                        boolean[] flags6 = {true, false, false, false, false, true, false};
+                        filteredPOIs = getFilteredPOIs(flags6);
+                        Log.d("FILTER POI: ", "CASE 6");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 7:
+                        boolean[] flags7 = {true, false, false, false, false, false, true};
+                        filteredPOIs = getFilteredPOIs(flags7);
+                        Log.d("FILTER POI: ", "CASE 7");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+
+                }
+                ArrayAdapter<String> listWithFilter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.select_dialog_singlechoice, filteredPOIs);
+                loc_input2.setAdapter(listWithFilter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d("FILTER POI: ", "CASE NONE");
+                boolean[] flags = {false, false, false, false, false, false, false};
+                filteredPOIs = getFilteredPOIs(flags);
+            }
+        });
+
+
 
         mNavItems.add(new NavItem("Map", "View map",R.drawable.ic_action_map));
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
@@ -205,8 +306,13 @@ public class MainActivity extends AppCompatActivity {
             while((csvLine = reader.readLine()) != null){
                 data = csvLine.split(",");
                 try{
-                    boolean[] filters = {Boolean.valueOf(data[2]), Boolean.valueOf(data[3]), Boolean.valueOf(data[4]), Boolean.valueOf(data[5]), Boolean.valueOf(data[6]), Boolean.valueOf(data[7])};
-                    db.populateHash(Integer.parseInt(data[0]), data[1], data[9], filters);
+                    boolean[] filters = {Boolean.parseBoolean(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), Boolean.parseBoolean(data[5]), Boolean.parseBoolean(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8])};
+                    for(boolean b : filters){
+                        Log.d("NIWOKLR", "" + b);
+                    }
+                    //boolean[] bool = {false, false, false, false, false, false, false, false};
+                    db.populateHash(Integer.parseInt(data[0]), data[1], "", filters);
+                    //db.populateHash(Integer.parseInt(data[0]), data[1]);
 
                 }
                 catch (Exception e){
@@ -226,9 +332,11 @@ public class MainActivity extends AppCompatActivity {
                 data = csvLine.split(",");
                 try{
                     db.createPair(data[0], data[1], data[2], Integer.parseInt(data[3]));
+
                 }
                 catch (Exception e){
-                    Log.d("Problem", e.toString());
+                    //Log.d("Problem", e.toString());
+                    Log.d("Problem1", data[0] + data[1] + data[2] + Integer.parseInt(data[3]) + "");
                 }
             }
         }
@@ -331,54 +439,78 @@ public class MainActivity extends AppCompatActivity {
 
     public ArrayList<String> getFilteredPOIs(boolean[] filterList){
         ArrayList<String> canUse = new ArrayList<>();
+        ArrayList<String> remove = new ArrayList<>();
         List<POI> allPOI = db.getPOIs();
+        Log.d("ALL POI SIZE",allPOI.size() + "" );
         for(int i = 0; i < allPOI.size(); i++){
             canUse.add(allPOI.get(i).getName());
         }
+        Log.d("FILTER LIST1",filterList[0] + "" );
+        Log.d("ALL POI SIZe",allPOI.size() + "" );
         for(int i = 0; i < allPOI.size(); i++){
             if(filterList[0]) {
+                Log.d("IN 0", "");
                 if (!allPOI.get(i).getIsAdmin()){
-                    canUse.remove(i);
+
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[1]){
+                Log.d("IN 1", "");
                 if (!allPOI.get(i).getIsClassroom()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[2]){
+                if (allPOI.get(i).getIsFood()){
+                    Log.d("FOOD ", allPOI.get(i).getName());
+                }
                 if (!allPOI.get(i).getIsFood()){
-                    canUse.remove(i);
+                    Log.d("NOT FOOD ", allPOI.get(i).getName());
+                    Log.d("REMOVE SIZE ", "" + remove.size());
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[3]){
+                Log.d("IN 3", "");
                 if (!allPOI.get(i).getIsParking()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[4]){
+                Log.d("IN 4", "");
                 if (!allPOI.get(i).getIsRec()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[5]){
+                Log.d("IN 5", "");
                 if (!allPOI.get(i).getIsResHall()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
             if(filterList[6]){
+                Log.d("IN 6", "");
                 if (!allPOI.get(i).getIsStudyArea()){
-                    canUse.remove(i);
+                    remove.add(allPOI.get(i).getName());
                     continue;
                 }
             }
         }
+        String s1 = "" + canUse.size();
+        Log.d("SIZE: ", s1);
+        for(int i = 0; i < remove.size(); i++){
+            Log.d("REMOVING ", remove.get(i));
+            canUse.remove(remove.get(i));
+        }
+        String s = "" + canUse.size();
+        Log.d("SIZE: ", s);
         return canUse;
     }
 

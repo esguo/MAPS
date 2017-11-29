@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import static com.ttmaps.maps.DBHandler.poilist;
-import static com.ttmaps.maps.MainActivity.POIs;
+//import static com.ttmaps.maps.DBHandler.poilist;
+//import static com.ttmaps.maps.MainActivity.POIs;
 
 /**
  * Created by Eddie on 11/28/2017.
@@ -31,10 +31,10 @@ public class FloorPlans extends AppCompatActivity{
 
         DBHandler db = new DBHandler(FloorPlans.this);
         for(POI poi: db.getPOIs()) {
-            POIs.add(poi.getName());
+            //POIs.add(poi.getName());
         }
-        ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
-        poiSearch.setAdapter(list);
+        //ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
+        //poiSearch.setAdapter(list);
 
         submitQuery.setOnClickListener(new View.OnClickListener() {
             @Override
