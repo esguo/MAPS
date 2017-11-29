@@ -123,6 +123,10 @@ public class POI {
 
 	public void setIsStudyArea(){ isStudyArea= true; }
 	public boolean getIsStudyArea(){ return isStudyArea; }
+
+	public String getFileName(){
+		return file_name;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
