@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -47,6 +49,11 @@ public class MainActivity extends AppCompatActivity {
     private AutoCompleteTextView loc_input2;
     private Button btn_submit;
     private Button rating_btn_submit;
+
+    private CheckBox safeRoute;
+    private CheckBox wellLit;
+    private CheckBox wheelChair;
+
     int rate = 0;
     final DBHandler db = new DBHandler(this);
     String[] data;
@@ -63,7 +70,9 @@ public class MainActivity extends AppCompatActivity {
         loc_input1 = (AutoCompleteTextView) findViewById(R.id.input);
         loc_input2 = (AutoCompleteTextView) findViewById(R.id.input2);
         btn_submit = (Button) findViewById(R.id.psearchSubmit);
-        rating_btn_submit = (Button) findViewById(R.id.ratingButton);
+        safeRoute = (CheckBox) findViewById(R.id.checkBox);
+        wellLit = (CheckBox) findViewById(R.id.checkBox2);
+        wheelChair = (CheckBox) findViewById(R.id.checkBox4);
 
         //final DBHandler db = new DBHandler(this);
         POIs = new ArrayList<>();
@@ -207,8 +216,12 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(context, Result.class);
                     Dijkstra d = new Dijkstra(db);
                     Bundle bundle = new Bundle();
-                    boolean[] a = new boolean[3];
-                    bundle.putString("result", d.dijkstra(loc1, loc2, a));
+                    boolean[] filter = new boolean[3];
+                    filter[0] = safeRoute.isChecked();
+                    filter[1] = wellLit.isChecked();
+                    filter[2] = wheelChair.isChecked();
+
+                    bundle.putString("result", d.dijkstra(loc1, loc2, filter));
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -217,20 +230,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-        final Context context1 = this;
-        //currently displays rating
-        rating_btn_submit.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent(MainActivity.this, add_ratings.class);
-                startActivityForResult(intent, rate);
-
-                //Log.d("ID IS ", String.valueOf(rate));
-            }
-        });
-
-
     }
 
 
@@ -260,7 +259,9 @@ public class MainActivity extends AppCompatActivity {
             while((csvLine = reader.readLine()) != null){
                 data = csvLine.split(",");
                 try{
-                    db.populateHash(Integer.parseInt(data[0]), data[1]);
+                    boolean[] filters = {Boolean.valueOf(data[2]), Boolean.valueOf(data[3]), Boolean.valueOf(data[4]), Boolean.valueOf(data[5]), Boolean.valueOf(data[6]), Boolean.valueOf(data[7])};
+                    db.populateHash(Integer.parseInt(data[0]), data[1], data[9], filters);
+
                 }
                 catch (Exception e){
                     Log.d("Problem", e.toString());

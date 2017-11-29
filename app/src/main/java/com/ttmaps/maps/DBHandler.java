@@ -202,8 +202,18 @@ class DBHandler extends SQLiteOpenHelper {
     }
 
     /* creates POI based on id, name, populates hash table with the appropriate POI */
-    public void populateHash(int id, String POIName){
-        POI poi = new POI(id, POIName);
+    public void populateHash(int id, String POIName, String img_file, boolean[] filters){
+        POI poi = new POI(id, POIName, img_file);
+
+        if(filters[0]) poi.setIsAdmin();
+        if(filters[1]) poi.setIsClassroom();
+        if(filters[2]) poi.setIsFood();
+        if(filters[3]) poi.setIsParking();
+        if(filters[4]) poi.setIsParking();
+        if(filters[5]) poi.setIsRec();
+        if(filters[6]) poi.setIsResHall();
+        if(filters[7]) poi.setIsStudyArea();
+
         poilist.put(poi.getName(), poi);
         POI dbpoi = new POI(id, POIName.toLowerCase());
         addPOI(dbpoi, 0, 0, 0, "");
