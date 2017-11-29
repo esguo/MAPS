@@ -68,7 +68,8 @@ public class poi_info_window extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.back_button:
-                super.onBackPressed();
+                Intent back = new Intent(this, MapsActivity.class);
+                startActivity(back);
                 break;
 
             default:
