@@ -1,5 +1,6 @@
 package com.ttmaps.maps;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -42,8 +43,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
     }
 
 
@@ -103,8 +102,8 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
     // Will take the user to info screen about poi. Include description and a "Go" Button
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Toast.makeText(this, "Actual: Will take you to another screen",
-                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, poi_info_window.class);
+        startActivity(intent);
     }
 
     // Info window that pops up when marker is tapped. Includes picture and name of POI
