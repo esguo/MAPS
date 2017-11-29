@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,14 +25,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
-        android:name=".Result"
-        android:label="@string/app_name"
-        android:parentActivityName=".MainActivity"></activity>
-
+            android:name=".Result"
+            android:label="@string/app_name"
+            android:parentActivityName=".MainActivity"/>
         <activity
-            android:name="com.ttmaps.maps.add_ratings"
+            android:name=".add_ratings"
             android:label="@string/app_name"
             android:parentActivityName=".MainActivity"/>
 
@@ -53,6 +50,8 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
             android:parentActivityName=".MainActivity">
+        </activity>
+        <activity android:name=".poi_info_window">
         </activity>
     </application>
 
