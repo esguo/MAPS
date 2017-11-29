@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
             POIs.add(poi.getName());
         }
 
+
+
         Log.d("HERE", "HERE");
         ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
         ArrayAdapter<String> listWithFilters = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
@@ -123,7 +125,52 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case 2:
-                        // Whatever you want to happen when the thrid item gets selected
+                        boolean[] flags2 = {false, true, false, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags2);
+                        Log.d("FILTER POI: ", "CASE 2");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 3:
+                        boolean[] flags3 = {true, false, true, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags3);
+                        Log.d("FILTER POI: ", "CASE 3");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 4:
+                        boolean[] flags4 = {true, false, false, true, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags4);
+                        Log.d("FILTER POI: ", "CASE 4");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 5:
+                        boolean[] flags5 = {true, false, false, false, true, false, false};
+                        filteredPOIs = getFilteredPOIs(flags5);
+                        Log.d("FILTER POI: ", "CASE 5");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 6:
+                        boolean[] flags6 = {true, false, false, false, false, true, false};
+                        filteredPOIs = getFilteredPOIs(flags6);
+                        Log.d("FILTER POI: ", "CASE 6");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 7:
+                        boolean[] flags7 = {true, false, false, false, false, false, true};
+                        filteredPOIs = getFilteredPOIs(flags7);
+                        Log.d("FILTER POI: ", "CASE 7");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
                         break;
 
                 }
@@ -259,8 +306,13 @@ public class MainActivity extends AppCompatActivity {
             while((csvLine = reader.readLine()) != null){
                 data = csvLine.split(",");
                 try{
-                    boolean[] filters = {Boolean.valueOf(data[2]), Boolean.valueOf(data[3]), Boolean.valueOf(data[4]), Boolean.valueOf(data[5]), Boolean.valueOf(data[6]), Boolean.valueOf(data[7])};
-                    db.populateHash(Integer.parseInt(data[0]), data[1], data[9], filters);
+                    boolean[] filters = {Boolean.parseBoolean(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), Boolean.parseBoolean(data[5]), Boolean.parseBoolean(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8])};
+                    for(boolean b : filters){
+                        Log.d("NIWOKLR", "" + b);
+                    }
+                    //boolean[] bool = {false, false, false, false, false, false, false, false};
+                    db.populateHash(Integer.parseInt(data[0]), data[1], "", filters);
+                    //db.populateHash(Integer.parseInt(data[0]), data[1]);
 
                 }
                 catch (Exception e){
@@ -280,9 +332,11 @@ public class MainActivity extends AppCompatActivity {
                 data = csvLine.split(",");
                 try{
                     db.createPair(data[0], data[1], data[2], Integer.parseInt(data[3]));
+
                 }
                 catch (Exception e){
-                    Log.d("Problem", e.toString());
+                    //Log.d("Problem", e.toString());
+                    Log.d("Problem1", data[0] + data[1] + data[2] + Integer.parseInt(data[3]) + "");
                 }
             }
         }
@@ -387,13 +441,20 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> canUse = new ArrayList<>();
         ArrayList<String> remove = new ArrayList<>();
         List<POI> allPOI = db.getPOIs();
+        Log.d("ALL POI SIZE",allPOI.size() + "" );
         for(int i = 0; i < allPOI.size(); i++){
             canUse.add(allPOI.get(i).getName());
         }
-
+        Log.d("FILTER LIST1",filterList[0] + "" );
+        Log.d("ALL POI SIZe",allPOI.size() + "" );
         for(int i = 0; i < allPOI.size(); i++){
+            Log.d("FILTER LIST",filterList[0] + "" );
             if(filterList[0]) {
+                if(allPOI.get(i).getName().equals("HDH Admin Building")){
+                    Log.d("NJKWNJFRWR", allPOI.get(i).getIsAdmin() + "");
+                }
                 if (!allPOI.get(i).getIsAdmin()){
+
                     remove.add(allPOI.get(i).getName());
                     continue;
                 }
