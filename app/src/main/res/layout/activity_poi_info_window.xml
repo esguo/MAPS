@@ -19,7 +19,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <ImageView
             android:id="@+id/loc_pic"
@@ -31,7 +33,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.578"
             app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@android:drawable/picture_frame"/>
+            app:srcCompat="@android:drawable/picture_frame" />
+
+        <Button
+            android:id="@+id/floor_plans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/go_button"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:text="Floor plans" />
 
         <Button
             android:id="@+id/go_button"
@@ -39,20 +50,21 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="21dp"
             android:text="Go"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/Desc"
             android:layout_width="match_parent"
-            android:layout_height="161dp"
+            android:layout_height="80dp"
+            android:layout_above="@+id/floor_plans"
             android:layout_alignStart="@+id/poi_name"
             android:layout_below="@+id/poi_name"
-            android:layout_marginTop="13dp"
+            android:layout_marginTop="11dp"
             android:text="Hey that's a pretty cool place. I would like to go there one day because it looks nice."
             android:textAlignment="center"
             android:textSize="18sp"
@@ -60,7 +72,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/poi_name"
-            app:layout_constraintVertical_bias="0.395"/>
+            app:layout_constraintVertical_bias="0.395" />
 
         <TextView
             android:id="@+id/poi_name"
@@ -74,15 +86,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="290dp"/>
+            tools:layout_editor_absoluteY="290dp" />
 
-        <Button
-            android:id="@+id/floor_plans"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Desc"
-            android:layout_centerHorizontal="true"
-            android:text="Floor plans"/>
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
