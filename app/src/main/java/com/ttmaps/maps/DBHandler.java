@@ -203,9 +203,7 @@ class DBHandler extends SQLiteOpenHelper {
 
     /* creates POI based on id, name, populates hash table with the appropriate POI */
     public void populateHash(int id, String POIName, String img_file, boolean[] filters){
-        Log.d("HER ndjweE", "NKJWNRF");
-        POI poi = new POI(id, POIName);
-        Log.d("nfwefn", "" + id + " " + POIName + img_file);
+        POI poi = new POI(id, POIName, img_file);
         if(filters[0]) poi.setIsAdmin();
         if(filters[1]) poi.setIsClassroom();
         if(filters[2]) poi.setIsFood();
@@ -213,13 +211,12 @@ class DBHandler extends SQLiteOpenHelper {
         if(filters[4]) poi.setIsRec();
         if(filters[5]) poi.setIsResHall();
         if(filters[6]) poi.setIsStudyArea();
-    /*public void populateHash(int id, String POIName){
-                POI poi = new POI(id, POIName);*/
+
+
         poilist.put(poi.getName(), poi);
         POI dbpoi = new POI(id, POIName.toLowerCase());
         addPOI(dbpoi, 0, 0, 0, "");
     }
-
 
     public void createPair(String pointA, String pointB, String name, int weight){
         POI a = poilist.get(pointA);
