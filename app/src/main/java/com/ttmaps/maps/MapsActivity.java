@@ -80,7 +80,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
 
         CH = mMap.addMarker(new MarkerOptions()
                 .position(center_Hall)
-                .title("Center Hall"));
+                .title("Center"));
         CH.setTag(0);
 
         GL = mMap.addMarker(new MarkerOptions()
@@ -103,7 +103,10 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
     @Override
     public void onInfoWindowClick(Marker marker) {
         Intent intent = new Intent(this, poi_info_window.class);
+        intent.putExtra("POI_Name", marker.getTitle());
+        intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
         startActivity(intent);
+        finish();
     }
 
     // Info window that pops up when marker is tapped. Includes picture and name of POI
