@@ -304,6 +304,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (Exception e){
                     Log.d("Problem1", e.toString());
+                    Log.d("Problem1", data[0] + data[1] + data[2] + Integer.parseInt(data[3]));
                 }
             }
         }

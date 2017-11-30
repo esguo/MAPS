@@ -1,5 +1,6 @@
+POI 1,POI 2,Path Name,Weight,,,
 Center Hall,Price Center,Student Services Center,2,TRUE,TRUE,TRUE
-Center Hall,Revelle,Walkway,3,TRUE,TRUE,TRUE
+Center Hall,Revelle Residential Halls,Walkway,3,TRUE,TRUE,TRUE
 Center Hall,Muir Residential Halls,Bike Path,3,TRUE,TRUE,TRUE
 Muir Residential Halls,Solis Hall,Goody's Path,3,TRUE,TRUE,TRUE
 Solis Hall,ERC Residential Halls,Goody's Path,2,TRUE,TRUE,TRUE

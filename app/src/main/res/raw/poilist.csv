@@ -1,4 +1,4 @@
-ID,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Longitude
+id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Longitude
 1,Center Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,path_search_ui,32.878035,-117.237351
 2,ERC Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,,
 3,John's Market,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,,
