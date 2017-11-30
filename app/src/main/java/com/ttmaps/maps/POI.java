@@ -1,4 +1,6 @@
 package com.ttmaps.maps;
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -23,6 +25,7 @@ public class POI {
 	private boolean isParking;
 	private boolean isStudyArea;
 	private String file_name;
+	private LatLng latLng;
 
 	public POI(){
 	}
@@ -127,6 +130,13 @@ public class POI {
 	public String getFileName(){
 		return file_name;
 	}
+	public void setLatLng(double lat, double lng){
+		latLng = new LatLng(lat, lng);
+	}
+	public LatLng getLatLng(){
+		return latLng;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

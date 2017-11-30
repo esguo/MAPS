@@ -9,6 +9,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /** Database and included datasets to select POI and their respective edges
  */
@@ -202,8 +203,24 @@ class DBHandler extends SQLiteOpenHelper {
     }
 
     /* creates POI based on id, name, populates hash table with the appropriate POI */
-    public void populateHash(int id, String POIName, String img_file, boolean[] filters){
+    public void populateHash(String [] data){
+        int id = Integer.parseInt(data[0]);
+        String POIName = data[1];
+        String img_file = "";
+        try{
+            img_file = data[9];
+        }
+        catch (Exception e){
+        }
+
         POI poi = new POI(id, POIName, img_file);
+
+        boolean [] filters = new boolean[7];
+
+        for(int i = 0; i < filters.length; i++)
+            filters[i] = Boolean.parseBoolean(data[i+2]);
+
+
         if(filters[0]) poi.setIsAdmin();
         if(filters[1]) poi.setIsClassroom();
         if(filters[2]) poi.setIsFood();
@@ -211,6 +228,13 @@ class DBHandler extends SQLiteOpenHelper {
         if(filters[4]) poi.setIsRec();
         if(filters[5]) poi.setIsResHall();
         if(filters[6]) poi.setIsStudyArea();
+
+        try{
+            poi.setLatLng(Double.parseDouble(data[10]), Double.parseDouble(data[11]));
+        }
+        catch (Exception e){
+            poi.setLatLng(0,0);
+        }
 
 
         poilist.put(poi.getName(), poi);

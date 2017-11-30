@@ -93,15 +93,16 @@ class Dijkstra {
             }
             output += start + "\n";
             while (!stack.isEmpty()) {
-                stack.pop();
-                o.add(stack.pop());
-                //output += "--> " + stack.pop() + " -->\n" + stack.pop() + "\n";
+                String path = stack.pop();
+                String poi = stack.pop();
+                output += "--> " + path + " -->\n" + poi + "\n";
+                o.add(poi);
             }
         }
         catch (OutOfMemoryError e){
             output = "Error while creating path: \n\n" + e.toString();
         }
-        //return output;
+        o.add(output); //return output;
         return o;
     }
 }

@@ -89,11 +89,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        Log.d("HERE", "HERE");
         ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
         ArrayAdapter<String> listWithFilters = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
         String s3 = "" + listWithFilters.getCount();
-        Log.d("SIZE OF AUTO: ", s3);
+
         //db.updateDb();
         /* sets dropdown autocomplete feature */
         loc_input1.setThreshold(1);
@@ -328,13 +327,7 @@ public class MainActivity extends AppCompatActivity {
             while((csvLine = reader.readLine()) != null){
                 data = csvLine.split(",");
                 try{
-                    boolean[] filters = {Boolean.parseBoolean(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), Boolean.parseBoolean(data[5]), Boolean.parseBoolean(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8])};
-                    try{
-                        db.populateHash(Integer.parseInt(data[0]), data[1], data[9], filters);
-                    }
-                    catch(Exception e){
-                        db.populateHash(Integer.parseInt(data[0]), data[1], "", filters);
-                    }
+                    db.populateHash(data);
                 }
                 catch (Exception e){
                     Log.d("Problem", e.toString());
@@ -358,7 +351,6 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (Exception e){
                     Log.d("Problem1", e.toString());
-                    Log.d("Problem1", data[0] + data[1] + data[2] + Integer.parseInt(data[3]) + "");
                 }
             }
         }
