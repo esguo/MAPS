@@ -25,6 +25,9 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.ttmaps.maps.MainActivity.POIList;
+import static com.ttmaps.maps.MyApplication.db;
+
 public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarkerClickListener,GoogleMap.OnInfoWindowClickListener,GoogleMap.InfoWindowAdapter,OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -92,43 +95,33 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
         mMap.setMaxZoomPreference(20.0f);
 
         // Setting up POI markers
-        PC = mMap.addMarker(new MarkerOptions()
-                .position(price_Center)
-                .title("Price Center"));
-        PC.setTag(0);
-        hash.put("PC", PC);
 
-        CH = mMap.addMarker(new MarkerOptions()
-                .position(center_Hall)
-                .title("Center"));
-        CH.setTag(0);
-        hash.put("Center", CH);
-
-        SSC = mMap.addMarker(new MarkerOptions().position(ssc).title("Student Services Center"));
-        SSC.setTag(0);
-        hash.put("SSC", SSC);
-
-        GL = mMap.addMarker(new MarkerOptions()
-                .position(geisel_Library)
-                .title("Geisel Library"));
-        GL.setTag(0);
-
-        WLH = mMap.addMarker(new MarkerOptions()
-                .position(warren_LecHall)
-                .title("Warren Lecture Hall"));
-        WLH.setTag(0);
-
-
+        for(POI poi: POIList.values())
+        {
+            if(!(poi.getLatLng().latitude == 0 || poi.getLatLng().longitude == 0)) {
+                Marker m = mMap.addMarker(new MarkerOptions().position(poi.getLatLng()).title(poi.getName()));
+                m.setTag(0);
+            }
+        }
 
         if (r != null && r.size() != 0) {
+            String result = r.remove(r.size()-1);
             PolylineOptions lineOptions = new PolylineOptions();
             ArrayList<LatLng> points = new ArrayList<LatLng>();
             for (int i = 0; i < r.size(); i++) {
-                if (!hash.containsKey(r.get(i))) {
+                if(!(POIList.get(r.get(i)).getLatLng().latitude == 0 ||
+                        POIList.get(r.get(i)).getLatLng().longitude == 0)) {
+                    points.add(POIList.get(r.get(i)).getLatLng());
+                }
+                else{
                     points.clear();
-                    break;
-                } else {
-                    points.add(hash.get(r.get(i)).getPosition());
+                    Intent intent;
+                    intent = new Intent(this, Result.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("result", result);
+                    intent.putExtras(bundle);
+                    startActivity(intent);
+                    finish();
                 }
             }
             if (points.size() >= 2) {
