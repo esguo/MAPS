@@ -10,8 +10,8 @@ Warren Residential Halls,Pepper Canyon,Path,2,TRUE,TRUE,TRUE
 Pepper Canyon,Sixth Residential Halls,Path,1,TRUE,TRUE,TRUE
 RIMAC Arena,Peterson,Ridge Walk,2,TRUE,TRUE,TRUE
 ERC Residential Halls,RIMAC Arena,Village Market,2,TRUE,TRUE,TRUE
-Geisel,Cognitive Science Building,Walkway,1,TRUE,TRUE,TRUE
-Geisel,Price Center,Library Walk,1,TRUE,TRUE,TRUE
+Geisel Library,Cognitive Science Building,Walkway,1,TRUE,TRUE,TRUE
+Geisel Library,Price Center,Library Walk,1,TRUE,TRUE,TRUE
 RIMAC Arena,Supercomputer Center,Ridge Walk,1,TRUE,TRUE,TRUE
 64 Degrees,Galbraith Hall,Revelle Plaza,1,TRUE,TRUE,TRUE
 64 Degrees,York Hall,Revelle Plaza,1,FALSE,TRUE,TRUE
