@@ -5,6 +5,7 @@
     android:id="@+id/linearLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDarkGray"
     android:orientation="vertical">
 
     <EditText
@@ -16,22 +17,23 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:gravity="center"
-        android:hint="Rate this POI!"
+        android:hint="Select POI"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/comment"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratePoiBar"
-        app:layout_constraintVertical_bias="0.214" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RatingBar
         android:id="@+id/ratePoiBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/viewRateButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/comment"
@@ -41,11 +43,10 @@
         android:gravity="center"
         android:hint="Comment"
         android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/rateButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/poiToRate" />
+        app:layout_constraintTop_toBottomOf="@+id/ratePoiBar" />
 
     <Button
         android:id="@+id/rateButton"
@@ -53,21 +54,24 @@
         android:layout_height="69dp"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:text="Go!"
-        app:layout_constraintBottom_toTopOf="@+id/viewRateButton"
+        android:background="@drawable/rounded_corner3"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/comment" />
 
     <Button
         android:id="@+id/viewRateButton"
-        android:layout_width="330dp"
-        android:layout_height="70dp"
-        android:layout_marginBottom="16dp"
-        android:text="View!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="172dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/rounded_corner3"
+        android:backgroundTint="@color/colorPrimaryLightGB"
+        android:text="View"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/poiToRate" />
 
 
 </android.support.constraint.ConstraintLayout>
