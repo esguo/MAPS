@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 
-import java.util.ArrayList;
-
 public class add_ratings extends AppCompatActivity {
     private Button rateButton;
     private Button viewRateButton;
@@ -78,14 +76,10 @@ public class add_ratings extends AppCompatActivity {
                     intent = new Intent(context, Result.class);
                     Bundle bundle = new Bundle();
                     if(db.getRatingCount(rateThisPOI.getId()) != 0) {
-                        ArrayList<String> a = new ArrayList<>();
-                        a.add("Rating\n" + (rating / (db.getRatingCount(rateThisPOI.getId()))) + "\n\nComments" + db.getRatingCom(rateThisPOI.getId()));
-                        bundle.putStringArrayList("result", a);
+                        bundle.putString("result", "Rating\n" + (rating / (db.getRatingCount(rateThisPOI.getId()))) + "\n\nComments" + db.getRatingCom(rateThisPOI.getId()));
                     }
                     else{
-                        ArrayList<String> a = new ArrayList<>();
-                        a.add("No ratings yet!");
-                        bundle.putStringArrayList("result", a);
+                        bundle.putString("result", "No ratings yet!");
                     }
                     intent.putExtras(bundle);
                     startActivity(intent);
