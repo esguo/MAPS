@@ -115,13 +115,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
                 }
                 else{
                     points.clear();
-                    Intent intent;
-                    intent = new Intent(this, Result.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("result", result);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    finish();
                 }
             }
             if (points.size() >= 2) {

@@ -23,18 +23,21 @@ public class Result extends AppCompatActivity {
         btn_viewmap = (Button) findViewById(R.id.viewMapBtn);
 
         Bundle bundle = getIntent().getExtras();
-        String r;
-        r = bundle.getString("result");
+        final ArrayList<String> r;
+        r = bundle.getStringArrayList("result");
 
         TextView result = (TextView) findViewById(R.id.result);
-        result.setText(r);
+        result.setText(r.get(r.size()-1));
 
         final Context context = this;
         btn_viewmap.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent intent;
-                intent = new Intent(context, MapsActivity.class);
+
+                Intent intent = new Intent(Result.this, MapsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("result", r);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

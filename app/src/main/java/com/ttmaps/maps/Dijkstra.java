@@ -9,6 +9,8 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
+import static com.ttmaps.maps.MainActivity.POIList;
+
 
 class Dijkstra {
 
@@ -16,13 +18,9 @@ class Dijkstra {
     private final Comparator<POI> comparator = new POIComparator();
     private final PriorityQueue<POI> queue = new PriorityQueue<>(50, comparator);
     private final Stack<String> stack = new Stack<>();
-    private final DBHandler database;
     private String output = "";
     private ArrayList<String> o;
 
-    Dijkstra(DBHandler d) {
-        database = d;
-    }
 
     ArrayList<String> dijkstra(String start, String end, boolean[] opt) {
         /* opt
@@ -34,10 +32,9 @@ class Dijkstra {
         o = new ArrayList<String>();
         o.add(start);
         int inf = Integer.MAX_VALUE;
-        List<POI> allPOI = database.getPOIs();
 
         //Initialize each POI's fields for Dijkstra
-        for (POI value : allPOI) {
+        for (POI value : POIList.values()) {
             value.setDistance(inf); // set distance to infinity
             value.setPrev(null);
             if (value.getName().equalsIgnoreCase(start)) {

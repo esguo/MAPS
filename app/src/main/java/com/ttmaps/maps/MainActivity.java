@@ -229,18 +229,26 @@ public class MainActivity extends AppCompatActivity {
                     String loc1 = loc_input1.getText().toString();
                     String loc2 = loc_input2.getText().toString();
 
+                    /*
                     Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                    Dijkstra d = new Dijkstra(db);
                     Bundle bundle = new Bundle();
+                    bundle.putStringArrayList("result", d.dijkstra(loc1, loc2, filter));
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, set_dest);*/
+
+
                     boolean[] filter = new boolean[3];
                     filter[0] = safeRoute.isChecked();
                     filter[1] = wellLit.isChecked();
                     filter[2] = wheelChair.isChecked();
 
+                    Intent intent;
+                    Dijkstra d = new Dijkstra();
+                    intent = new Intent(MainActivity.this, Result.class);
+                    Bundle bundle = new Bundle();
                     bundle.putStringArrayList("result", d.dijkstra(loc1, loc2, filter));
-
                     intent.putExtras(bundle);
-                    startActivityForResult(intent, set_dest);
+                    startActivity(intent);
                 }
                 else{
                     Toast.makeText(MainActivity.this, "Please enter locations in both operand fields", Toast.LENGTH_LONG).show();
