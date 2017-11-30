@@ -324,16 +324,11 @@ public class MainActivity extends AppCompatActivity {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         try{
             String csvLine;
+            reader.readLine();
             while((csvLine = reader.readLine()) != null){
                 data = csvLine.split(",");
                 try{
-                    boolean[] filters = {Boolean.parseBoolean(data[2]), Boolean.parseBoolean(data[3]), Boolean.parseBoolean(data[4]), Boolean.parseBoolean(data[5]), Boolean.parseBoolean(data[6]), Boolean.parseBoolean(data[7]), Boolean.parseBoolean(data[8])};
-                    try{
-                        db.populateHash(Integer.parseInt(data[0]), data[1], data[9], filters);
-                    }
-                    catch(Exception e){
-                        db.populateHash(Integer.parseInt(data[0]), data[1], "", filters);
-                    }
+                    db.populateHash(data);
                 }
                 catch (Exception e){
                     Log.d("Problem", e.toString());
@@ -348,6 +343,7 @@ public class MainActivity extends AppCompatActivity {
         reader = new BufferedReader(new InputStreamReader(inputStream));
         try{
             String csvLine;
+            reader.readLine();
             while((csvLine = reader.readLine()) != null){
                 data = csvLine.split(",");
                 try{
