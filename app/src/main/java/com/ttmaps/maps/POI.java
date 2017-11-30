@@ -1,6 +1,4 @@
 package com.ttmaps.maps;
-import com.google.android.gms.maps.model.LatLng;
-
 import java.util.List;
 import java.util.ArrayList;
 
@@ -25,9 +23,6 @@ public class POI {
 	private boolean isParking;
 	private boolean isStudyArea;
 	private String file_name;
-	private double lat;
-	private double lng;
-	LatLng latlng;
 
 	public POI(){
 	}
@@ -49,12 +44,10 @@ public class POI {
 		this.isParking = false;
 		this.isStudyArea = false;
 		this.file_name = "";
-		this.lat = 0;
-		this.lng = 0;
-		latlng = new LatLng(lat, lng);
         //poiList.add(new POI("PC")); 		// Need to figure out how to update list from database
         //poiList.add(new POI("Sixth"));
 	}
+
 
 	POI(int id, String name, String file_name) {
 		this(id, name);
@@ -134,17 +127,6 @@ public class POI {
 	public String getFileName(){
 		return file_name;
 	}
-
-	public void setLatLng(double lat, double lng){
-		this.lat = lat;
-		this.lng = lng;
-		latlng = new LatLng(this.lat, this.lng);
-	}
-
-	public LatLng getLatlng(){
-		return latlng;
-	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
