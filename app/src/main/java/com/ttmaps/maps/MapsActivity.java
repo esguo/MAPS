@@ -43,7 +43,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
     private Marker SSC;
 
     private ArrayList<String> r;
-    private HashMap<String, Marker> hash;
+    private HashMap<String, LatLng> hash;
     private Polyline polyline;
 
 
@@ -53,7 +53,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
         setContentView(R.layout.activity_maps);
 
         Bundle bundle = getIntent().getExtras();
-        hash = new HashMap<String, Marker>();
+        hash = new HashMap<String, LatLng>();
         if (bundle != null) {
             r = bundle.getStringArrayList("result");
         }
@@ -96,17 +96,17 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
                 .position(price_Center)
                 .title("Price Center"));
         PC.setTag(0);
-        hash.put("PC", PC);
+        hash.put("PC", price_Center);
 
         CH = mMap.addMarker(new MarkerOptions()
                 .position(center_Hall)
                 .title("Center"));
         CH.setTag(0);
-        hash.put("Center", CH);
+        hash.put("Center", center_Hall);
 
         SSC = mMap.addMarker(new MarkerOptions().position(ssc).title("Student Services Center"));
         SSC.setTag(0);
-        hash.put("SSC", SSC);
+        hash.put("SSC", ssc);
 
         GL = mMap.addMarker(new MarkerOptions()
                 .position(geisel_Library)
@@ -128,7 +128,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
                     points.clear();
                     break;
                 } else {
-                    points.add(hash.get(r.get(i)).getPosition());
+                    points.add(hash.get(r.get(i)));
                 }
             }
             if (points.size() >= 2) {
