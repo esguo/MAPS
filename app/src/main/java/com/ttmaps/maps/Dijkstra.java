@@ -93,6 +93,7 @@ class Dijkstra {
             }
             output += start + "\n";
             while (!stack.isEmpty()) {
+                stack.pop();
                 o.add(stack.pop());
                 //output += "--> " + stack.pop() + " -->\n" + stack.pop() + "\n";
             }
