@@ -25,6 +25,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static com.ttmaps.maps.MainActivity.POIList;
+
 public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarkerClickListener,GoogleMap.OnInfoWindowClickListener,GoogleMap.InfoWindowAdapter,OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -43,7 +45,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
     private Marker SSC;
 
     private ArrayList<String> r;
-    private HashMap<String, LatLng> hash;
+    //private HashMap<String, LatLng> hash;
     private Polyline polyline;
 
 
@@ -53,7 +55,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
         setContentView(R.layout.activity_maps);
 
         Bundle bundle = getIntent().getExtras();
-        hash = new HashMap<String, LatLng>();
         if (bundle != null) {
             r = bundle.getStringArrayList("result");
         }
@@ -92,6 +93,11 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
         mMap.setMaxZoomPreference(20.0f);
 
         // Setting up POI markers
+        for(POI poi: POIList.values()){
+            Marker m = mMap.addMarker(new MarkerOptions().position(poi.getLatlng()).title(poi.getName()));
+            m.setTag(0);
+        }
+        /*
         PC = mMap.addMarker(new MarkerOptions()
                 .position(price_Center)
                 .title("Price Center"));
@@ -116,7 +122,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
         WLH = mMap.addMarker(new MarkerOptions()
                 .position(warren_LecHall)
                 .title("Warren Lecture Hall"));
-        WLH.setTag(0);
+        WLH.setTag(0);*/
 
 
 
@@ -124,11 +130,11 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
             PolylineOptions lineOptions = new PolylineOptions();
             ArrayList<LatLng> points = new ArrayList<LatLng>();
             for (int i = 0; i < r.size(); i++) {
-                if (!hash.containsKey(r.get(i))) {
+                if (!POIList.containsKey(r.get(i))) {
                     points.clear();
                     break;
                 } else {
-                    points.add(hash.get(r.get(i)));
+                    points.add(POIList.get(r).getLatlng());
                 }
             }
             if (points.size() >= 2) {
