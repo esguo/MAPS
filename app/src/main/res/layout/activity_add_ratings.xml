@@ -12,6 +12,7 @@
         android:id="@+id/poiToRate"
         android:layout_width="350dp"
         android:layout_height="85dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -19,6 +20,8 @@
         android:gravity="center"
         android:hint="Select POI"
         android:inputType="text"
+        android:textColor="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/viewRateButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,22 +31,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/comment"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewRateButton" />
 
     <EditText
         android:id="@+id/comment"
         android:layout_width="323dp"
         android:layout_height="87dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="240dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Comment"
         android:inputType="text"
+        android:textColor="#ffff"
+        android:textColorLink="@android:color/background_light"
+        app:layout_constraintBottom_toTopOf="@+id/rateButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="273dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/rateButton"
@@ -63,7 +75,7 @@
         android:id="@+id/viewRateButton"
         android:layout_width="351dp"
         android:layout_height="41dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/rounded_corner3"
         android:backgroundTint="@color/colorPrimaryLightGB"
         android:text="View POI"
