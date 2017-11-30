@@ -1,10 +1,12 @@
 package com.ttmaps.maps;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +19,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarkerClickListener,GoogleMap.OnInfoWindowClickListener,GoogleMap.InfoWindowAdapter,OnMapReadyCallback {
 
@@ -27,17 +34,29 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
     private static final LatLng center_Hall = new LatLng( 32.878035, -117.237351);
     private static final LatLng geisel_Library = new LatLng( 32.880915, -117.237562);
     private static final LatLng warren_LecHall = new LatLng (32.880700, -117.234406);
+    private static final LatLng ssc = new LatLng(32.878938, -117.235783);
 
     private Marker PC;
     private Marker CH;
     private Marker GL;
     private Marker WLH;
+    private Marker SSC;
+
+    private ArrayList<String> r;
+    private HashMap<String, Marker> hash;
+    private Polyline polyline;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        Bundle bundle = getIntent().getExtras();
+        hash = new HashMap<String, Marker>();
+        if (bundle != null) {
+            r = bundle.getStringArrayList("result");
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -77,11 +96,17 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
                 .position(price_Center)
                 .title("Price Center"));
         PC.setTag(0);
+        hash.put("PC", PC);
 
         CH = mMap.addMarker(new MarkerOptions()
                 .position(center_Hall)
                 .title("Center"));
         CH.setTag(0);
+        hash.put("Center", CH);
+
+        SSC = mMap.addMarker(new MarkerOptions().position(ssc).title("Student Services Center"));
+        SSC.setTag(0);
+        hash.put("SSC", SSC);
 
         GL = mMap.addMarker(new MarkerOptions()
                 .position(geisel_Library)
@@ -92,6 +117,27 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
                 .position(warren_LecHall)
                 .title("Warren Lecture Hall"));
         WLH.setTag(0);
+
+
+
+        if (r != null && r.size() != 0) {
+            PolylineOptions lineOptions = new PolylineOptions();
+            ArrayList<LatLng> points = new ArrayList<LatLng>();
+            for (int i = 0; i < r.size(); i++) {
+                if (!hash.containsKey(r.get(i))) {
+                    points.clear();
+                    break;
+                } else {
+                    points.add(hash.get(r.get(i)).getPosition());
+                }
+            }
+            if (points.size() >= 2) {
+                lineOptions.addAll(points);
+                lineOptions.width(10);
+                lineOptions.color(Color.RED);
+                polyline = mMap.addPolyline(lineOptions);
+            }
+        }
 
         //Info Window
         mMap.setInfoWindowAdapter(this);

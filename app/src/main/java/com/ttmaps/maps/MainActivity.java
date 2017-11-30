@@ -263,6 +263,7 @@ public class MainActivity extends AppCompatActivity {
                     String loc1 = loc_input1.getText().toString();
                     String loc2 = loc_input2.getText().toString();
 
+                    /**
                     Intent intent;
                     intent = new Intent(context, Result.class);
                     Dijkstra d = new Dijkstra(db);
@@ -275,6 +276,19 @@ public class MainActivity extends AppCompatActivity {
                     bundle.putString("result", d.dijkstra(loc1, loc2, filter));
                     intent.putExtras(bundle);
                     startActivity(intent);
+                     */
+                    Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                    Dijkstra d = new Dijkstra(db);
+                    Bundle bundle = new Bundle();
+                    boolean[] filter = new boolean[3];
+                    filter[0] = safeRoute.isChecked();
+                    filter[1] = wellLit.isChecked();
+                    filter[2] = wheelChair.isChecked();
+
+                    bundle.putStringArrayList("result", d.dijkstra(loc1, loc2, filter));
+
+                    intent.putExtras(bundle);
+                    startActivityForResult(intent, set_dest);
                 }
                 else{
                     Toast.makeText(MainActivity.this, "Please enter locations in both operand fields", Toast.LENGTH_LONG).show();
