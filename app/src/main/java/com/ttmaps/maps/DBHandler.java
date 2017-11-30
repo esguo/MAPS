@@ -202,24 +202,7 @@ class DBHandler extends SQLiteOpenHelper {
     }
 
     /* creates POI based on id, name, populates hash table with the appropriate POI */
-    public void populateHash(String[] data){
-        int id = Integer.parseInt(data[0]);
-        String POIName = data[1];
-        String img_file;
-
-        try{
-            img_file = data[9];
-        }
-        catch (Exception e) {
-            img_file = "";
-        }
-        boolean [] filters = new boolean[7];
-
-
-        //set bool values for filter
-        for(int i = 0; i < filters.length; i++)
-            filters[i] = Boolean.parseBoolean(data[i+2]);
-
+    public void populateHash(int id, String POIName, String img_file, boolean[] filters){
         POI poi = new POI(id, POIName, img_file);
         if(filters[0]) poi.setIsAdmin();
         if(filters[1]) poi.setIsClassroom();
@@ -229,13 +212,6 @@ class DBHandler extends SQLiteOpenHelper {
         if(filters[5]) poi.setIsResHall();
         if(filters[6]) poi.setIsStudyArea();
 
-        //set lat/lng if available
-        try{
-            poi.setLatLng(Double.parseDouble(data[10]), Double.parseDouble(data[11]));
-        }
-        catch(Exception e){
-            poi.setLatLng(-1, -1);
-        }
 
         poilist.put(poi.getName(), poi);
         POI dbpoi = new POI(id, POIName.toLowerCase());
