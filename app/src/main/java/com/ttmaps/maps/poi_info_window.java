@@ -62,8 +62,6 @@ public class poi_info_window extends AppCompatActivity implements View.OnClickLi
             case R.id.floor_plans:
                 Intent intent1 = new Intent(this, FloorPlans.class);
                 intent1.putExtra("floorPlan", target);
-
-
                 startActivity(intent1);
                 break;
 

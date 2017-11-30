@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
         mNavItems.add(new NavItem("Search", "Find a path", R.drawable.ic_action_path));
         mNavItems.add(new NavItem("Ratings", "View path ratings", R.drawable.ic_action_ratings));
         mNavItems.add(new NavItem("Favorites", "View saved paths", R.drawable.ic_action_favorites));
-        mNavItems.add(new NavItem("Find a Room", "View available rooms", R.drawable.ic_action_rooms));
+        mNavItems.add(new NavItem("Floor Plans", "View floor plans", R.drawable.ic_action_rooms));
         mNavItems.add(new NavItem("Preferences", "Change your settings",R.drawable.ic_action_settings));
         mNavItems.add(new NavItem("About", "Our team", R.drawable.ic_action_about));
 
@@ -216,43 +216,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String poi1 = db.getAllPOIs();
-        Log.d("INFO OF ALL POIS: ", poi1);
-//        int poi3 = db.getRating(0);
-//        Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
-       // int rating = db.updatePOI(0, "Warren", 5);
-//        String poi2 = db.getPOI(0);
-//        Log.d("NEW RATING IS: ", String.valueOf(rating));
-//        Log.d("INFO ON UPDATED POI: ", poi2);
-//        int rating1 = db.updatePOI(0, "Warren", 3);
         /*
         String poi1 = db.getAllPOIs();
         Log.d("INFO OF ALL POIS: ", poi1);
-        int poi3 = db.getRating(0);
-        Log.d("CURRENT RATING IS: ", String.valueOf(poi3));
-        int rating = db.updatePOI(0, "Warren", 5);
-        String poi2 = db.getPOI(0);
-        Log.d("NEW RATING IS: ", String.valueOf(rating));
-        Log.d("INFO ON UPDATED POI: ", poi2);
-        int rating1 = db.updatePOI(0, "Warren", 3);
         */
-        /* testing database stuff*/
-        /*Log.d("Reading: ", "Reading all POIs...");
-        POI poi1 = db.getPOI(1);
-        POI poi2 = db.getPOIByName("Muir");
-        String log = "Id: " + poi1.getId() + ", Name: " + poi1.getName();
-        Log.d("POI: ", log);
-        String log1 = "Count of POIs: " + db.getPOIsCount();
-        Log.d("POI Count: ", log1);
-        db.deletePOI(poi1);
-        String log2 = "Count of POIs after deleting: " + db.getPOIsCount();
-        Log.d("POI Count: ", log2);
-        
-        List<POI> pois = db.getAllPOIs();
-        for (POI poi : pois) {
-            String log3 = "Id: " + poi.getId() + ", Name: " + poi.getName();
-            Log.d("POI: ", log3);
-        }*/
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
@@ -262,20 +229,6 @@ public class MainActivity extends AppCompatActivity {
                     String loc1 = loc_input1.getText().toString();
                     String loc2 = loc_input2.getText().toString();
 
-                    /**
-                    Intent intent;
-                    intent = new Intent(context, Result.class);
-                    Dijkstra d = new Dijkstra(db);
-                    Bundle bundle = new Bundle();
-                    boolean[] filter = new boolean[3];
-                    filter[0] = safeRoute.isChecked();
-                    filter[1] = wellLit.isChecked();
-                    filter[2] = wheelChair.isChecked();
-
-                    bundle.putString("result", d.dijkstra(loc1, loc2, filter));
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                     */
                     Intent intent = new Intent(MainActivity.this, MapsActivity.class);
                     Dijkstra d = new Dijkstra(db);
                     Bundle bundle = new Bundle();
@@ -440,6 +393,11 @@ public class MainActivity extends AppCompatActivity {
             transaction.replace(R.id.activity_main, fragment);
             transaction.commit();
              */
+        }
+
+        if(position == 4){
+            Intent intent = new Intent(MainActivity.this, SearchFloorPlans.class);
+            startActivity(intent);
         }
 
         mDrawerList.setItemChecked(position, true);

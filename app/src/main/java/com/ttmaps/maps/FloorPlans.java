@@ -2,6 +2,7 @@ package com.ttmaps.maps;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
@@ -26,7 +27,12 @@ public class FloorPlans extends AppCompatActivity{
 
         try {
             int id = getResources().getIdentifier(POIList.get(target).getFileName(), "drawable", getPackageName());
-            imageView.setImage(ImageSource.resource(id));
+            if(id == 0){
+                imageView.setImage(ImageSource.resource(R.drawable.no_plan));
+            }
+            else {
+                imageView.setImage(ImageSource.resource(id));
+            }
         }
         catch (Exception e){
             imageView.setImage(ImageSource.resource(R.drawable.no_plan));
