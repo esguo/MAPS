@@ -216,10 +216,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
+
         String poi1 = db.getAllPOIs();
         Log.d("INFO OF ALL POIS: ", poi1);
-        */
+        
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
