@@ -1,6 +1,8 @@
 package com.ttmaps.maps;
 import android.util.Log;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 import java.lang.Integer;
 import java.util.Comparator;
@@ -16,18 +18,21 @@ class Dijkstra {
     private final Stack<String> stack = new Stack<>();
     private final DBHandler database;
     private String output = "";
+    private ArrayList<String> o;
 
     Dijkstra(DBHandler d) {
         database = d;
     }
 
-    String dijkstra(String start, String end, boolean[] opt) {
+    ArrayList<String> dijkstra(String start, String end, boolean[] opt) {
         /* opt
             0 - safe
             1 - well lit
             2 - wheelchair
          */
 
+        o = new ArrayList<String>();
+        o.add(start);
         int inf = Integer.MAX_VALUE;
         List<POI> allPOI = database.getPOIs();
 
@@ -88,13 +93,17 @@ class Dijkstra {
             }
             output += start + "\n";
             while (!stack.isEmpty()) {
-                output += "--> " + stack.pop() + " -->\n" + stack.pop() + "\n";
+                String path = stack.pop();
+                String poi = stack.pop();
+                output += "--> " + path + " -->\n" + poi + "\n";
+                o.add(poi);
             }
         }
         catch (OutOfMemoryError e){
             output = "Error while creating path: \n\n" + e.toString();
         }
-        return output;
+        o.add(output); //return output;
+        return o;
     }
 }
 

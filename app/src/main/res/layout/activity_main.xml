@@ -37,7 +37,7 @@
             android:id="@+id/viewPathSearch2"
             class="android.support.v4.widget.DrawerLayout"
             android:layout_width="283dp"
-            android:layout_height="186dp"
+            android:layout_height="132dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/rounded_corner2"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +45,7 @@
             app:layout_constraintHorizontal_bias="0.504"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchPathLabel2"
-            app:layout_constraintVertical_bias="0.06" />
+            app:layout_constraintVertical_bias="0.793" />
 
         <AutoCompleteTextView
             android:id="@+id/input"
@@ -131,7 +131,8 @@
             android:layout_width="190dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="15dp"
             android:checked="false"
             android:text="Safe Routes Only"
             app:layout_constraintEnd_toEndOf="@+id/checkBox2"
@@ -145,7 +146,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:text="Well-lit Routes Only"
             app:layout_constraintBottom_toBottomOf="@+id/viewPathSearch2"
             app:layout_constraintEnd_toEndOf="@+id/checkBox3"
@@ -158,25 +158,25 @@
             android:id="@+id/checkBox3"
             android:layout_width="190dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:text="Blacklist Locations"
-            app:layout_constraintBottom_toTopOf="@+id/checkBox4"
-            app:layout_constraintEnd_toEndOf="@+id/checkBox4"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/checkBox4" />
-
-        <CheckBox
-            android:id="@+id/checkBox4"
-            android:layout_width="190dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="21dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:text="Wheelchair Accessibility"
             app:layout_constraintBottom_toBottomOf="@+id/viewPathSearch2"
             app:layout_constraintEnd_toEndOf="@+id/viewPathSearch2"
             app:layout_constraintStart_toStartOf="@+id/viewPathSearch2" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="292dp"
+            android:layout_height="47dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:spinnerMode="dropdown"
+            app:layout_constraintBottom_toTopOf="@+id/viewPathSearch2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchPathLabel2" />
 
     </android.support.constraint.ConstraintLayout>
 
