@@ -3,29 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDarkGray">
 
     <Button
         android:id="@+id/submit_search_floorplan"
-        android:layout_width="wrap_content"
+        android:layout_width="228dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="192dp"
+        android:background="@drawable/rounded_corner3"
         android:text="Enter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_floor_plan_textbox"></Button>
+        app:layout_constraintStart_toStartOf="parent"></Button>
 
 
     <AutoCompleteTextView
         android:id="@+id/search_floor_plan_textbox"
         android:layout_width="0dp"
         android:layout_height="43dp"
+        android:layout_marginTop="168dp"
         android:hint="Search for floor plan"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/submit_search_floorplan"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

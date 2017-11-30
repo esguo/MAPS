@@ -15,11 +15,12 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="?android:attr/actionModeCloseDrawable"/>
+        app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorMenuBlue"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
@@ -39,19 +40,25 @@
             android:id="@+id/floor_plans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/go_button"
-            android:layout_centerHorizontal="true"
-            android:textAlignment="center"
-            android:text="Floor plans" />
+            android:layout_alignBaseline="@+id/go_button"
+            android:layout_alignBottom="@+id/go_button"
+            android:layout_alignStart="@+id/Desc"
+            android:layout_marginStart="39dp"
+            android:background="@drawable/rounded_corner3"
+            android:backgroundTint="@color/colorPrimaryLightGB"
+            android:text="Floor plans"
+            android:textAlignment="center" />
 
         <Button
             android:id="@+id/go_button"
             android:layout_width="158dp"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/poi_name"
             android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="21dp"
-            android:text="Go"
+            android:layout_marginBottom="13dp"
+            android:layout_marginEnd="34dp"
+            android:background="@drawable/rounded_corner3"
+            android:text="Set As Destination"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -65,6 +72,7 @@
             android:layout_alignStart="@+id/poi_name"
             android:layout_below="@+id/poi_name"
             android:layout_marginTop="11dp"
+            android:background="@drawable/rounded_corner"
             android:text="Hey that's a pretty cool place. I would like to go there one day because it looks nice."
             android:textAlignment="center"
             android:textSize="18sp"
