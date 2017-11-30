@@ -100,13 +100,13 @@
             android:layout_height="17dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:fontFamily="serif"
             android:gravity="center"
             android:text="Search"
             android:textColor="@color/common_google_signin_btn_text_dark_default"
+            app:layout_constraintBottom_toTopOf="@+id/viewPathSearch1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
