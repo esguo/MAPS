@@ -25,7 +25,11 @@ public class Result extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         final ArrayList<String> r;
         r = bundle.getStringArrayList("result");
-
+        String b = bundle.getString("FromRatings");
+        if(b.equals("1")){
+            TextView t = (TextView)findViewById(R.id.textView);
+            t.setText("Current Ratings");
+        }
         TextView result = (TextView) findViewById(R.id.result);
         result.setText(r.get(r.size()-1));
 
