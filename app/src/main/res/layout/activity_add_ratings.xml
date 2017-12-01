@@ -8,7 +8,7 @@
     android:background="@color/colorPrimaryDarkGray"
     android:orientation="vertical">
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/poiToRate"
         android:layout_width="350dp"
         android:layout_height="85dp"
@@ -16,11 +16,9 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:ems="10"
-        android:gravity="center"
         android:hint="Select POI"
-        android:inputType="text"
-        android:textColor="#fff"
+        android:textAlignment="center"
+        android:textColor="#ffff"
         app:layout_constraintBottom_toTopOf="@+id/viewRateButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,10 +73,12 @@
         android:id="@+id/viewRateButton"
         android:layout_width="351dp"
         android:layout_height="41dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginBottom="36dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corner3"
         android:backgroundTint="@color/colorPrimaryLightGB"
         android:text="View Ratings"
+        app:layout_constraintBottom_toTopOf="@+id/ratePoiBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
