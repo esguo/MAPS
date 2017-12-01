@@ -15,6 +15,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +44,7 @@ import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static com.ttmaps.maps.MainActivity.POIList;
 import static com.ttmaps.maps.MyApplication.db;
@@ -98,6 +102,10 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
     private HashMap<String, Marker> hash;
     private Polyline polyline;
 
+    ArrayList<String> filteredPOIs;
+    Spinner dropdown;
+    //final DBHandler db = new DBHandler(this);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,11 +131,101 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
         mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
+        dropdown = (Spinner)findViewById(R.id.spinner1);
         Bundle bundle = getIntent().getExtras();
         hash = new HashMap<String, Marker>();
-        if (bundle != null) {
+        if (bundle != null && bundle.size() != 0) {
             r = bundle.getStringArrayList("result");
+            dropdown.setEnabled(false);
         }
+
+        filteredPOIs = new ArrayList<>();
+        String[] items = new String[]{"No filters selected", "Admin", "Classroom", "Food", "Parking", "Recreation", "Residential Hall", "Study Area"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter1);
+        dropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected (AdapterView < ? > parent, View v,int position, long id){
+
+                switch (position) {
+                    case 0:
+                        boolean[] flags = {false, false, false, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags);
+                        Log.d("FILTER POI: ", "CASE 0");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 1:
+                        // Whatever you want to happen when the second item gets selected
+                        boolean[] flags1 = {true, false, false, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags1);
+                        Log.d("FILTER POI: ", "CASE 1");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 2:
+                        boolean[] flags2 = {false, true, false, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags2);
+                        Log.d("FILTER POI: ", "CASE 2");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 3:
+                        boolean[] flags3 = {false, false, true, false, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags3);
+                        Log.d("FILTER POI: ", "CASE 3");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 4:
+                        boolean[] flags4 = {false, false, false, true, false, false, false};
+                        filteredPOIs = getFilteredPOIs(flags4);
+                        Log.d("FILTER POI: ", "CASE 4");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 5:
+                        boolean[] flags5 = {false, false, false, false, true, false, false};
+                        filteredPOIs = getFilteredPOIs(flags5);
+                        Log.d("FILTER POI: ", "CASE 5");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 6:
+                        boolean[] flags6 = {false, false, false, false, false, true, false};
+                        filteredPOIs = getFilteredPOIs(flags6);
+                        Log.d("FILTER POI: ", "CASE 6");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+                    case 7:
+                        boolean[] flags7 = {false, false, false, false, false, false, true};
+                        filteredPOIs = getFilteredPOIs(flags7);
+                        Log.d("FILTER POI: ", "CASE 7");
+                        for (String s : filteredPOIs) {
+                            Log.d("FILTER POI: ", s);
+                        }
+                        break;
+
+                }
+                ArrayAdapter<String> listWithFilter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.select_dialog_singlechoice, filteredPOIs);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                Log.d("FILTER POI: ", "CASE NONE");
+                boolean[] flags = {false, false, false, false, false, false, false};
+                filteredPOIs = getFilteredPOIs(flags);
+            }
+        });
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -180,6 +278,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
             if(!(poi.getLatLng().latitude == 0 || poi.getLatLng().longitude == 0)) {
                 Marker m = mMap.addMarker(new MarkerOptions().position(poi.getLatLng()).title(poi.getName()));
                 m.setTag(0);
+                hash.put(poi.getName(), m);
             }
         }
 
@@ -201,7 +300,22 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
                 lineOptions.width(10);
                 lineOptions.color(Color.RED);
                 polyline = mMap.addPolyline(lineOptions);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(points.get(0),17));
+            } else {
+                // Prompt the user for permission.
+                getLocationPermission();
+                // Turn on the My Location layer and the related control on the map.
+                updateLocationUI();
+                // Get the current location of the device and set the position of the map.
+                getDeviceLocation();
             }
+        } else {
+            // Prompt the user for permission.
+            getLocationPermission();
+            // Turn on the My Location layer and the related control on the map.
+            updateLocationUI();
+            // Get the current location of the device and set the position of the map.
+            getDeviceLocation();
         }
 
         //Info Window
@@ -209,12 +323,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
 
-        // Prompt the user for permission.
-        getLocationPermission();
-        // Turn on the My Location layer and the related control on the map.
-        updateLocationUI();
-        // Get the current location of the device and set the position of the map.
-        getDeviceLocation();
 
     }
 
@@ -418,5 +526,82 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
         return null;
     }
 
+    public ArrayList<String> getFilteredPOIs(boolean[] filterList){
+        ArrayList<String> canUse = new ArrayList<>();
+        ArrayList<String> remove = new ArrayList<>();
+        //List<POI> allPOI = db.getPOIs();
+
+        Log.d("ALL POI SIZE",POIList.keySet().size() + "" );
+        for(POI poi: POIList.values())
+        {
+            canUse.add(poi.getName());
+        }
+
+        Log.d("FILTER LIST1",filterList[0] + "" );
+        //Log.d("ALL POI SIZe",allPOI.size() + "" );
+        for(POI poi: POIList.values()){
+            if(filterList[0]) {
+                if (!poi.getIsAdmin()){
+
+                    remove.add(poi.getName());
+                    continue;
+                }
+            }
+            if(filterList[1]){
+                if (!poi.getIsClassroom()){
+                    remove.add(poi.getName());
+                    continue;
+                }
+            }
+            if(filterList[2]){
+                if (!poi.getIsFood()){
+                    remove.add(poi.getName());
+                    continue;
+                }
+            }
+            if(filterList[3]){
+                if (!poi.getIsParking()){
+                    remove.add(poi.getName());
+                    continue;
+                }
+            }
+            if(filterList[4]){
+                if (!poi.getIsRec()){
+                    remove.add(poi.getName());
+                    continue;
+                }
+            }
+            if(filterList[5]){
+                if (!poi.getIsResHall()){
+                    remove.add(poi.getName());
+                    continue;
+                }
+            }
+            if(filterList[6]){
+                if (!poi.getIsStudyArea()){
+                    remove.add(poi.getName());
+                    continue;
+                }
+            }
+        }
+        String s1 = "" + canUse.size();
+        Log.d("SIZE: ", s1);
+        for(int i = 0; i < remove.size(); i++){
+            canUse.remove(remove.get(i));
+        }
+        String s = "" + canUse.size();
+        Log.d("SIZE: ", s);
+        for (int i = 0; i < canUse.size(); i++) {
+            if (hash.get(canUse.get(i)) != null) {
+                hash.get(canUse.get(i)).setVisible(true);
+            }
+        }
+        for (int i = 0; i < remove.size(); i++) {
+            if (hash.get(remove.get(i)) != null) {
+                hash.get(remove.get(i)).setVisible(false);
+            }
+        }
+        return canUse;
+    }
 
 }

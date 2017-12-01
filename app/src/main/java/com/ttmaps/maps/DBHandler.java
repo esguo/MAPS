@@ -210,7 +210,7 @@ class DBHandler extends SQLiteOpenHelper {
         try{
             img_file = data[9];
         }
-        catch (Exception e){
+            catch (Exception e){
         }
 
         POI poi = new POI(id, POIName, img_file);

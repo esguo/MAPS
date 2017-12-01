@@ -26,7 +26,7 @@ public class Result extends AppCompatActivity {
         final ArrayList<String> r;
         r = bundle.getStringArrayList("result");
         String b = bundle.getString("FromRatings");
-        if(b.equals("1")){
+        if(b != null && b.equals("1")){
             TextView t = (TextView)findViewById(R.id.textView);
             t.setText("Current Ratings");
         }
