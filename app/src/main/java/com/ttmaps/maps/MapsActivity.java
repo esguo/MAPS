@@ -103,6 +103,13 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //set a default mLastKnownLocation
+        if (mLastKnownLocation == null) {
+            mLastKnownLocation = new Location("geisel");
+            mLastKnownLocation.setLatitude(32.880915);
+            mLastKnownLocation.setLongitude(-117.237562);
+        }
+
         // Retrieve location and camera position from saved instance state.
         if (savedInstanceState != null) {
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
