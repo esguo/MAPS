@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:elevation="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
@@ -22,7 +23,11 @@
         android:layout_height="match_parent"
         android:background="@color/colorMenuBlue"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="0dp"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toStartOf="parent" >
 
         <ImageView
             android:id="@+id/loc_pic"
@@ -55,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_alignEnd="@+id/poi_name"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="13dp"
             android:layout_marginBottom="13dp"
             android:layout_marginEnd="34dp"
             android:background="@drawable/rounded_corner3"
@@ -69,8 +75,10 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_above="@+id/floor_plans"
+            android:layout_alignEnd="@+id/poi_name"
             android:layout_alignStart="@+id/poi_name"
             android:layout_below="@+id/poi_name"
+            android:layout_marginBottom="13dp"
             android:layout_marginTop="11dp"
             android:background="@drawable/rounded_corner"
             android:text="Hey that's a pretty cool place. I would like to go there one day because it looks nice."

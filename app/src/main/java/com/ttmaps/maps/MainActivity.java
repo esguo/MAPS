@@ -55,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox wellLit;
     private CheckBox wheelChair;
 
+    static ArrayAdapter<String> list;
+
     int rate = 0;
     int set_dest = 1;
     final DBHandler db = new DBHandler(this);
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        ArrayAdapter<String> list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
+        list = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
         ArrayAdapter<String> listWithFilters = new ArrayAdapter<>(this, android.R.layout.select_dialog_singlechoice, POIs);
         String s3 = "" + listWithFilters.getCount();
 
@@ -216,10 +218,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        String poi1 = db.getAllPOIs();
-        Log.d("INFO OF ALL POIS: ", poi1);
-        */
+
+//        String poi1 = db.getAllPOIs();
+//        Log.d("INFO OF ALL POIS: ", poi1);
+//
 
         final Context context = this;
         btn_submit.setOnClickListener(new View.OnClickListener(){
