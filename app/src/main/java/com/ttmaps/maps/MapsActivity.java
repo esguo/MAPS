@@ -233,6 +233,12 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
                         if (task.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
+                            //set a default mLastKnownLocation
+                            if (mLastKnownLocation == null) {
+                                mLastKnownLocation = new Location("geisel");
+                                mLastKnownLocation.setLatitude(32.880915);
+                                mLastKnownLocation.setLongitude(-117.237562);
+                            }
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));

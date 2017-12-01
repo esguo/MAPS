@@ -145,24 +145,26 @@
             android:layout_width="155dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="316dp"
+            android:layout_marginTop="32dp"
             android:checked="false"
             android:gravity="center"
             android:text="Safe Routes Only"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.438"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/viewPathSearch2" />
 
         <CheckBox
             android:id="@+id/checkBox2"
             android:layout_width="167dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
             android:gravity="center"
             android:text="Well-lit Routes Only"
-            app:layout_constraintEnd_toStartOf="@+id/viewPathSearch2"
-            app:layout_constraintHorizontal_bias="0.53"
-            app:layout_constraintStart_toEndOf="@+id/viewPathSearch2"
+            app:layout_constraintEnd_toEndOf="@+id/viewPathSearch2"
+            app:layout_constraintHorizontal_bias="0.151"
+            app:layout_constraintStart_toStartOf="@+id/viewPathSearch2"
             app:layout_constraintTop_toBottomOf="@+id/checkBox" />
 
         <CheckBox
