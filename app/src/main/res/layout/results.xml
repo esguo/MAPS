@@ -76,7 +76,7 @@
         android:layout_width="140dp"
         android:layout_height="45dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_corner3"
+        android:background="@drawable/maplogofinal"
         android:text="View Map"
         app:layout_constraintEnd_toStartOf="@+id/viewPathResult1"
         app:layout_constraintHorizontal_bias="0.501"
