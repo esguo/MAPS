@@ -11,6 +11,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class add_ratings extends AppCompatActivity {
     private Button rateButton;
@@ -18,6 +21,7 @@ public class add_ratings extends AppCompatActivity {
     private EditText poiToRate;
     private RatingBar ratingBar;
     private EditText comment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,11 +80,16 @@ public class add_ratings extends AppCompatActivity {
                     intent = new Intent(context, Result.class);
                     Bundle bundle = new Bundle();
                     if(db.getRatingCount(rateThisPOI.getId()) != 0) {
-                        bundle.putString("result", "Rating\n" + (rating / (db.getRatingCount(rateThisPOI.getId()))) + "\n\nComments" + db.getRatingCom(rateThisPOI.getId()));
+                        ArrayList<String> a = new ArrayList<>();
+                        a.add("Rating\n" + (rating / (db.getRatingCount(rateThisPOI.getId()))) + "\n\nComments" + db.getRatingCom(rateThisPOI.getId()));
+                        bundle.putStringArrayList("result", a);
                     }
                     else{
-                        bundle.putString("result", "No ratings yet!");
+                        ArrayList<String> a = new ArrayList<>();
+                        a.add("No ratings yet!");
+                        bundle.putStringArrayList("result", a);
                     }
+                    intent.putExtra("FromRatings", "1");
                     intent.putExtras(bundle);
                     startActivity(intent);
                     intent.putExtra("name", poi);

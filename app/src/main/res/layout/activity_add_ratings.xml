@@ -78,7 +78,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/rounded_corner3"
         android:backgroundTint="@color/colorPrimaryLightGB"
-        android:text="View POI"
+        android:text="View Ratings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.515"
         app:layout_constraintStart_toStartOf="parent"
