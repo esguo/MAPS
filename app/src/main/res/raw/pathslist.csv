@@ -17,3 +17,13 @@ RIMAC Arena,Supercomputer Center,Ridge Walk,1,TRUE,TRUE,TRUE
 64 Degrees,York Hall,Revelle Plaza,1,FALSE,TRUE,TRUE
 64 Degrees,Pacific Hall,Path,1,FALSE,FALSE,TRUE
 Hopkins Parking Structure,Warren Lecture Hall,Voigt Drive,3,FALSE,FALSE,TRUE
+Galbraith Hall,York Hall,Revelle Plaza,1,TRUE,TRUE,TRUE
+Meyer Hall,York Hall,Revelle Plaza,1,TRUE,TRUE,TRUE
+Meyer Hall,Galbraith Hall,Revelle Plaza,2,TRUE,TRUE,TRUE
+Meyer Hall,Urey Hall,Urey Hall,1,TRUE,TRUE,TRUE
+The Fleet Residence Halls,64 Degrees,Revelle Plaza,1,TRUE,TRUE,TRUE
+Urey Hall,Bonner Hall,Ridge Walk,1,TRUE,TRUE,TRUE
+Bonner Hall,Main Gym,Ridge Walk,1,TRUE,TRUE,TRUE
+Main Gym,APM,Ridge Walk,1,TRUE,TRUE,TRUE
+APM,Peterson,Ridge Walk,1,TRUE,FALSE,TRUE
+APM,Humanities and Social Sciences,APM,1,TRUE,TRUE,TRUE
