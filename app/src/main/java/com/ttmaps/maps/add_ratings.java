@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -15,10 +16,12 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.ttmaps.maps.MainActivity.list;
+
 public class add_ratings extends AppCompatActivity {
     private Button rateButton;
     private Button viewRateButton;
-    private EditText poiToRate;
+    private AutoCompleteTextView poiToRate;
     private RatingBar ratingBar;
     private EditText comment;
 
@@ -28,10 +31,13 @@ public class add_ratings extends AppCompatActivity {
         //db = ((MyApplication)getApplication()).db;
         DBHandler db = new DBHandler(add_ratings.this);
         setContentView(R.layout.activity_add_ratings);
-        poiToRate = (EditText) findViewById(R.id.poiToRate);
+        poiToRate = (AutoCompleteTextView) findViewById(R.id.poiToRate);
         ratingBar = (RatingBar) findViewById(R.id.ratePoiBar);
         rateButton = (Button) findViewById(R.id.rateButton);
         comment = (EditText) findViewById(R.id.comment);
+
+        poiToRate.setThreshold(1);
+        poiToRate.setAdapter(list);
 
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override
