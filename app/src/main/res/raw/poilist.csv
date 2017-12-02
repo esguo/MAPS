@@ -5,7 +5,7 @@ id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Lo
 4,Atkinson Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8829164,-117.2350471,
 5,Biomedical Library,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,,32.875261,-117.2368956,A lot bigger than she seems.
 6,Bookstore,,,,,,,,,32.8794408,-117.2369353,
-7,Café Ventanas,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8860786,-117.2427651,Home of the big mac-daddy wednesdays.
+7,Cafe Ventanas,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8860786,-117.2427651,Home of the big mac-daddy wednesdays.
 8,Canyon View,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,,32.8805864,-117.2318743,"They have rock swimming AND pool climbing. Certainly the best gym, unbiased opinion."
 9,Canyon Vista,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8839368,-117.2333183,Once known for their legendary panini press. May she rest in peace.
 10,Career Services Center,,,,,,,,,32.8784403,-117.2379177,Avoid HDH at all costs
@@ -16,7 +16,7 @@ id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Lo
 15,Copley International Conference Center,,,,,,,,,32.8850016,-117.2412938,
 16,Croutons,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.878533,-117.2357618,She'll never be open when you want to go.
 17,CSE Building,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,,32.8818127,-117.2335303,The only real part of this building is underground. Everything else is a facade.
-18,Earl’s Place and Market,,,,,,,,,32.883906,-117.233149,
+18,Earl's Place and Market,,,,,,,,,32.883906,-117.233149,
 19,ERC Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8855832,-117.2420382,
 20,Fallen Star,,,,,,,,,32.8814264,-117.2353233,The alarmingly odd building placed on the top that is mostly closed.
 21,Food Co-op,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.877294,-117.2399783,For those who need it.

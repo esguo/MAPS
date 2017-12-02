@@ -87,6 +87,11 @@ class Dijkstra {
                 stack.add(curr.getName());
                 stack.add(curr.getPrevEdge().getName());
                 curr = curr.getPrev();
+                if(stack.size() > 50) {
+                    output = "Sorry, no path could be found.";
+                    o.add(output);
+                    return o;
+                }
             }
             output += start + "\n";
             while (!stack.isEmpty()) {
