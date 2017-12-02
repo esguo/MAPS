@@ -25,6 +25,7 @@ public class POI {
 	private boolean isParking;
 	private boolean isStudyArea;
 	private String file_name;
+	private String desc;
 	private LatLng latLng;
 
 	public POI(){
@@ -47,17 +48,13 @@ public class POI {
 		this.isParking = false;
 		this.isStudyArea = false;
 		this.file_name = "";
-        //poiList.add(new POI("PC")); 		// Need to figure out how to update list from database
-        //poiList.add(new POI("Sixth"));
+		this.desc = "";
 	}
 
 
 	POI(int id, String name, String file_name) {
 		this(id, name);
 		this.file_name = file_name;
-
-		//poiList.add(new POI("PC")); 		// Need to figure out how to update list from database
-		//poiList.add(new POI("Sixth"));
 	}
 
 	public int getId() {
@@ -126,6 +123,13 @@ public class POI {
 
 	public void setIsStudyArea(){ isStudyArea= true; }
 	public boolean getIsStudyArea(){ return isStudyArea; }
+
+	public void setDesc(String desc){
+		this.desc = desc;
+	}
+	public String getDesc(){
+		return desc;
+	}
 
 	public String getFileName(){
 		return file_name;

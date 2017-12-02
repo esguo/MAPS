@@ -33,6 +33,9 @@ public class poi_info_window extends AppCompatActivity implements View.OnClickLi
         three.setOnClickListener(this); // calling onClick() method
         TextView POIName = (TextView) findViewById(R.id.poi_name);
         POIName.setText(target);
+        TextView desc = (TextView) findViewById(R.id.Desc);
+        if(!POIList.get(target).getDesc().equals(""))
+            desc.setText(POIList.get(target).getDesc());
 
         /// get image and set to floorplan
         try {
@@ -42,7 +45,7 @@ public class poi_info_window extends AppCompatActivity implements View.OnClickLi
             floorPlan.setImageDrawable(drawable);
         }
         catch (Exception e){
-
+            Log.d("Error Pic", e.toString());
         }
     }
 

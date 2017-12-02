@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
         //db.updateDb();
         /* sets dropdown autocomplete feature */
-        loc_input1.setThreshold(1);
-        loc_input2.setThreshold(1);
+        loc_input1.setThreshold(2);
+        loc_input2.setThreshold(2);
         loc_input1.setAdapter(list);
         loc_input2.setAdapter(listWithFilters);
 
@@ -115,66 +115,66 @@ public class MainActivity extends AppCompatActivity {
                     case 0:
                         boolean[] flags = {false, false, false, false, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags);
-                        Log.d("FILTER POI: ", "CASE 0");
+                        //Log.d("FILTER POI: ", "CASE 0");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 1:
                         // Whatever you want to happen when the second item gets selected
                         boolean[] flags1 = {true, false, false, false, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags1);
-                        Log.d("FILTER POI: ", "CASE 1");
+                        //Log.d("FILTER POI: ", "CASE 1");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 2:
                         boolean[] flags2 = {false, true, false, false, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags2);
-                        Log.d("FILTER POI: ", "CASE 2");
+                        //Log.d("FILTER POI: ", "CASE 2");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 3:
                         boolean[] flags3 = {false, false, true, false, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags3);
-                        Log.d("FILTER POI: ", "CASE 3");
+                        //Log.d("FILTER POI: ", "CASE 3");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 4:
                         boolean[] flags4 = {false, false, false, true, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags4);
-                        Log.d("FILTER POI: ", "CASE 4");
+                        //Log.d("FILTER POI: ", "CASE 4");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 5:
                         boolean[] flags5 = {false, false, false, false, true, false, false};
                         filteredPOIs = getFilteredPOIs(flags5);
-                        Log.d("FILTER POI: ", "CASE 5");
+                        //Log.d("FILTER POI: ", "CASE 5");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 6:
                         boolean[] flags6 = {false, false, false, false, false, true, false};
                         filteredPOIs = getFilteredPOIs(flags6);
-                        Log.d("FILTER POI: ", "CASE 6");
+                        //Log.d("FILTER POI: ", "CASE 6");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 7:
                         boolean[] flags7 = {false, false, false, false, false, false, true};
                         filteredPOIs = getFilteredPOIs(flags7);
-                        Log.d("FILTER POI: ", "CASE 7");
+                        //Log.d("FILTER POI: ", "CASE 7");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
 
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d("FILTER POI: ", "CASE NONE");
+                //Log.d("FILTER POI: ", "CASE NONE");
                 boolean[] flags = {false, false, false, false, false, false, false};
                 filteredPOIs = getFilteredPOIs(flags);
             }
@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //        String poi1 = db.getAllPOIs();
-//        Log.d("INFO OF ALL POIS: ", poi1);
+//        //Log.d("INFO OF ALL POIS: ", poi1);
 //
 
         final Context context = this;
@@ -230,14 +230,6 @@ public class MainActivity extends AppCompatActivity {
                 if ((loc_input1.getText().length() > 0) && (loc_input2.getText().length() > 0 )){
                     String loc1 = loc_input1.getText().toString();
                     String loc2 = loc_input2.getText().toString();
-
-                    /*
-                    Intent intent = new Intent(MainActivity.this, MapsActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putStringArrayList("result", d.dijkstra(loc1, loc2, filter));
-                    intent.putExtras(bundle);
-                    startActivityForResult(intent, set_dest);*/
-
 
                     boolean[] filter = new boolean[3];
                     filter[0] = safeRoute.isChecked();
@@ -266,8 +258,8 @@ public class MainActivity extends AppCompatActivity {
             String num1 = data.getStringExtra("name");
             String num2 = data.getStringExtra("rateNum");
             String num3 = data.getStringExtra("comment");
-            Log.d("POI NAME", num1);
-            Log.d("RATE NUM ", num2);
+            //Log.d("POI NAME", num1);
+            //Log.d("RATE NUM ", num2);
             POI poi = db.getPOIByName(num1);
             if (Integer.parseInt(num2) == 0) {
                 return;
@@ -288,12 +280,12 @@ public class MainActivity extends AppCompatActivity {
             String csvLine;
             reader.readLine();
             while((csvLine = reader.readLine()) != null){
-                data = csvLine.split(",");
+                data = csvLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 try{
                     db.populateHash(data);
                 }
                 catch (Exception e){
-                    Log.d("Problem", e.toString());
+                    Log.d("Problem-poi", e.toString());
                 }
             }
         }
@@ -307,14 +299,18 @@ public class MainActivity extends AppCompatActivity {
             String csvLine;
             reader.readLine();
             while((csvLine = reader.readLine()) != null){
-                data = csvLine.split(",");
+                data = csvLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 try{
-                    db.createPair(data[0], data[1], data[2], Integer.parseInt(data[3]));
-
+                    try {
+                        db.createPair(data[0], data[1], data[3], Integer.parseInt(data[2]));
+                    }
+                    catch (Exception e){
+                        db.createPair(data[0], data[1], "", Integer.parseInt(data[2]));
+                    }
                 }
                 catch (Exception e){
-                    Log.d("Problem1", e.toString());
-                    Log.d("Problem1", data[0] + data[1] + data[2] + Integer.parseInt(data[3]));
+                    Log.d("Problem-path", e.toString());
+                    Log.d("Problem-path", data[0] + data[1] + data[2] + Integer.parseInt(data[3]));
                 }
             }
         }
@@ -397,13 +393,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, add_ratings.class);
             startActivityForResult(intent, rate);
 
-            /**
-            Fragment fragment = new RatingsFragment();
-
-            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.activity_main, fragment);
-            transaction.commit();
-             */
         }
 
         if(position == 4){
@@ -412,8 +401,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         mDrawerList.setItemChecked(position, true);
-        setTitle(mNavItems.get(position).mTitle);
-        Log.d("test", "fragment");
+        //setTitle(mNavItems.get(position).mTitle);
+        //Log.d("test", "fragment");
 
         // Close the drawer
         mDrawerLayout.closeDrawer(mDrawerPane);
@@ -424,12 +413,12 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> canUse = new ArrayList<>();
         ArrayList<String> remove = new ArrayList<>();
         List<POI> allPOI = db.getPOIs();
-        Log.d("ALL POI SIZE",allPOI.size() + "" );
+        //Log.d("ALL POI SIZE",allPOI.size() + "" );
         for(int i = 0; i < allPOI.size(); i++){
             canUse.add(allPOI.get(i).getName());
         }
-        Log.d("FILTER LIST1",filterList[0] + "" );
-        Log.d("ALL POI SIZe",allPOI.size() + "" );
+        //Log.d("FILTER LIST1",filterList[0] + "" );
+        //Log.d("ALL POI SIZe",allPOI.size() + "" );
         for(int i = 0; i < allPOI.size(); i++){
             if(filterList[0]) {
                 if (!allPOI.get(i).getIsAdmin()){
@@ -476,12 +465,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         String s1 = "" + canUse.size();
-        Log.d("SIZE: ", s1);
+        //Log.d("SIZE: ", s1);
         for(int i = 0; i < remove.size(); i++){
             canUse.remove(remove.get(i));
         }
         String s = "" + canUse.size();
-        Log.d("SIZE: ", s);
+        //Log.d("SIZE: ", s);
         return canUse;
     }
 

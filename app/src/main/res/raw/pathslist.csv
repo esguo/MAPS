@@ -1,29 +1,27 @@
-POI 1,POI 2,Path Name,Weight,,,
-Center Hall,Price Center,Student Services Center,2,TRUE,TRUE,TRUE
-Center Hall,Revelle Residential Halls,Walkway,3,TRUE,TRUE,TRUE
-Center Hall,Muir Residential Halls,Bike Path,3,TRUE,TRUE,TRUE
-Muir Residential Halls,Solis Hall,Goody's Path,3,TRUE,TRUE,TRUE
-Solis Hall,ERC Residential Halls,Goody's Path,2,TRUE,TRUE,TRUE
-Rady School of Management,ERC Residential Halls,RIMAC Path,2,TRUE,TRUE,TRUE
-Warren Residential Halls,Price Center,Warren Mall,3,TRUE,TRUE,TRUE
-Warren Residential Halls,Pepper Canyon,Path,2,TRUE,TRUE,TRUE
-Pepper Canyon,Sixth Residential Halls,Path,1,TRUE,TRUE,TRUE
-RIMAC Arena,Peterson,Ridge Walk,2,TRUE,TRUE,TRUE
-ERC Residential Halls,RIMAC Arena,Village Market,2,TRUE,TRUE,TRUE
-Geisel Library,Cognitive Science Building,Walkway,1,TRUE,TRUE,TRUE
-Geisel Library,Price Center,Library Walk,1,TRUE,TRUE,TRUE
-RIMAC Arena,Supercomputer Center,Ridge Walk,1,TRUE,TRUE,TRUE
-64 Degrees,Galbraith Hall,Revelle Plaza,1,TRUE,TRUE,TRUE
-64 Degrees,York Hall,Revelle Plaza,1,FALSE,TRUE,TRUE
-64 Degrees,Pacific Hall,Path,1,FALSE,FALSE,TRUE
-Hopkins Parking Structure,Warren Lecture Hall,Voigt Drive,3,FALSE,FALSE,TRUE
-Galbraith Hall,York Hall,Revelle Plaza,1,TRUE,TRUE,TRUE
-Meyer Hall,York Hall,Revelle Plaza,1,TRUE,TRUE,TRUE
-Meyer Hall,Galbraith Hall,Revelle Plaza,2,TRUE,TRUE,TRUE
-Meyer Hall,Urey Hall,Urey Hall,1,TRUE,TRUE,TRUE
-The Fleet Residence Halls,64 Degrees,Revelle Plaza,1,TRUE,TRUE,TRUE
-Urey Hall,Bonner Hall,Ridge Walk,1,TRUE,TRUE,TRUE
-Bonner Hall,Main Gym,Ridge Walk,1,TRUE,TRUE,TRUE
-Main Gym,APM,Ridge Walk,1,TRUE,TRUE,TRUE
-APM,Peterson,Ridge Walk,1,TRUE,FALSE,TRUE
-APM,Humanities and Social Sciences,APM,1,TRUE,TRUE,TRUE
+POI 1,POI 2,Weight,Path Name,,,,ID 1,ID 2
+Center Hall,Price Center,2,Student Services Center,TRUE,TRUE,TRUE,,
+Center Hall,Revelle Residential Halls,3,Walkway,TRUE,TRUE,TRUE,,
+Center Hall,Muir Residential Halls,3,Bike Path,TRUE,TRUE,TRUE,,
+Muir Residential Halls,Solis Hall,3,Goody's Path,TRUE,TRUE,TRUE,,
+Solis Hall,ERC Residential Halls,2,Goody's Path,TRUE,TRUE,TRUE,,
+Rady School of Management,ERC Residential Halls,2,RIMAC Path,TRUE,TRUE,TRUE,,
+Warren Residential Halls,Price Center,3,Warren Mall,TRUE,TRUE,TRUE,,
+Warren Residential Halls,Pepper Canyon Hall,2,Path,TRUE,TRUE,TRUE,,
+Pepper Canyon Hall,Sixth College Residential Halls,1,Path,TRUE,TRUE,TRUE,,
+RIMAC,Peterson Hall,2,Ridge Walk,TRUE,TRUE,TRUE,,
+ERC Residential Halls,RIMAC,2,Village Market,TRUE,TRUE,TRUE,,
+Geisel Library,Cognitive Science Building,1,Walkway,TRUE,TRUE,TRUE,,
+Geisel Library,Price Center,1,Library Walk,TRUE,TRUE,TRUE,,
+RIMAC,Supercomputer Center,1,Ridge Walk,TRUE,TRUE,TRUE,,
+64 Degrees,Galbraith Hall,1,Revelle Plaza,TRUE,TRUE,TRUE,,
+64 Degrees,York Hall,1,Revelle Plaza,FALSE,TRUE,TRUE,,
+64 Degrees,Pacific Hall,1,Path,FALSE,FALSE,TRUE,,
+Hopkins Parking Structure,Warren Lecture Hall,3,Voigt Drive,FALSE,FALSE,TRUE,,
+Galbraith Hall,York Hall,1,Revelle Plaza,TRUE,TRUE,TRUE,,
+Meyer Hall,York Hall,1,Revelle Plaza,TRUE,TRUE,TRUE,,
+Meyer Hall,Galbraith Hall,2,Revelle Plaza,TRUE,TRUE,TRUE,,
+Meyer Hall,Urey Hall,1,Urey Hall,TRUE,TRUE,TRUE,,
+Revelle Residential Halls,64 Degrees,1,Revelle Plaza,TRUE,TRUE,TRUE,,
+Main Gym,AP&M,1,Ridge Walk,TRUE,TRUE,TRUE,,
+AP&M,Peterson Hall,1,Ridge Walk,TRUE,FALSE,TRUE,,
+AP&M,HSS - Humanities and Social Sciences,1,APM,TRUE,TRUE,TRUE,,

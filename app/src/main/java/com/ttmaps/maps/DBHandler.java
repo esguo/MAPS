@@ -236,6 +236,12 @@ class DBHandler extends SQLiteOpenHelper {
             poi.setLatLng(0,0);
         }
 
+        try{
+            poi.setDesc(data[12]);
+        }
+        catch (Exception e){
+        }
+
 
         poilist.put(poi.getName(), poi);
         POI dbpoi = new POI(id, POIName.toLowerCase());

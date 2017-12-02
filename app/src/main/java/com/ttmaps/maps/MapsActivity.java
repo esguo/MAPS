@@ -83,20 +83,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
     private String[] mLikelyPlaceAddresses;
     private String[] mLikelyPlaceAttributions;
     private LatLng[] mLikelyPlaceLatLngs;
-/*
-    //Hard Coded locations
-    private static final LatLng price_Center = new LatLng(32.879616,-117.236317);
-    private static final LatLng center_Hall = new LatLng( 32.878035, -117.237351);
-    private static final LatLng geisel_Library = new LatLng( 32.880915, -117.237562);
-    private static final LatLng warren_LecHall = new LatLng (32.880700, -117.234406);
-    private static final LatLng ssc = new LatLng(32.878938, -117.235783);
-
-    private Marker PC;
-    private Marker CH;
-    private Marker GL;
-    private Marker WLH;
-    private Marker SSC;
-*/
 
     private ArrayList<String> r;
     private HashMap<String, Marker> hash;
@@ -151,66 +137,66 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
                     case 0:
                         boolean[] flags = {false, false, false, false, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags);
-                        Log.d("FILTER POI: ", "CASE 0");
+                        //Log.d("FILTER POI: ", "CASE 0");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 1:
                         // Whatever you want to happen when the second item gets selected
                         boolean[] flags1 = {true, false, false, false, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags1);
-                        Log.d("FILTER POI: ", "CASE 1");
+                        //Log.d("FILTER POI: ", "CASE 1");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 2:
                         boolean[] flags2 = {false, true, false, false, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags2);
-                        Log.d("FILTER POI: ", "CASE 2");
+                        //Log.d("FILTER POI: ", "CASE 2");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 3:
                         boolean[] flags3 = {false, false, true, false, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags3);
-                        Log.d("FILTER POI: ", "CASE 3");
+                        //Log.d("FILTER POI: ", "CASE 3");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 4:
                         boolean[] flags4 = {false, false, false, true, false, false, false};
                         filteredPOIs = getFilteredPOIs(flags4);
-                        Log.d("FILTER POI: ", "CASE 4");
+                        //Log.d("FILTER POI: ", "CASE 4");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 5:
                         boolean[] flags5 = {false, false, false, false, true, false, false};
                         filteredPOIs = getFilteredPOIs(flags5);
-                        Log.d("FILTER POI: ", "CASE 5");
+                        //Log.d("FILTER POI: ", "CASE 5");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 6:
                         boolean[] flags6 = {false, false, false, false, false, true, false};
                         filteredPOIs = getFilteredPOIs(flags6);
-                        Log.d("FILTER POI: ", "CASE 6");
+                        //Log.d("FILTER POI: ", "CASE 6");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
                     case 7:
                         boolean[] flags7 = {false, false, false, false, false, false, true};
                         filteredPOIs = getFilteredPOIs(flags7);
-                        Log.d("FILTER POI: ", "CASE 7");
+                        //Log.d("FILTER POI: ", "CASE 7");
                         for (String s : filteredPOIs) {
-                            Log.d("FILTER POI: ", s);
+                            //Log.d("FILTER POI: ", s);
                         }
                         break;
 
@@ -220,7 +206,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                Log.d("FILTER POI: ", "CASE NONE");
+                //Log.d("FILTER POI: ", "CASE NONE");
                 boolean[] flags = {false, false, false, false, false, false, false};
                 filteredPOIs = getFilteredPOIs(flags);
             }
@@ -351,7 +337,7 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                         } else {
-                            Log.d(TAG, "Current location is null. Using defaults.");
+                            //Log.d(TAG, "Current location is null. Using defaults.");
                             Log.e(TAG, "Exception: %s", task.getException());
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(mDefaultLocation, DEFAULT_ZOOM));
@@ -531,13 +517,13 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
         ArrayList<String> remove = new ArrayList<>();
         //List<POI> allPOI = db.getPOIs();
 
-        Log.d("ALL POI SIZE",POIList.keySet().size() + "" );
+        //Log.d("ALL POI SIZE",POIList.keySet().size() + "" );
         for(POI poi: POIList.values())
         {
             canUse.add(poi.getName());
         }
 
-        Log.d("FILTER LIST1",filterList[0] + "" );
+        //Log.d("FILTER LIST1",filterList[0] + "" );
         //Log.d("ALL POI SIZe",allPOI.size() + "" );
         for(POI poi: POIList.values()){
             if(filterList[0]) {
@@ -585,12 +571,12 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
             }
         }
         String s1 = "" + canUse.size();
-        Log.d("SIZE: ", s1);
+        //Log.d("SIZE: ", s1);
         for(int i = 0; i < remove.size(); i++){
             canUse.remove(remove.get(i));
         }
         String s = "" + canUse.size();
-        Log.d("SIZE: ", s);
+        //Log.d("SIZE: ", s);
         for (int i = 0; i < canUse.size(); i++) {
             if (hash.get(canUse.get(i)) != null) {
                 hash.get(canUse.get(i)).setVisible(true);
