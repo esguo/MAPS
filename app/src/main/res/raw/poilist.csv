@@ -1,54 +1,54 @@
 id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Longitude,Description
 1,64 Degrees,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8747459,-117.2420341,Revelle dining hall. They have... interesting salads.
 2,AP&M,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.879025,-117.241031,"A place to admire the brutalist architecture blending in with the creeping nature, then panic when you realize your math homework is due in 10 minutes."
-3,Art of Espresso,,,,,,,,,32.8776395,-117.2391975,
+3,Art of Espresso,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8776395,-117.2391975,A nice coffee cart and seating area outside of Mandeville Auditorium
 4,Atkinson Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8829164,-117.2350471,
 5,Biomedical Library,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,,32.875261,-117.2368956,A lot bigger than she seems.
-6,Bookstore,,,,,,,,,32.8794408,-117.2369353,
+6,Bookstore,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8794408,-117.2369353,Get all your UCSD gear here!
 7,Cafe Ventanas,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8860786,-117.2427651,Home of the big mac-daddy wednesdays.
 8,Canyon View,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,,32.8805864,-117.2318743,"They have rock swimming AND pool climbing. Certainly the best gym, unbiased opinion."
 9,Canyon Vista,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8839368,-117.2333183,Once known for their legendary panini press. May she rest in peace.
-10,Career Services Center,,,,,,,,,32.8784403,-117.2379177,Avoid HDH at all costs
+10,Career Services Center,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8784403,-117.2379177,Avoid HDH at all costs
 11,Center Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8777515,-117.2372611,"Hardly central to campus, but a hub of many classrooms."
 12,Cognitive Science Building,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8806188,-117.2393668,Known for their greatly intuitive layout of classroom numbering. Really easy to find your way around here. Definitely.
 13,Communication Building,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8814793,-117.2402841,Communicate about the welfare of the wavelengths emitted from air holes. Give them a raise.
-14,Conrad Prebys Music Center,,,,,,,,,32.87794,-117.23442,
-15,Copley International Conference Center,,,,,,,,,32.8850016,-117.2412938,
+14,Conrad Prebys Music Center,FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,,32.87794,-117.23442,
+15,Copley International Conference Center,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8850016,-117.2412938,
 16,Croutons,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.878533,-117.2357618,She'll never be open when you want to go.
 17,CSE Building,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,,32.8818127,-117.2335303,The only real part of this building is underground. Everything else is a facade.
-18,Earl's Place and Market,,,,,,,,,32.883906,-117.233149,
-19,ERC Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8855832,-117.2420382,
-20,Fallen Star,,,,,,,,,32.8814264,-117.2353233,The alarmingly odd building placed on the top that is mostly closed.
+18,Earl's Place and Market,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.883906,-117.233149,
+19,ERC Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8855832,-117.2420382,The best residential halls on campus… BY FAR
+20,Fallen Star,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8814264,-117.2353233,The alarmingly odd building placed on the top that is mostly closed.
 21,Food Co-op,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.877294,-117.2399783,For those who need it.
 22,Foodworx,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8788119,-117.2304304,What're you doing here? Go to a real dining hal-- oh I mean if you want a salad wrap I high recommend the Thai
 23,Galbraith Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8738007,-117.2409754,"Used to be the main library, but has since been converted to look like a really cool study lounge."
 24,Geisel Library,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,path_search_ui,32.8811507,-117.2374497,"A place of marination of knowledge, food, and bodies, especially during exam season. Which is, essentially, all the time. #justquartersystemthings"
 25,Gilman Parking Structure,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,,32.8774337,-117.2337341,It's heard that you can park here.
 26,Goody's Place and Market,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8828992,-117.2404115,Market on the 1st floor and burritos on the 2nd. Somehow Marshall students managed to live with it when their main dining hall was closed for renovation for a year
-27,Graduate Student Lounge,,,,,,,,,32.8773357,-117.2397007,
+27,Graduate Student Lounge,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,,32.8773357,-117.2397007,
 28,HDH Administration Building,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8745081,-117.2432332,This is probably where you need to turn in your employee forms for HDH. Proceed with caution!
-29,Home Plate ,,,,,,,,,32.8856385,-117.2405121,One of the few places on campus that serves bitter beverages.
-30,Hopkins Parking Structure,,,,,,,,,32.8835963,-117.2397618,What's an S spot?
+29,Home Plate ,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8856385,-117.2405121,One of the few places on campus where you can crack open cold ones with the bois (or girls)
+30,Hopkins Parking Structure,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,,32.8835963,-117.2397618,What's an S spot?
 31,HSS - Humanities and Social Sciences,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,,32.878382,-117.2416726,
-32,Ida and Cecil Green Faculty Club,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.879255,-117.239585,
-33,International Student Center,,,,,,,,,32.8772726,-117.2388134,Remember to get you I-20 signed before you leave! Don't go to the one next to Student Services Center.
+32,Ida and Cecil Green Faculty Club,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.879255,-117.239585,
+33,International Student Center,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8772726,-117.2388134,Remember to get you I-20 signed before you leave! Don't go to the one next to Student Services Center.
 34,Jacobs School of Engineering,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8814678,-117.2354827,The building with the alarmingly odd building placed on top.
-35,John Muir Field,,,,,,,,,32.8769539,-117.2426156,
-36,Keeling Apartments,,,,,,,,,32.8738813,-117.2432452,Some of the nicest on campus apartments.
+35,John Muir Field,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,,32.8769539,-117.2426156,
+36,Keeling Apartments,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8738813,-117.2432452,Some of the nicest on campus apartments.
 37,Ledden Auditorium,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8788554,-117.2416896,Math. Here. Forever.
-38,Main Gym,,,,,,,,,32.8771494,-117.2412479,Known for having less equipment than RIMAC Gym. NO DEADLIFTS ALLOWED
+38,Main Gym,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,,32.8771494,-117.2412479,The Main Gym that isn't the main gym. Just go to RIMAC.
 39,Mandeville Auditorium,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8778257,-117.2394534,"Not to be confused with Mandeville classrooms, which are totally not even in the same building."
 40,Mandler Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8793259,-117.2421563,"Mandeville's lesser known, but oddly more attractive cousin."
 41,Marshall Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8832514,-117.2414328,Used to be lit all the time when Pokemon Go was still in the hype.
 42,Matthews Apartments,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8784609,-117.2311056,Slightly closer to civilization. Slightly.
 43,McGill Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8790221,-117.2420372,Nondescript building of learning
-44,Mesa Verde Hall,,,,,,,,,32.8860065,-117.2414438,
+44,Mesa Verde Hall,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8860065,-117.2414438,
 45,Meyer Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8752585,-117.2402005,
 46,Muir Parking Lot,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,,32.8814703,-117.2425425,"Huge, but if you leave in the middle of the day for a hot second, you're not getting that spot back."
 47,Muir Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8790499,-117.2433834,Has the most blinding oceanview sunsets in the lounges. In the LOUNGES.
-48,Muir Woods Coffee House,,,,,,,,,32.8788682,-117.2425434,
+48,Muir Woods Coffee House,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8788682,-117.2425434,
 49,Oceanview Restaurant,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8831037,-117.2427668,The newest dining hall on campus. And you can build your own pizza
-50,Old Student Services Center,,,,,,,,,32.8772805,-117.2400963,
+50,Old Student Services Center,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8772805,-117.2400963,
 51,Pacific Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8759409,-117.2421066,Specific to the Pacific
 52,Pangaea Parking Structure,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,,32.8842611,-117.2430333,You'd probably only bother coming here if it's <6am
 53,Pepper Canyon Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8782897,-117.2339407,"Home of a couple of lecture halls, classrooms, creativity hub, and commuter lounge."
@@ -56,27 +56,27 @@ id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Lo
 55,Pines,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8787816,-117.2425164,"Nevermind about this dining hall, but downstairs is a coffee shop with real bomb coffee and the most charismatic baristas."
 56,Price Center,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8799098,-117.237116,"Legends say that you can still hear the people sing, singing the songs of angry students"
 57,Rady School of Management,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8866137,-117.2412796,"If you thought people were lax about having food in lecture halls, honey you've got a big storm coming."
-58,Rec Gym,,,,,,,,,32.876772,-117.2412938,
-59,Revelle Plaza,,,,,,,,,32.8746494,-117.2409976,
+58,Rec Gym,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.876772,-117.2412938,
+59,Revelle Plaza,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8746494,-117.2409976,Nice open flat plaza. Watch for the SICK skateboard tricks
 60,Revelle Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8741133,-117.2424406,"Super open lounges, nothing shady to be seen."
 61,RIMAC,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,,32.8852724,-117.2392273,"A place whose population flairs in the beginning of the Fall and Winter quarter, but quickly dies down after a couple of weeks."
-62,Robinson Auditorium,,,,,,,,,32.8843287,-117.2409815,
-63,Roger's Place and Market,,,,,,,,,32.8744726,-117.2420624,
-64,Roots,,,,,,,,,32.8788844,-117.2424084,"Grass-fed grass, free-roam fruit, very vegan friendly."
+62,Robinson Auditorium,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8843287,-117.2409815,
+63,Roger's Place and Market,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8744726,-117.2420624,
+64,Roots,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8788844,-117.2424084,"Grass-fed grass, free-roam fruit, very vegan friendly."
 65,Sequoyah Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.881851,-117.240834,"Have fun in your DOC discussions, Marshall students"
 66,Sixth College Apartments,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8775872,-117.2306142,"It's a good thing you're using this app, because you're bound to get lost over here."
-67,Sixth College Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.87788,-117.23288,
-68,Sixty-Four North,,,,,,,,,32.8749419,-117.242276,"The other fancy dining hall on campus. Closer than the Bistro but still, you'd probably only go there once or twice in college."
-69,Social Sciences Building,,,,,,,,,32.8839462,-117.240441,"90% of the people walk pass it everyday but never noticed it. The other 10% saw its name, but never been in there."
+67,Sixth College Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.87788,-117.23288,Huh? Sixth College Exists??
+68,Sixty-Four North,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8749419,-117.242276,"The other fancy dining hall on campus. Closer than the Bistro but still, you'd probably only go there once or twice in college."
+69,Social Sciences Building,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8839462,-117.240441,"90% of the people walk pass it everyday but never noticed it. The other 10% saw its name, but never been in there."
 70,Solis Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8809145,-117.2397849,
 71,Student Health and Wellness Center,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8794254,-117.2380363,
 72,Student Services Center,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.878792,-117.2359201,You'll never find an unlocked restroom here.
 73,Sungod Statue,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.878515,-117.2397047,Some say the statue underpass has been blocked off due to too many students abusing the good luck.
 74,Supercomputer Center,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8842926,-117.2399716,You -wish- you could dig for your bitcoins here.
-75,Taco Villa ,,,,,,,,,32.8769429,-117.2401,
+75,Taco Villa ,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8769429,-117.2401,Some tacos by the G-Spot
 76,Tamarack Apartments,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8783077,-117.2423494,She's bigger AND better.
-77,The Bistro at the Strand,,,,,,,,,32.8870122,-117.2417531,"More like a restaurant but takes dining dollars. But if you're down to walk this far to eat in a restaurant, why not just go off campus?"
-78,The Village,,,,,,,,,32.8879573,-117.2425452,"In contrast to the name, there are in fact no small buildings here."
+77,The Bistro at the Strand,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8870122,-117.2417531,"More like a restaurant but takes dining dollars. But if you're down to walk this far to eat in a restaurant, why not just go off campus?"
+78,The Village,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8879573,-117.2425452,"In contrast to the name, there are in fact no small buildings here."
 79,The Village Market,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8876737,-117.2419809,Looks like a big ol' shopping cart from the outside
 80,Tuolumne Apartments,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8784429,-117.2432184,"The rumors are true, they really are the sadder apartments."
 81,Urey Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8755865,-117.2409868,On ice?
