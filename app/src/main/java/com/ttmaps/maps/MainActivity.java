@@ -198,7 +198,6 @@ public class MainActivity extends AppCompatActivity {
         mNavItems.add(new NavItem("Ratings", "View path ratings", R.drawable.ic_action_ratings));
         mNavItems.add(new NavItem("Favorites", "View saved paths", R.drawable.ic_action_favorites));
         mNavItems.add(new NavItem("Floor Plans", "View floor plans", R.drawable.ic_action_rooms));
-        mNavItems.add(new NavItem("Preferences", "Change your settings",R.drawable.ic_action_settings));
         mNavItems.add(new NavItem("About", "Our team", R.drawable.ic_action_about));
 
         // DrawerLayout
@@ -227,9 +226,9 @@ public class MainActivity extends AppCompatActivity {
         btn_submit.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                if ((loc_input1.getText().length() > 0) && (loc_input2.getText().length() > 0 )){
-                    String loc1 = loc_input1.getText().toString();
-                    String loc2 = loc_input2.getText().toString();
+                String loc1 = loc_input1.getText().toString();
+                String loc2 = loc_input2.getText().toString();
+                if (POIList.containsKey(loc1) && POIList.containsKey(loc2)){
 
                     boolean[] filter = new boolean[3];
                     filter[0] = safeRoute.isChecked();
@@ -245,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else{
-                    Toast.makeText(MainActivity.this, "Please enter locations in both operand fields", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Please enter valid POI location(s)", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -397,6 +396,11 @@ public class MainActivity extends AppCompatActivity {
 
         if(position == 4){
             Intent intent = new Intent(MainActivity.this, SearchFloorPlans.class);
+            startActivity(intent);
+        }
+
+        if(position == 5){
+            Intent intent = new Intent(MainActivity.this, About.class);
             startActivity(intent);
         }
 
