@@ -13,9 +13,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static com.ttmaps.maps.MainActivity.POIList;
 import static com.ttmaps.maps.MainActivity.list;
 
 public class add_ratings extends AppCompatActivity {
@@ -42,14 +44,12 @@ public class add_ratings extends AppCompatActivity {
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-                if(poiToRate.getText().length() > 0){
+                if(POIList.containsKey(poiToRate.getText().length())){
                     final DBHandler db = new DBHandler(add_ratings.this);
                     String poi = poiToRate.getText().toString().toLowerCase();
                     POI rateThisPOI = db.getPOIByName(poi);
                     float stars = ratingBar.getRating();
-                    Log.d("STAAAAAAAAAAAAAARS: ", String.valueOf(stars));
-                    //int rating = db.updatePOI(rateThisPOI.getId(), poi, (int)stars);
-                    Log.d("NOOOOOOOOOOOOOOOW: ", String.valueOf(db.getAvgRating(rateThisPOI.getId())));
+
                     Intent data = new Intent();
                     if(comment.getText().length() > 0){
                         String com = comment.getText().toString();
@@ -68,6 +68,9 @@ public class add_ratings extends AppCompatActivity {
                     }
                     finish();
                 }
+                else{
+                    Toast.makeText(add_ratings.this, "Please enter valid POI location", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -76,7 +79,7 @@ public class add_ratings extends AppCompatActivity {
         viewRateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-                if(poiToRate.getText().length() > 0){
+                if(POIList.containsKey(poiToRate.getText().length())){
                     final DBHandler db = new DBHandler(add_ratings.this);
                     String poi = poiToRate.getText().toString().toLowerCase();
                     POI rateThisPOI = db.getPOIByName(poi);
@@ -102,6 +105,9 @@ public class add_ratings extends AppCompatActivity {
                     intent.putExtra("rateNum", "0");
                     intent.putExtra("comment", "");
                     finish();
+                }
+                else{
+                    Toast.makeText(add_ratings.this, "Please enter valid POI location", Toast.LENGTH_SHORT).show();
                 }
 
             }

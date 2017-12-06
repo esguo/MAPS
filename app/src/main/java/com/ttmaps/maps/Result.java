@@ -31,7 +31,9 @@ public class Result extends AppCompatActivity {
             t.setText("Current Ratings");
         }
         TextView result = (TextView) findViewById(R.id.result);
-        result.setText(r.get(r.size()-1));
+
+        String resultString = r.get(r.size()-1);
+        result.setText(resultString);
 
         final Context context = this;
         btn_viewmap.setOnClickListener(new View.OnClickListener(){
