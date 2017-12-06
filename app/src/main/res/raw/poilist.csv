@@ -84,3 +84,5 @@ id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Lo
 83,Warren Lecture Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,wlh,32.8805918,-117.2344208,"Home of CSE 110, where Triton Trails all started."
 84,Warren Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8842003,-117.232393,Some people go 4 years through college without ever setting foot in this place.
 85,York Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8745613,-117.2402123,Of course you'd have a class here right after the one in Warren Lecture Hall.
+86,Matthews/Lyman Path,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.87984,-117.23399,Nice short path from Warren too Sixth
+87,Warren Apartments,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8831,-117.2334,
