@@ -268,6 +268,17 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
             }
         }
 
+        draw();
+
+        //Info Window
+        mMap.setInfoWindowAdapter(this);
+        mMap.setOnMarkerClickListener(this);
+        mMap.setOnInfoWindowClickListener(this);
+
+
+    }
+
+    private void draw() {
         if (r != null && r.size() != 0) {
             String result = r.remove(r.size()-1);
             PolylineOptions lineOptions = new PolylineOptions();
@@ -303,13 +314,6 @@ public class MapsActivity extends AppCompatActivity implements GoogleMap.OnMarke
             // Get the current location of the device and set the position of the map.
             getDeviceLocation();
         }
-
-        //Info Window
-        mMap.setInfoWindowAdapter(this);
-        mMap.setOnMarkerClickListener(this);
-        mMap.setOnInfoWindowClickListener(this);
-
-
     }
 
     // Gets the current location of the device, and positions the map's camera.

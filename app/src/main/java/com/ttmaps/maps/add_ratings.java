@@ -66,6 +66,7 @@ public class add_ratings extends AppCompatActivity {
                     else{
                         getParent().setResult(RESULT_OK, data);
                     }
+                    Toast.makeText(add_ratings.this, "Rating submitted successfully!", Toast.LENGTH_LONG).show();
                     finish();
                 }
                 else{

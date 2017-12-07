@@ -9,7 +9,6 @@ public class POI {
 
 	private int id;
 	private String name;
-  	private int distance;
   	private POI prev;
   	private Edge prevEdge;
   	private List<Pair> pairList;
@@ -34,7 +33,6 @@ public class POI {
 	POI(int id, String name) {
 	    this.id = id;
 		this.name = name;
-        this.distance = 0;
         this.prev = null;
         this.prevEdge = null;
         pairList = new ArrayList<>();
@@ -67,15 +65,6 @@ public class POI {
 	public String getName() {
 		return name;
 	}
-
-    int getDistance()
-    {
-    	return distance;
-    }
-
-    void setDistance(int distance){
-        this.distance = distance;
-    }
 
     POI getPrev(){
         return prev;
