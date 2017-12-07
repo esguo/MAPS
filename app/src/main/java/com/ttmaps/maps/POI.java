@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class POI {
 
-
+	private int distance;
 	private int id;
 	private String name;
   	private POI prev;
@@ -31,6 +31,7 @@ public class POI {
 	}
 
 	POI(int id, String name) {
+		this.distance = 0;
 	    this.id = id;
 		this.name = name;
         this.prev = null;
@@ -150,5 +151,13 @@ public class POI {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
+	public int getDistance() {
+		return distance;
 	}
 }
