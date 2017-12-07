@@ -44,7 +44,7 @@ public class add_ratings extends AppCompatActivity {
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-                if(POIList.containsKey(poiToRate.getText().length())){
+                if(POIList.containsKey(poiToRate.getText().toString())){
                     final DBHandler db = new DBHandler(add_ratings.this);
                     String poi = poiToRate.getText().toString().toLowerCase();
                     POI rateThisPOI = db.getPOIByName(poi);
@@ -79,7 +79,7 @@ public class add_ratings extends AppCompatActivity {
         viewRateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-                if(POIList.containsKey(poiToRate.getText().length())){
+                if(POIList.containsKey(poiToRate.getText().toString())){
                     final DBHandler db = new DBHandler(add_ratings.this);
                     String poi = poiToRate.getText().toString().toLowerCase();
                     POI rateThisPOI = db.getPOIByName(poi);
