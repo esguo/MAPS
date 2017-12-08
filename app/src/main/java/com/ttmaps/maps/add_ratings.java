@@ -51,6 +51,10 @@ public class add_ratings extends AppCompatActivity {
                     float stars = ratingBar.getRating();
 
                     Intent data = new Intent();
+                    if((int)stars == 0){
+                        Toast.makeText(add_ratings.this, "Please enter a rating.", Toast.LENGTH_LONG).show();
+                        return;
+                    }
                     if(comment.getText().length() > 0){
                         String com = comment.getText().toString();
                         data.putExtra("comment", com);
