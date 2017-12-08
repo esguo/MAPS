@@ -9,7 +9,7 @@ id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Lo
 8,Canyon View,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,,32.8805864,-117.2318743,"They have rock swimming AND pool climbing. Certainly the best gym, unbiased opinion."
 9,Canyon Vista,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8839368,-117.2333183,Once known for their legendary panini press. May she rest in peace.
 10,Career Services Center,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8784403,-117.2379177,Avoid HDH at all costs
-11,Center Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8777515,-117.2372611,"Hardly central to campus, but a hub of many classrooms."
+11,Center Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,center,32.8777515,-117.2372611,"Hardly central to campus, but a hub of many classrooms."
 12,Cognitive Science Building,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8806188,-117.2393668,Known for their greatly intuitive layout of classroom numbering. Really easy to find your way around here. Definitely.
 13,Communication Building,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8814793,-117.2402841,Communicate about the welfare of the wavelengths emitted from air holes. Give them a raise.
 14,Conrad Prebys Music Center,FALSE,TRUE,FALSE,FALSE,TRUE,FALSE,FALSE,,32.87794,-117.23442,
@@ -17,7 +17,7 @@ id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Lo
 16,Croutons,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.878533,-117.2357618,She'll never be open when you want to go.
 17,CSE Building,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,TRUE,,32.8818127,-117.2335303,The only real part of this building is underground. Everything else is a facade.
 18,Earl's Place and Market,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.883906,-117.233149,
-19,ERC Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8855832,-117.2420382,The best residential halls on campus… BY FAR
+19,ERC Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8855832,-117.2420382,The best residential halls on campusï¿½ BY FAR
 20,Fallen Star,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8814264,-117.2353233,The alarmingly odd building placed on the top that is mostly closed.
 21,Food Co-op,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.877294,-117.2399783,For those who need it.
 22,Foodworx,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8788119,-117.2304304,What're you doing here? Go to a real dining hal-- oh I mean if you want a salad wrap I high recommend the Thai
@@ -54,7 +54,7 @@ id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Lo
 53,Pepper Canyon Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8782897,-117.2339407,"Home of a couple of lecture halls, classrooms, creativity hub, and commuter lounge."
 54,Peterson Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8799907,-117.2402455,Sick ass mural on the side. Campus architecture never ceases to surprise society with fitting lecture halls in the most unlikely of places.
 55,Pines,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8787816,-117.2425164,"Nevermind about this dining hall, but downstairs is a coffee shop with real bomb coffee and the most charismatic baristas."
-56,Price Center,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8799098,-117.237116,"Legends say that you can still hear the people sing, singing the songs of angry students"
+56,Price Center,TRUE,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,pc,32.8799098,-117.237116,"Legends say that you can still hear the people sing, singing the songs of angry students"
 57,Rady School of Management,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8866137,-117.2412796,"If you thought people were lax about having food in lecture halls, honey you've got a big storm coming."
 58,Rec Gym,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.876772,-117.2412938,
 59,Revelle Plaza,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8746494,-117.2409976,Nice open flat plaza. Watch for the SICK skateboard tricks
@@ -83,6 +83,6 @@ id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Lo
 82,Warren Bear,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8818397,-117.2341204,A really big boy!
 83,Warren Lecture Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,wlh,32.8805918,-117.2344208,"Home of CSE 110, where Triton Trails all started."
 84,Warren Residential Halls,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8842003,-117.232393,Some people go 4 years through college without ever setting foot in this place.
-85,York Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8745613,-117.2402123,Of course you'd have a class here right after the one in Warren Lecture Hall.
+85,York Hall,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,york,32.8745613,-117.2402123,Of course you'd have a class here right after the one in Warren Lecture Hall.
 86,Matthews/Lyman Path,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.87984,-117.23399,Nice short path from Warren too Sixth
 87,Warren Apartments,FALSE,FALSE,FALSE,FALSE,FALSE,TRUE,FALSE,,32.8831,-117.2334,
