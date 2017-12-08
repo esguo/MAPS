@@ -10,10 +10,12 @@ class Pair {
     private boolean safeBox;
     private boolean stairs;
 
-    Pair(POI first, Edge second) {
+    Pair(POI first, Edge second, boolean [] data) {
         poi = first;
         edge = second;
-
+        lit = data[0];
+        safeBox = data[1];
+        stairs = !data[2];
     }
 
 

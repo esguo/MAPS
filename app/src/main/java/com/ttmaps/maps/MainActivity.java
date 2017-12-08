@@ -301,10 +301,10 @@ public class MainActivity extends AppCompatActivity {
                 data = csvLine.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 try{
                     try {
-                        db.createPair(data[0], data[1], data[3], Integer.parseInt(data[2]));
+                        db.createPair(data);
                     }
                     catch (Exception e){
-                        db.createPair(data[0], data[1], "", Integer.parseInt(data[2]));
+                        db.createPair(data);
                     }
                 }
                 catch (Exception e){
@@ -391,7 +391,6 @@ public class MainActivity extends AppCompatActivity {
 
             Intent intent = new Intent(MainActivity.this, add_ratings.class);
             startActivityForResult(intent, rate);
-
         }
 
         if(position == 4){

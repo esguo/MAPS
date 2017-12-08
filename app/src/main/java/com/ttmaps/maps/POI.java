@@ -83,7 +83,7 @@ public class POI {
         prevEdge = e;
     }
 
-    void addNeighbor(POI p, Edge e) { pairList.add(new Pair(p, e)); }
+    void addNeighbor(POI p, Edge e, boolean[] data) { pairList.add(new Pair(p, e, data)); }
 
     List<Pair> getNeighbors() { return pairList; }
 

@@ -30,7 +30,6 @@ class Dijkstra {
          */
 
         o = new ArrayList<String>();
-        o.add(start);
         int inf = Integer.MAX_VALUE;
 
         //Initialize each POI's fields for Dijkstra
@@ -87,7 +86,8 @@ class Dijkstra {
                 stack.add(curr.getName());
                 stack.add(curr.getPrevEdge().getName());
                 curr = curr.getPrev();
-                if(stack.size() > 50) {
+                o.add(start);
+                if(stack.size() > 50 || stack.size() == 0) {
                     output = "Sorry, no path could be found.";
                     o.add(output);
                     return o;

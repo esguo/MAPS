@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -248,13 +249,25 @@ class DBHandler extends SQLiteOpenHelper {
         addPOI(dbpoi, 0, 0, 0, "");
     }
 
-    public void createPair(String pointA, String pointB, String name, int weight){
-        POI a = poilist.get(pointA);
-        POI b = poilist.get(pointB);
+    public void createPair(String[] data){
+        POI a = poilist.get(data[0]);
+        POI b = poilist.get(data[1]);
 
-        Edge e = new Edge(name, weight);
-        a.addNeighbor(b, e);
-        b.addNeighbor(a, e);
+        boolean [] filters = new boolean[3];
+        try{
+            filters[0] = Boolean.parseBoolean(data[4]);
+            filters[1] = Boolean.parseBoolean(data[5]);
+            filters[2] = Boolean.parseBoolean(data[6]);
+        }
+        catch (Exception e){
+            filters[0] = false;
+            filters[1] = false;
+            filters[2] = false;
+        }
+
+        Edge e = new Edge(data[3], Integer.parseInt(data[2]));
+        a.addNeighbor(b, e, filters);
+        b.addNeighbor(a, e, filters);
     }
 
     public List<POI> getPOIs() {
