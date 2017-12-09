@@ -29,7 +29,7 @@ id,POI,Admin,Classroom,Food,Parking,Rec,ResHall,StudyArea,Floor Plan,Latitude,Lo
 28,HDH Administration Building,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8745081,-117.2432332,This is probably where you need to turn in your employee forms for HDH. Proceed with caution!
 29,Home Plate ,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,,32.8856385,-117.2405121,One of the few places on campus where you can crack open cold ones with the bois (or girls)
 30,Hopkins Parking Structure,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,,32.8835963,-117.2397618,What's an S spot?
-31,HSS - Humanities and Social Sciences,FALSE,FALSE,FALSE,TRUE,FALSE,FALSE,FALSE,,32.878382,-117.2416726,
+31,HSS - Humanities and Social Sciences,FALSE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.878382,-117.2416726,
 32,Ida and Cecil Green Faculty Club,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.879255,-117.239585,
 33,International Student Center,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8772726,-117.2388134,Remember to get you I-20 signed before you leave! Don't go to the one next to Student Services Center.
 34,Jacobs School of Engineering,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,,32.8814678,-117.2354827,The building with the alarmingly odd building placed on top.
